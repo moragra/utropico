@@ -887,7 +887,12 @@ function rgbMix(hex,factor){const[r,g,b]=hexToRgb(hex);return`rgb(${Math.round(r
 const canvas = document.getElementById('canvas3d');
 const ctx = canvas.getContext('2d');
 const CW = 320, CH = 240;
-canvas.width = CW; canvas.height = CH;
+const DPR = window.devicePixelRatio || 1;
+canvas.width  = CW * DPR;
+canvas.height = CH * DPR;
+canvas.style.width  = CW + 'px';
+canvas.style.height = CH + 'px';
+ctx.scale(DPR, DPR);
 
 // Y = horizontal spin, X = tilt. Start at a clean isometric angle.
 let rotY = 0.6, rotX = 0.42;
@@ -967,100 +972,118 @@ function box(cx,cy,cz, hx,hy,hz, col){
 }
 
 // ── FURNITURE GEOMETRY ──
-// All furniture sits with its floor at y=0, top at y=H.
-// Origin is at the center of the floor footprint.
+// y=0 is floor. All parts stacked from there upward.
 function buildGeometry(){
-  const L = 32 + (state.largo/300)*88;   // 32–120  X width
-  const D = 18 + (state.ancho/200)*52;   // 18–70   Z depth
-  const H = 20 + (state.alto/120)*58;    // 20–78   Y height
+  const L = 32 + (state.largo/300)*88;
+  const D = 18 + (state.ancho/200)*52;
+  const H = 20 + (state.alto/120)*58;
   const c = state.colorHex;
   const cd = darken(c,28);
-  const parts = []; // {fn, args} deferred so we can depth-sort all at once
-
-  // We'll collect renderBox calls as plain data and sort by center depth before drawing
   const boxes = [];
   const B = (cx,cy,cz,hx,hy,hz,col)=>boxes.push({cx,cy,cz,hx,hy,hz,col});
 
   switch(state.tipo){
     case 'Mesa de comedor':
     case 'Mesa de centro':{
-      const tt = Math.max(3, H*0.15);   // tabletop thickness
-      const lh = H - tt;                // leg height
-      const lr = 2.2;                   // leg half-width
-      // tabletop sits at y = lh .. lh+tt
-      B(0, lh+tt/2, 0,  L/2, tt/2, D/2,  c);
-      // 4 legs: each goes from y=0 to y=lh, inset from corners
-      const ix=L/2-lr-1, iz=D/2-lr-1;
-      [[-ix,lh/2,-iz],[ix,lh/2,-iz],[-ix,lh/2,iz],[ix,lh/2,iz]]
+      const tt = Math.max(3, H*0.14);
+      const lh = H - tt;
+      const lr = 2.2;
+      const inX = L/2 - lr - 1;
+      const inZ = D/2 - lr - 1;
+      // legs: y center = lh/2, so bottom=0, top=lh ✓
+      [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
         .forEach(([bx,by,bz])=>B(bx,by,bz, lr,lh/2,lr, cd));
+      // tabletop: bottom=lh, center=lh+tt/2, top=lh+tt=H ✓
+      B(0, lh+tt/2, 0, L/2,tt/2,D/2, c);
       break;
     }
     case 'Sillón / Sofá':{
-      const lh=H*0.10, sh=H*0.38, bh=H*0.52, bd=D*0.28, aw=4;
-      // legs
-      const ix2=L/2-3, iz2=D/2-3;
-      [[-ix2,lh/2,-iz2],[ix2,lh/2,-iz2],[-ix2,lh/2,iz2],[ix2,lh/2,iz2]]
-        .forEach(([bx,by,bz])=>B(bx,by,bz, 2,lh/2,2, cd));
-      // seat: y = lh .. lh+sh
-      B(0, lh+sh/2, 0,  L/2, sh/2, D/2,  c);
-      // backrest: sits on seat rear edge, y = lh+sh .. lh+sh+bh
-      B(0, lh+sh+bh/2, -D/2+bd/2,  L/2, bh/2, bd/2,  darken(c,12));
-      // armrests: run full depth, same height as seat+back combined
-      const armH = sh+bh*0.55;
-      B(-(L/2+aw/2), lh+armH/2, 0,  aw/2, armH/2, D/2,  darken(c,8));
-      B( (L/2+aw/2), lh+armH/2, 0,  aw/2, armH/2, D/2,  darken(c,8));
+      const lh  = H*0.10;
+      const sh  = H*0.30;
+      const bh  = H*0.55;
+      const bd  = D*0.22;
+      const aw  = 3.5;
+      const armH = sh + bh*0.52;
+      const inX = L/2-4, inZ = D/2-4;
+      // legs: bottom=0, top=lh
+      [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
+        .forEach(([bx,by,bz])=>B(bx,by,bz, 2.2,lh/2,2.2, cd));
+      // seat: bottom=lh, top=lh+sh
+      B(0, lh+sh/2, 0, L/2,sh/2,D/2, c);
+      // backrest: bottom=lh+sh, rear-aligned at -Z
+      B(0, lh+sh+bh/2, -(D/2-bd/2), L/2,bh/2,bd/2, darken(c,12));
+      // armrests: bottom=lh, same width as seat, outside on X
+      B(-(L/2+aw), lh+armH/2, 0, aw,armH/2,D/2, darken(c,8));
+      B( (L/2+aw), lh+armH/2, 0, aw,armH/2,D/2, darken(c,8));
       break;
     }
     case 'Cama':{
-      const fh=H*0.08, mh=H*0.22, hbH=H*0.70, fbH=H*0.28, hbD=5;
-      // frame/base
-      B(0, fh/2, 0,  L/2+2, fh/2, D/2+2,  darken(c,18));
-      // mattress on top of frame
-      B(0, fh+mh/2, 0,  L/2, mh/2, D/2,  lighten(c,32));
-      // headboard at -Z
-      B(0, hbH/2, -(D/2+hbD/2),  L/2+2, hbH/2, hbD/2,  darken(c,10));
-      // footboard at +Z
-      B(0, fbH/2,  (D/2+2),      L/2+2, fbH/2, 2,       darken(c,14));
+      const fh  = H*0.08;
+      const mh  = H*0.18;
+      const hbH = H*0.75;
+      const fbH = H*0.25;
+      const hbD = 4;
+      // base: bottom=0, top=fh
+      B(0, fh/2, 0, L/2+2,fh/2,D/2+2, darken(c,18));
+      // mattress: bottom=fh, top=fh+mh
+      B(0, fh+mh/2, 0, L/2,mh/2,D/2, lighten(c,32));
+      // headboard: bottom=0, at -Z
+      B(0, hbH/2, -(D/2+hbD/2), L/2+2,hbH/2,hbD/2, darken(c,10));
+      // footboard: bottom=0, at +Z
+      B(0, fbH/2, D/2+2, L/2+2,fbH/2,2, darken(c,14));
       break;
     }
     case 'Aparador / Vitrina':{
-      const lh=H*0.08;
-      // legs
-      const ix3=L/2-3, iz3=D/2-3;
-      [[-ix3,lh/2,-iz3],[ix3,lh/2,-iz3],[-ix3,lh/2,iz3],[ix3,lh/2,iz3]]
+      const lh = H*0.09;
+      const bh = H - lh;
+      const inX = L/2-3, inZ = D/2-3;
+      // legs: bottom=0, top=lh
+      [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
         .forEach(([bx,by,bz])=>B(bx,by,bz, 2.5,lh/2,2.5, cd));
-      // body
-      B(0, lh+H*0.46, 0,  L/2, H*0.46, D/2,  c);
-      // top panel
-      B(0, lh+H*0.92+2, 0,  L/2, 2, D/2,  darken(c,8));
-      // centre divider strip on front face (visual)
-      B(0, lh+H*0.46, -D/2+0.8,  1.5, H*0.46, 0.8,  darken(c,22));
+      // body: bottom=lh, top=lh+bh=H
+      B(0, lh+bh/2, 0, L/2,bh/2,D/2, c);
+      // top cap: sits on top of body
+      B(0, lh+bh+1.5, 0, L/2,1.5,D/2, darken(c,8));
+      // door divider flush with front face
+      B(0, lh+bh/2, -(D/2-1), 1.5,bh/2,1, darken(c,22));
       break;
     }
     case 'Mueble exterior / Terraza':{
-      const lh=H*0.08, sh=H*0.35, bh=H*0.57, bd=D*0.25, aw=5;
-      [[-L/2+3,lh/2,-D/2+3],[L/2-3,lh/2,-D/2+3],[-L/2+3,lh/2,D/2-3],[L/2-3,lh/2,D/2-3]]
+      const lh = H*0.08;
+      const sh = H*0.32;
+      const bh = H*0.60;
+      const bd = D*0.22;
+      const aw = 4;
+      const inX = L/2-4, inZ = D/2-4;
+      [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
         .forEach(([bx,by,bz])=>B(bx,by,bz, 2.5,lh/2,2.5, cd));
-      B(0, lh+sh/2, 0,  L/2, sh/2, D/2,  c);
-      B(0, lh+sh+bh/2, -D/2+bd/2,  L/2, bh/2, bd/2,  darken(c,10));
-      B(-(L/2+aw/2), lh+(sh+bh*0.5)/2, 0, aw/2,(sh+bh*0.5)/2, D/2, darken(c,8));
-      B( (L/2+aw/2), lh+(sh+bh*0.5)/2, 0, aw/2,(sh+bh*0.5)/2, D/2, darken(c,8));
+      // seat: bottom=lh
+      B(0, lh+sh/2, 0, L/2,sh/2,D/2, c);
+      // backrest: bottom=lh+sh
+      B(0, lh+sh+bh/2, -(D/2-bd/2), L/2,bh/2,bd/2, darken(c,10));
+      // armrests: bottom=lh
+      const armH = sh+bh*0.48;
+      B(-(L/2+aw), lh+armH/2, 0, aw,armH/2,D/2, darken(c,8));
+      B( (L/2+aw), lh+armH/2, 0, aw,armH/2,D/2, darken(c,8));
       break;
     }
     case 'Silla':{
-      const lh=H*0.38, sh=H*0.12, bh=H*0.50, bd=D*0.18;
-      // legs
-      const ix4=L/2-2.5, iz4=D/2-2.5;
-      [[-ix4,lh/2,-iz4],[ix4,lh/2,-iz4],[-ix4,lh/2,iz4],[ix4,lh/2,iz4]]
+      const lh = H*0.40;
+      const sh = H*0.10;
+      const bh = H*0.50;
+      const bd = D*0.16;
+      const inX = L/2-2.5, inZ = D/2-2.5;
+      // legs: bottom=0, top=lh
+      [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
         .forEach(([bx,by,bz])=>B(bx,by,bz, 2,lh/2,2, cd));
-      // seat
-      B(0, lh+sh/2, 0,  L/2, sh/2, D/2,  c);
-      // backrest
-      B(0, lh+sh+bh/2, -D/2+bd/2,  L/2, bh/2, bd/2,  darken(c,10));
+      // seat: bottom=lh, top=lh+sh
+      B(0, lh+sh/2, 0, L/2,sh/2,D/2, c);
+      // backrest: bottom=lh+sh, rear-aligned
+      B(0, lh+sh+bh/2, -(D/2-bd/2), L/2,bh/2,bd/2, darken(c,10));
       break;
     }
     default:
-      B(0, H/2, 0,  L/2, H/2, D/2,  c);
+      B(0, H/2, 0, L/2,H/2,D/2, c);
   }
   return {boxes, L, D, H};
 }
