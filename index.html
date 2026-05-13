@@ -1554,8 +1554,8 @@ ${inspoText}${notaLine}
 
 ¡Gracias!`;
 
-  // Send to Google Sheets via GET params (POST body is dropped by no-cors)
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwrPIaKUsLaxDM3GrwnC_aDThXvrEd5OjwHBCeoK8TfB5nyQdIJAoperCNxQ9FBCXIoLw/exec';
+  // Send to Google Sheets
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz1DvA4IBFWS6xqZd01aAp5RaG4gSWtPkp5E0x6vkvXONx-b9oWQac1I-nBP9pq1IHGbw/exec';
   const params = new URLSearchParams({
     fecha:       new Date().toISOString(),
     tipo:        state.tipo + subtipo,
@@ -1568,7 +1568,7 @@ ${inspoText}${notaLine}
     referencias: inspoText,
     nota:        nota,
   });
-  try { new Image().src = SHEETS_URL + '?' + params.toString(); } catch(e){}
+  fetch(SHEETS_URL + '?' + params.toString(), {mode:'no-cors'}).catch(()=>{});
 
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
 }
