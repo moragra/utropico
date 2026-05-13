@@ -356,7 +356,6 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
               <div class="chip" data-val="Silla comedor" onclick="sel(this,'tipo')"><span class="icon">🪑</span>Silla comedor</div>
               <div class="chip" data-val="Stool / Banqueta" onclick="sel(this,'tipo')"><span class="icon">🍄</span>Stool</div>
               <div class="chip" data-val="Mesa de noche" onclick="sel(this,'tipo')"><span class="icon">🌙</span>Mesa de noche</div>
-              <div class="chip" data-val="Tapicería / Cojinería" onclick="sel(this,'tipo')"><span class="icon">🧵</span>Tapicería</div>
             </div>
           </div>
 
@@ -503,7 +502,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
           <p class="sec-label">Asesoría personalizada</p>
           <h2 class="sec-h2">Te acompañamos en<br>cada <em>decisión.</em></h2>
           <div class="asesoria-features">
-            <div class="af-item"><div class="af-icon">🌿</div><div><p class="af-title">Consulta de espacio</p><p class="af-text">Analizamos fotos de tu espacio para recomendarte piezas que funcionen con la arquitectura, luz y estilo de tu proyecto.</p></div></div>
+            <div class="af-item"><div class="af-icon">🌿</div><div><p class="af-title">Consulta de espacio</p><p class="af-text">Analizamos tu espacio para recomendarte piezas que se adapten con la arquitectura, luz y estilo de tu proyecto.</p></div></div>
             <div class="af-item"><div class="af-icon">🪵</div><div><p class="af-title">Selección de materiales</p><p class="af-text">Te explicamos las diferencias entre maderas, acabados y materiales según el ambiente — interior vs exterior, humedad, mantenimiento.</p></div></div>
             <div class="af-item"><div class="af-icon">📐</div><div><p class="af-title">Diseño a medida</p><p class="af-text">Si tenés una idea específica o necesitás adaptar una pieza a medidas exactas, nuestro equipo te ayuda a definir cada detalle.</p></div></div>
             <div class="af-item"><div class="af-icon">🚚</div><div><p class="af-title">Entrega e instalación</p><p class="af-text">Coordinamos logística para todo Costa Rica — Pacífico Norte, Central, y GAM. Instalamos y dejamos todo en su lugar.</p></div></div>
@@ -512,7 +511,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
         <div class="ases-cta-box">
           <h3>"Tengo una idea pero no sé exactamente qué quiero."</h3>
           <p>No hay problema. Nuestro proceso de asesoría empieza con una conversación sin compromiso. Contanos qué espacio tenés, qué estilo te gusta, y nosotros te proponemos opciones.</p>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.5)">⏱ Respuesta en menos de 2 horas en horario laboral</p>
+          
           <button class="btn-rattan" onclick="startAsesoriaWA()">Iniciar asesoría por WhatsApp →</button>
         </div>
       </div>
@@ -569,21 +568,20 @@ const state = {
 };
 
 // Knowledge base — reemplazar con tus fotos reales (src: ruta o URL)
-// Inspiration KB — update src with product-only photos when available
-// Currently using best available shots; replace with clean product photos
+// Inspiration KB — replace src with clean product-only photos when available
 const KB = [
-  {id:'kb1', name:'Mesa comedor oval', cat:'Comedor', src:'fotos/p10.png'},
-  {id:'kb2', name:'Mesa comedor rectangular', cat:'Comedor', src:'fotos/p15.jpg'},
-  {id:'kb3', name:'Mesa Guanacaste 10p', cat:'Comedor', src:'fotos/p17.jpg'},
-  {id:'kb4', name:'Sillas rattan comedor', cat:'Comedor', src:'fotos/p01.png'},
-  {id:'kb5', name:'Sofá teca exterior', cat:'Sofá', src:'fotos/p23.jpg'},
-  {id:'kb6', name:'Sofá sala madera', cat:'Sofá', src:'fotos/p18.jpg'},
-  {id:'kb7', name:'Sillas lounge rattan', cat:'Sala', src:'fotos/p12.png'},
-  {id:'kb8', name:'Chaise longue teca', cat:'Exterior', src:'fotos/p06.jpg'},
-  {id:'kb9', name:'Cama con mesa de noche', cat:'Dormitorio', src:'fotos/p09.png'},
-  {id:'kb10', name:'Cama cabecera madera', cat:'Dormitorio', src:'fotos/p11.png'},
-  {id:'kb11', name:'Habitación teca', cat:'Dormitorio', src:'fotos/p20.jpg'},
-  {id:'kb12', name:'Credenza madera', cat:'Sala', src:'fotos/p19.jpg'},
+  {id:'kb1',  name:'Mesa comedor oval',        cat:'Comedor',    src:''},
+  {id:'kb2',  name:'Mesa comedor rectangular', cat:'Comedor',    src:''},
+  {id:'kb3',  name:'Mesa centro circular',     cat:'Sala',       src:''},
+  {id:'kb4',  name:'Mesa centro rectangular',  cat:'Sala',       src:''},
+  {id:'kb5',  name:'Sillón 1 puesto',          cat:'Sala',       src:''},
+  {id:'kb6',  name:'Sofá 3 módulos',           cat:'Sala',       src:''},
+  {id:'kb7',  name:'Sofá seccional',           cat:'Sala',       src:''},
+  {id:'kb8',  name:'Silla comedor',            cat:'Comedor',    src:''},
+  {id:'kb9',  name:'Stool / Banqueta',         cat:'Comedor',    src:''},
+  {id:'kb10', name:'Cama queen',               cat:'Dormitorio', src:''},
+  {id:'kb11', name:'Mesa de noche',            cat:'Dormitorio', src:''},
+  {id:'kb12', name:'Credenza',                 cat:'Sala',       src:''},
 ];
 
 const gradients=['linear-gradient(145deg,#daeece,#a8cc80)','linear-gradient(145deg,#ccdbb8,#94b860)','linear-gradient(145deg,#e0d4b8,#c4a860)','linear-gradient(145deg,#d8e8c4,#a0c060)','linear-gradient(145deg,#c8d4a8,#8aaa50)','linear-gradient(145deg,#e4dcc8,#b8a070)','linear-gradient(145deg,#d0e0b8,#90b855)','linear-gradient(145deg,#dcd0b0,#b09050)'];
@@ -894,7 +892,7 @@ function sel(el,group){
 
 const MESA_FORMAS = ['Rectangular','Oval','Circular'];
 const MESA_PATAS  = ['4 patas','Pata central'];
-const TEXTILE_TIPOS = ['Sillón / Sofá','Tapicería / Cojinería','Silla comedor','Stool / Banqueta'];
+const TEXTILE_TIPOS = ['Sillón / Sofá','Silla comedor','Stool / Banqueta'];
 
 // Sofa modular state
 if(!state.sofaModules)  state.sofaModules  = 3;
@@ -1195,12 +1193,12 @@ function buildGeometry(){
 
       // ── Legs first (drawn behind tabletop) ──
       if(patas === 'Pata central'){
-        const pw = forma==='Circular' ? Math.min(L,D)*0.07 : L*0.065;
-        B(0, lh/2, 0,  pw, lh/2, pw, cd);
-        B(0, 2.5,  0,  L*0.22, 2.5, D*0.13, darken(cd,8));
+        const pw = forma==='Circular' ? Math.min(L,D)*0.07 : L*0.07;
+        // Single pedestal only — no base rectangle
+        B(0, lh/2, 0, pw, lh/2, pw, cd);
       } else {
         const inX = L/2 - lr - 1;
-        const inZ = (forma==='Oval' ? D/2*0.7 : D/2) - lr - 1;
+        const inZ = D/2 - lr - 1;
         [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
           .forEach(([bx,by,bz])=>B(bx,by,bz, lr,lh/2,lr, cd));
       }
@@ -1263,19 +1261,26 @@ function buildGeometry(){
       B(0, fbH/2, D/2+2, L/2+2,fbH/2,2, darken(c,14));
       break;
     }
+    case 'Credenza / Consola':
     case 'Aparador / Vitrina':{
-      const lh = H*0.09;
+      const lh = H*0.10;
       const bh = H - lh;
       const inX = L/2-3, inZ = D/2-3;
-      // legs: bottom=0, top=lh
+      // legs
       [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
         .forEach(([bx,by,bz])=>B(bx,by,bz, 2.5,lh/2,2.5, cd));
-      // body: bottom=lh, top=lh+bh=H
+      // body
       B(0, lh+bh/2, 0, L/2,bh/2,D/2, c);
-      // top cap: sits on top of body
+      // top cap
       B(0, lh+bh+1.5, 0, L/2,1.5,D/2, darken(c,8));
-      // door divider flush with front face
-      B(0, lh+bh/2, -(D/2-1), 1.5,bh/2,1, darken(c,22));
+      // two door dividers at thirds
+      [-L/6, L/6].forEach(dx=>{
+        B(dx, lh+bh/2, -(D/2-1), 1.2,bh/2,1, darken(c,20));
+      });
+      // knobs on each door panel
+      [-L/3, 0, L/3].forEach(dx=>{
+        B(dx, lh+bh*0.5, -(D/2+0.5), 1.2,1.2,0.5, darken(c,30));
+      });
       break;
     }
     case 'Mueble exterior / Terraza':{
@@ -1297,35 +1302,36 @@ function buildGeometry(){
       B( (L/2+aw), lh+armH/2, 0, aw,armH/2,D/2, darken(c,8));
       break;
     }
+    case 'Silla comedor':
     case 'Silla':{
       const lh = H*0.40;
       const sh = H*0.10;
       const bh = H*0.50;
       const bd = D*0.16;
-      const inX = L/2-2.5, inZ = D/2-2.5;
-      // legs: bottom=0, top=lh
-      [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
-        .forEach(([bx,by,bz])=>B(bx,by,bz, 2,lh/2,2, cd));
-      // seat: bottom=lh, top=lh+sh
+      const lr4 = 2.0;
+      const inX = L/2-lr4-1, inZ4 = D/2-lr4-1;
+      [[-inX,lh/2,-inZ4],[inX,lh/2,-inZ4],[-inX,lh/2,inZ4],[inX,lh/2,inZ4]]
+        .forEach(([bx,by,bz])=>B(bx,by,bz, lr4,lh/2,lr4, cd));
       B(0, lh+sh/2, 0, L/2,sh/2,D/2, c);
-      // backrest: bottom=lh+sh, rear-aligned
+      // backrest with two vertical slats for detail
       B(0, lh+sh+bh/2, -(D/2-bd/2), L/2,bh/2,bd/2, darken(c,10));
+      [-L/4, L/4].forEach(dx=>{
+        B(dx, lh+sh+bh/2, -(D/2-bd/2-0.5), 1.5,bh/2*0.85,0.6, darken(c,22));
+      });
       break;
     }
     case 'Stool / Banqueta':{
-      const lh = H*0.72;  // long legs
-      const sh = H*0.12;  // thin seat
+      const lh = H*0.72;
+      const sh = H*0.12;
       const lr2 = 2.0;
-      const inX = L/2-lr2-1, inZ2 = D/2-lr2-1;
-      // 4 legs
-      [[-inX,lh/2,-inZ2],[inX,lh/2,-inZ2],[-inX,lh/2,inZ2],[inX,lh/2,inZ2]]
+      const inX2 = L/2-lr2-1, inZ2 = D/2-lr2-1;
+      // 4 legs — no backrest
+      [[-inX2,lh/2,-inZ2],[inX2,lh/2,-inZ2],[-inX2,lh/2,inZ2],[inX2,lh/2,inZ2]]
         .forEach(([bx,by,bz])=>B(bx,by,bz, lr2,lh/2,lr2, cd));
-      // Footrest crossbar midway up
-      B(0, lh*0.45, 0, L/2-lr2, 1.2, 1.2, darken(cd,5));
-      // Seat
+      // Footrest crossbar
+      B(0, lh*0.42, 0, L/2-lr2, 1.2, 1.2, darken(cd,5));
+      // Seat only
       B(0, lh+sh/2, 0, L/2, sh/2, D/2, c);
-      // Cushion if applicable
-      if(state.sofaCushion !== false) B(0, lh+sh+sh*0.4, 0, L/2-1, sh*0.4, D/2-1, lighten(c,28));
       break;
     }
     case 'Mesa de noche':{
