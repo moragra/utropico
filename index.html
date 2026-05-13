@@ -1074,7 +1074,9 @@ function proj(x,y,z){
   const rx = x*cy - z*sy;
   const rz = x*sy + z*cy;
   const ry2 = y*cx2 - rz*sx;
-  return [CW/2 + rx, CH/2 - ry2];
+  const s = window._scale3d || 1;
+  const offY = window._offsetY3d || 0;
+  return [CW/2 + rx*s, CH/2 - ry2*s + offY];
 }
 
 // Depth of a world point (for painter's sort)
@@ -1174,9 +1176,9 @@ function box(cx,cy,cz, hx,hy,hz, col){
 // ── FURNITURE GEOMETRY ──
 // y=0 is floor. All parts stacked from there upward.
 function buildGeometry(){
-  const L = 32 + (state.largo/300)*88;
-  const D = 18 + (state.ancho/200)*52;
-  const H = 20 + (state.alto/120)*58;
+  const L = 28 + (state.largo/500)*130;   // 28–158 canvas units
+  const D = 16 + (state.ancho/200)*68;    // 16–84 canvas units
+  const H = 18 + (state.alto/120)*64;     // 18–82 canvas units
   const c = state.colorHex;
   const cd = darken(c,28);
   const boxes = [];
@@ -1221,10 +1223,9 @@ function buildGeometry(){
       const hasCushion = state.sofaCushion !== false;
       const cushionCol = hasCushion ? lighten(c, 28) : c;
 
-      // Scale canvas width to accommodate all modules nicely
-      // Each module is ~18-22 units wide regardless of slider
-      const modW = Math.max(14, Math.min(26, L / mods));
-      const totalW = modW * mods;
+      // modW driven by L (largo slider) divided evenly across modules
+      const modW = L / mods;
+      const totalW = L; // totalW === L so cotas align correctly
 
       for(let m=0; m<mods; m++){
         const mx = -totalW/2 + modW*m + modW/2;
@@ -1396,24 +1397,53 @@ function cotaLine(x1,y1,x2,y2){
 
 function draw3d(){
   ctx.clearRect(0,0,CW,CH);
-  // background
   const bg=ctx.createRadialGradient(CW/2,CH/2,8,CW/2,CH/2,170);
   bg.addColorStop(0,'#f5f0e6'); bg.addColorStop(1,'#e8dfc8');
   ctx.fillStyle=bg; ctx.fillRect(0,0,CW,CH);
 
   const {boxes, L, D, H} = buildGeometry();
 
-  // Shadow ellipse at floor level y=0
+  // ── Auto-scale: fit furniture into canvas ──
+  // Find bounding box of all projected points at current rotation
+  // Use a scale factor so the widest dimension fits ~80% of canvas
+  const cosY=Math.cos(rotY), sinY=Math.sin(rotY);
+  const cosX=Math.cos(rotX), sinX=Math.sin(rotX);
+  // Estimate projected width of bounding box corners
+  const corners = [
+    [-L/2,0,-D/2],[ L/2,0,-D/2],[-L/2,H,-D/2],[ L/2,H,-D/2],
+    [-L/2,0, D/2],[ L/2,0, D/2],[-L/2,H, D/2],[ L/2,H, D/2],
+  ];
+  // For sofá, use totalW instead of L
+  const sofaMods = state.sofaModules||3;
+  const sofaModW = L / sofaMods;
+  const sofaTotalW = sofaModW * sofaMods; // same as L for sofa, use L directly
+  
+  let minX2d=Infinity, maxX2d=-Infinity, minY2d=Infinity, maxY2d=-Infinity;
+  corners.forEach(([wx,wy,wz])=>{
+    const rx = wx*cosY - wz*sinY;
+    const rz = wx*sinY + wz*cosY;
+    const ry2 = wy*cosX - rz*sinX;
+    minX2d=Math.min(minX2d,rx); maxX2d=Math.max(maxX2d,rx);
+    minY2d=Math.min(minY2d,-ry2); maxY2d=Math.max(maxY2d,-ry2);
+  });
+  const spanX = maxX2d - minX2d;
+  const spanY = maxY2d - minY2d;
+  const scale = Math.min((CW*0.72)/Math.max(spanX,1), (CH*0.72)/Math.max(spanY,1));
+
+  // Override proj function with this scale for this frame
+  window._scale3d = scale;
+
+  // Shadow
   const sc = proj(0,0,0);
-  const sl = proj(-L*0.45, 0, 0), sr = proj(L*0.45, 0, 0);
+  const sl = proj(-L*0.45,0,0), sr = proj(L*0.45,0,0);
   const sw = Math.hypot(sr[0]-sl[0], sr[1]-sl[1]);
   ctx.beginPath();
   ctx.ellipse(sc[0], sc[1], sw*0.62, sw*0.14, 0, 0, Math.PI*2);
   ctx.fillStyle='rgba(0,0,0,0.10)'; ctx.fill();
 
-  // Sort all boxes by center depth (painter's algorithm)
+  // Sort and draw boxes
   boxes.sort((a,b)=>{
-    if(a.special) return 1;  // specials always on top
+    if(a.special) return 1;
     if(b.special) return -1;
     const da=depth(a.cx,a.cy,a.cz), db=depth(b.cx,b.cy,b.cz);
     return da-db;
@@ -1436,21 +1466,18 @@ function draw3d(){
     }
   });
 
-  // ── DIMENSION COTAS drawn AFTER furniture ──
+  // ── DIMENSION COTAS ──
   const floor = 0, ceil = H;
-  // Largo: front-bottom edge (z = +D/2), x from -L/2 to +L/2
   const pLargoA = proj(-L/2, floor, D/2+6);
   const pLargoB = proj( L/2, floor, D/2+6);
   cotaLine(pLargoA[0],pLargoA[1], pLargoB[0],pLargoB[1]);
   dimLabel((pLargoA[0]+pLargoB[0])/2, (pLargoA[1]+pLargoB[1])/2+11, `${state.largo} cm`);
 
-  // Ancho (depth): right-bottom edge (x = +L/2+6), z from -D/2 to +D/2
   const pAnchoA = proj(L/2+6, floor, -D/2);
   const pAnchoB = proj(L/2+6, floor,  D/2);
   cotaLine(pAnchoA[0],pAnchoA[1], pAnchoB[0],pAnchoB[1]);
   dimLabel((pAnchoA[0]+pAnchoB[0])/2+14, (pAnchoA[1]+pAnchoB[1])/2, `${state.ancho} cm`);
 
-  // Alto: right-front vertical edge (x=+L/2+6, z=+D/2+6)
   const pAltoA = proj(L/2+6, floor, D/2+6);
   const pAltoB = proj(L/2+6, ceil,  D/2+6);
   cotaLine(pAltoA[0],pAltoA[1], pAltoB[0],pAltoB[1]);
@@ -1515,7 +1542,7 @@ ${inspoText}${notaLine}
 ¡Gracias!`;
 
   // Send to Google Sheets (fire & forget)
-  const SHEETS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // Reemplazá YOUR_SCRIPT_ID después de deployar el Apps Script
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzvpPRL6dY41bpKIyoCinFggDG-XybHjtsxXg4JM4YlGKy5Cgjtc3FMIlK2al42HJ7vaA/exec';
   const payload = {
     fecha: new Date().toISOString(),
     tipo: state.tipo + subtipo,
