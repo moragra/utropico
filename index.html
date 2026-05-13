@@ -1430,8 +1430,21 @@ function draw3d(){
   const spanY = maxY2d - minY2d;
   const scale = Math.min((CW*0.72)/Math.max(spanX,1), (CH*0.72)/Math.max(spanY,1));
 
-  // Override proj function with this scale for this frame
+  // Compute vertical center offset so furniture sits centered in canvas
+  // Find projected Y center of the bounding box at this scale
+  let minY2dS=Infinity, maxY2dS=-Infinity;
+  corners.forEach(([wx,wy,wz])=>{
+    const rx = wx*cosY - wz*sinY;
+    const rz = wx*sinY + wz*cosY;
+    const ry2 = wy*cosX - rz*sinX;
+    const sy2d = CH/2 - ry2*scale;
+    minY2dS=Math.min(minY2dS,sy2d); maxY2dS=Math.max(maxY2dS,sy2d);
+  });
+  const furnitureCenterY = (minY2dS + maxY2dS) / 2;
+  const offsetY = (CH/2 + 10) - furnitureCenterY; // +10 pushes slightly down from center
+
   window._scale3d = scale;
+  window._offsetY3d = offsetY;
 
   // Shadow
   const sc = proj(0,0,0);
@@ -1541,23 +1554,21 @@ ${inspoText}${notaLine}
 
 ¡Gracias!`;
 
-  // Send to Google Sheets (fire & forget)
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzvpPRL6dY41bpKIyoCinFggDG-XybHjtsxXg4JM4YlGKy5Cgjtc3FMIlK2al42HJ7vaA/exec';
-  const payload = {
-    fecha: new Date().toISOString(),
-    tipo: state.tipo + subtipo,
-    material: state.material,
-    acabado: state.acabado,
-    tono: state.color,
-    textil: TEXTILE_TIPOS.includes(state.tipo) ? state.textile : '',
+  // Send to Google Sheets via GET params (POST body is dropped by no-cors)
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwrPIaKUsLaxDM3GrwnC_aDThXvrEd5OjwHBCeoK8TfB5nyQdIJAoperCNxQ9FBCXIoLw/exec';
+  const params = new URLSearchParams({
+    fecha:       new Date().toISOString(),
+    tipo:        state.tipo + subtipo,
+    material:    state.material,
+    acabado:     state.acabado,
+    tono:        state.color,
+    textil:      (TEXTILE_TIPOS.includes(state.tipo) && state.sofaCushion!==false) ? (state.textile||'Sombrella') : '',
     dimensiones: `${state.largo}x${state.ancho}x${state.alto}`,
-    ambiente: state.ambiente,
+    ambiente:    state.ambiente,
     referencias: inspoText,
-    nota: nota,
-  };
-  try {
-    fetch(SHEETS_URL, {method:'POST', body:JSON.stringify(payload)}).catch(()=>{});
-  } catch(e){}
+    nota:        nota,
+  });
+  try { new Image().src = SHEETS_URL + '?' + params.toString(); } catch(e){}
 
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
 }
