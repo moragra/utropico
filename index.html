@@ -445,7 +445,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
           <div class="config-step">
             <div class="step-head"><div class="step-num-badge">6</div><span class="step-label">Dimensiones aproximadas</span></div>
             <div class="slider-row"><label>Largo</label><span class="dim-val" id="val-largo">160 cm</span></div>
-            <input id="sl-largo" type="range" min="60" max="300" value="160" step="5" oninput="updateDim('largo',this.value)">
+            <input id="sl-largo" type="range" min="60" max="500" value="160" step="5" oninput="updateDim('largo',this.value)">
             <div style="height:.8rem"></div>
             <div class="slider-row"><label>Ancho</label><span class="dim-val" id="val-ancho">90 cm</span></div>
             <input id="sl-ancho" type="range" min="40" max="200" value="90" step="5" oninput="updateDim('ancho',this.value)">
@@ -892,28 +892,121 @@ function sel(el,group){
   updatePreview();
 }
 
-const SUBTIPO_OPTIONS = {
-  'Mesa de comedor': {label:'Forma de la mesa', opts:['Rectangular','Oval','Circular','Pata central','4 patas']},
-  'Mesa de centro':  {label:'Forma de la mesa', opts:['Rectangular','Oval','Circular','Pata central','4 patas']},
-  'Sillón / Sofá':   {label:'Configuración', opts:['Con reposa brazos','Sin reposa brazos','Esquinero (L)','Loveseat 2 puestos','3 puestos']},
-};
+const MESA_FORMAS = ['Rectangular','Oval','Circular'];
+const MESA_PATAS  = ['4 patas','Pata central'];
 const TEXTILE_TIPOS = ['Sillón / Sofá','Tapicería / Cojinería','Silla comedor','Stool / Banqueta'];
 
+// Sofa modular state
+if(!state.sofaModules)  state.sofaModules  = 3;
+if(!state.sofaArmL)     state.sofaArmL     = true;
+if(!state.sofaArmR)     state.sofaArmR     = true;
+if(!state.sofaCushion)  state.sofaCushion  = true;
+if(!state.mesaForma)    state.mesaForma    = 'Rectangular';
+if(!state.mesaPatas)    state.mesaPatas    = '4 patas';
+
 function updateSubtipo(tipo){
-  const wrap = document.getElementById('step-subtipo-wrap');
+  const wrap    = document.getElementById('step-subtipo-wrap');
   const txtWrap = document.getElementById('step-textile-wrap');
-  const sub = SUBTIPO_OPTIONS[tipo];
-  if(sub){
-    document.getElementById('subtipo-label').textContent = sub.label;
-    const grp = document.getElementById('step-subtipo');
-    grp.innerHTML = sub.opts.map((o,i)=>`<div class="chip${i===0?' selected':''}" data-val="${o}" onclick="sel(this,'subtipo')">${o}</div>`).join('');
-    state.subtipo = sub.opts[0];
+
+  if(tipo === 'Mesa de comedor' || tipo === 'Mesa de centro'){
+    document.getElementById('subtipo-label').textContent = 'Forma y patas';
+    document.getElementById('step-subtipo').innerHTML = `
+      <div style="display:flex;flex-direction:column;gap:.75rem;width:100%">
+        <div>
+          <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Forma</p>
+          <div class="chip-group">
+            ${MESA_FORMAS.map(f=>`<div class="chip${f===state.mesaForma?' selected':''}" onclick="setMesaForma(this,'${f}')">${f}</div>`).join('')}
+          </div>
+        </div>
+        <div>
+          <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Patas</p>
+          <div class="chip-group">
+            ${(state.mesaForma==='Oval'||state.mesaForma==='Circular')
+              ? `<div class="chip selected" onclick="setMesaPatas(this,'Pata central')">Pata central</div>`
+              : MESA_PATAS.map(p=>`<div class="chip${p===state.mesaPatas?' selected':''}" onclick="setMesaPatas(this,'${p}')">${p}</div>`).join('')
+            }
+          </div>
+        </div>
+      </div>`;
+    wrap.style.display = 'block';
+  } else if(tipo === 'Sillón / Sofá'){
+    document.getElementById('subtipo-label').textContent = 'Configuración modular';
+    document.getElementById('step-subtipo').innerHTML = `
+      <div style="display:flex;flex-direction:column;gap:1rem;width:100%">
+        <!-- Module counter -->
+        <div style="display:flex;align-items:center;gap:1rem">
+          <p style="font-size:.78rem;color:var(--mid);font-weight:400;min-width:80px">Módulos</p>
+          <button onclick="changeMod(-1)" style="width:32px;height:32px;border:1.5px solid var(--border);background:transparent;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--moss)">−</button>
+          <span id="mod-count" style="font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;color:var(--moss);min-width:24px;text-align:center">${state.sofaModules}</span>
+          <button onclick="changeMod(1)"  style="width:32px;height:32px;border:1.5px solid var(--border);background:transparent;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--moss)">+</button>
+        </div>
+        <!-- Armrests -->
+        <div>
+          <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Reposa brazos</p>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+            <div class="chip${state.sofaArmL?' selected':''}" onclick="toggleArm('L')">← Izquierdo</div>
+            <div class="chip${state.sofaArmR?' selected':''}" onclick="toggleArm('R')">Derecho →</div>
+            <div class="chip" onclick="setNoArms()">Sin reposa brazos</div>
+          </div>
+        </div>
+        <!-- Cushion -->
+        <div>
+          <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Sentadero con cushion</p>
+          <div style="display:flex;gap:.5rem">
+            <div class="chip${state.sofaCushion?' selected':''}" onclick="setCushion(true)">Con cushion</div>
+            <div class="chip${!state.sofaCushion?' selected':''}" onclick="setCushion(false)">Sin cushion</div>
+          </div>
+        </div>
+      </div>`;
     wrap.style.display = 'block';
   } else {
     wrap.style.display = 'none';
     state.subtipo = '';
   }
-  txtWrap.style.display = TEXTILE_TIPOS.includes(tipo) ? 'block' : 'none';
+
+  txtWrap.style.display = TEXTILE_TIPOS.includes(tipo) && state.sofaCushion ? 'block' : 'none';
+}
+
+function setMesaForma(el, val){
+  state.mesaForma = val;
+  // Oval/Circular only allow pata central
+  if(val === 'Oval' || val === 'Circular'){
+    state.mesaPatas = 'Pata central';
+  } else if(state.mesaPatas === 'Pata central'){
+    // Keep pata central if already selected, otherwise default to 4 patas
+  }
+  // Re-render subtipo to update patas options
+  updateSubtipo(state.tipo);
+  updatePreview();
+}
+function setMesaPatas(el, val){
+  state.mesaPatas = val;
+  document.querySelectorAll('#step-subtipo .chip').forEach(ch=>{
+    if(MESA_PATAS.includes(ch.textContent)) ch.classList.toggle('selected', ch.textContent===val);
+  });
+  updatePreview();
+}
+function changeMod(d){
+  state.sofaModules = Math.max(1, Math.min(12, state.sofaModules + d));
+  const el = document.getElementById('mod-count');
+  if(el) el.textContent = state.sofaModules;
+  updatePreview();
+}
+function toggleArm(side){
+  if(side==='L') state.sofaArmL = !state.sofaArmL;
+  else           state.sofaArmR = !state.sofaArmR;
+  updateSubtipo('Sillón / Sofá');
+  updatePreview();
+}
+function setNoArms(){
+  state.sofaArmL = false; state.sofaArmR = false;
+  updateSubtipo('Sillón / Sofá');
+  updatePreview();
+}
+function setCushion(val){
+  state.sofaCushion = val;
+  updateSubtipo('Sillón / Sofá');
+  updatePreview();
 }
 
 function selColor(el){
@@ -1003,6 +1096,54 @@ function drawFace(pts, fillCol, strokeCol){
   ctx.strokeStyle=strokeCol; ctx.lineWidth=0.5; ctx.stroke();
 }
 
+// Draw a curved/elliptical top face (for oval/circular tables)
+function drawEllipseTop(cx, cy, cz, rx, rz, yTop, col){
+  // Project 16 points around the ellipse perimeter
+  const N = 16;
+  const pts = [];
+  for(let i=0;i<N;i++){
+    const a = (i/N)*Math.PI*2;
+    pts.push(proj(cx + Math.cos(a)*rx, yTop, cz + Math.sin(a)*rz));
+  }
+  ctx.beginPath();
+  ctx.moveTo(...pts[0]);
+  pts.slice(1).forEach(p=>ctx.lineTo(...p));
+  ctx.closePath();
+  ctx.fillStyle = rgbMix(col,1.0);
+  ctx.fill();
+  ctx.strokeStyle = rgbMix(col,0.7);
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+}
+
+// Draw elliptical band (side of oval/circular table)
+function drawEllipseSide(cx, cy, cz, rx, rz, yTop, yBot, col){
+  const N = 16;
+  // Only draw the visible front half (facing camera based on rotY)
+  for(let i=0;i<N;i++){
+    const a0 = (i/N)*Math.PI*2;
+    const a1 = ((i+1)/N)*Math.PI*2;
+    const x0=Math.cos(a0)*rx, z0=Math.sin(a0)*rz;
+    const x1=Math.cos(a1)*rx, z1=Math.sin(a1)*rz;
+    // Rough normal for face culling
+    const nx=Math.cos((a0+a1)/2), nz=Math.sin((a0+a1)/2);
+    const cosY=Math.cos(rotY),sinY=Math.sin(rotY);
+    const viewDot = nx*cosY - nz*(-sinY); // simplified
+    const bright = 0.45 + 0.3*Math.max(0, viewDot);
+    const p0t=proj(cx+x0,yTop,cz+z0), p1t=proj(cx+x1,yTop,cz+z1);
+    const p0b=proj(cx+x0,yBot,cz+z0), p1b=proj(cx+x1,yBot,cz+z1);
+    ctx.beginPath();
+    ctx.moveTo(...p0t); ctx.lineTo(...p1t);
+    ctx.lineTo(...p1b); ctx.lineTo(...p0b);
+    ctx.closePath();
+    ctx.fillStyle = rgbMix(col, bright);
+    ctx.fill();
+    ctx.strokeStyle = rgbMix(col, bright*0.7);
+    ctx.lineWidth = 0.4;
+    ctx.stroke();
+  }
+}
+
 // Render a box defined by its 8 corners (already in world space)
 // corners: [x0,y0,z0] = min corner, [x1,y1,z1] = max corner
 // All face y-coords use bottom=yBot, top=yTop
@@ -1049,13 +1190,24 @@ function buildGeometry(){
       const tt = Math.max(3, H*0.14);
       const lh = H - tt;
       const lr = 2.2;
-      const inX = L/2 - lr - 1;
-      const inZ = D/2 - lr - 1;
-      // legs: y center = lh/2, so bottom=0, top=lh ✓
-      [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
-        .forEach(([bx,by,bz])=>B(bx,by,bz, lr,lh/2,lr, cd));
-      // tabletop: bottom=lh, center=lh+tt/2, top=lh+tt=H ✓
-      B(0, lh+tt/2, 0, L/2,tt/2,D/2, c);
+      const forma = state.mesaForma || 'Rectangular';
+      const patas = state.mesaPatas || '4 patas';
+
+      // ── Legs first (drawn behind tabletop) ──
+      if(patas === 'Pata central'){
+        const pw = forma==='Circular' ? Math.min(L,D)*0.07 : L*0.065;
+        B(0, lh/2, 0,  pw, lh/2, pw, cd);
+        B(0, 2.5,  0,  L*0.22, 2.5, D*0.13, darken(cd,8));
+      } else {
+        const inX = L/2 - lr - 1;
+        const inZ = (forma==='Oval' ? D/2*0.7 : D/2) - lr - 1;
+        [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
+          .forEach(([bx,by,bz])=>B(bx,by,bz, lr,lh/2,lr, cd));
+      }
+
+      // ── Tabletop — deferred draw flag ──
+      // We push a special marker so ellipses draw after boxes
+      boxes.push({special:'mesa_top', forma, L, D, tt, lh, c});
       break;
     }
     case 'Sillón / Sofá':{
@@ -1065,17 +1217,34 @@ function buildGeometry(){
       const bd  = D*0.22;
       const aw  = 3.5;
       const armH = sh + bh*0.52;
-      const inX = L/2-4, inZ = D/2-4;
-      // legs: bottom=0, top=lh
-      [[-inX,lh/2,-inZ],[inX,lh/2,-inZ],[-inX,lh/2,inZ],[inX,lh/2,inZ]]
-        .forEach(([bx,by,bz])=>B(bx,by,bz, 2.2,lh/2,2.2, cd));
-      // seat: bottom=lh, top=lh+sh
-      B(0, lh+sh/2, 0, L/2,sh/2,D/2, c);
-      // backrest: bottom=lh+sh, rear-aligned at -Z
-      B(0, lh+sh+bh/2, -(D/2-bd/2), L/2,bh/2,bd/2, darken(c,12));
-      // armrests: bottom=lh, same width as seat, outside on X
-      B(-(L/2+aw), lh+armH/2, 0, aw,armH/2,D/2, darken(c,8));
-      B( (L/2+aw), lh+armH/2, 0, aw,armH/2,D/2, darken(c,8));
+      const mods = state.sofaModules || 3;
+      const hasArmL = state.sofaArmL !== false;
+      const hasArmR = state.sofaArmR !== false;
+      const hasCushion = state.sofaCushion !== false;
+      const cushionCol = hasCushion ? lighten(c, 28) : c;
+
+      // Scale canvas width to accommodate all modules nicely
+      // Each module is ~18-22 units wide regardless of slider
+      const modW = Math.max(14, Math.min(26, L / mods));
+      const totalW = modW * mods;
+
+      for(let m=0; m<mods; m++){
+        const mx = -totalW/2 + modW*m + modW/2;
+        const legInX = modW/2-2.5, legInZ = D/2-3;
+        // Legs
+        [[-legInX,lh/2,-legInZ],[legInX,lh/2,-legInZ],
+         [-legInX,lh/2, legInZ],[legInX,lh/2, legInZ]]
+          .forEach(([bx,by,bz])=>B(mx+bx,by,bz, 1.8,lh/2,1.8, cd));
+        // Seat
+        B(mx, lh+sh/2, 0, modW/2-0.4, sh/2, D/2, c);
+        // Cushion
+        if(hasCushion) B(mx, lh+sh+sh*0.12, 0, modW/2-1.2, sh*0.12, D/2-1.5, cushionCol);
+        // Backrest
+        B(mx, lh+sh+bh/2, -(D/2-bd/2), modW/2-0.4, bh/2, bd/2, darken(c,12));
+      }
+      // Armrests attach flush to ends of sofa
+      if(hasArmL) B(-(totalW/2+aw), lh+armH/2, 0, aw, armH/2, D/2, darken(c,8));
+      if(hasArmR) B( (totalW/2+aw), lh+armH/2, 0, aw, armH/2, D/2, darken(c,8));
       break;
     }
     case 'Cama':{
@@ -1143,6 +1312,53 @@ function buildGeometry(){
       B(0, lh+sh+bh/2, -(D/2-bd/2), L/2,bh/2,bd/2, darken(c,10));
       break;
     }
+    case 'Stool / Banqueta':{
+      const lh = H*0.72;  // long legs
+      const sh = H*0.12;  // thin seat
+      const lr2 = 2.0;
+      const inX = L/2-lr2-1, inZ2 = D/2-lr2-1;
+      // 4 legs
+      [[-inX,lh/2,-inZ2],[inX,lh/2,-inZ2],[-inX,lh/2,inZ2],[inX,lh/2,inZ2]]
+        .forEach(([bx,by,bz])=>B(bx,by,bz, lr2,lh/2,lr2, cd));
+      // Footrest crossbar midway up
+      B(0, lh*0.45, 0, L/2-lr2, 1.2, 1.2, darken(cd,5));
+      // Seat
+      B(0, lh+sh/2, 0, L/2, sh/2, D/2, c);
+      // Cushion if applicable
+      if(state.sofaCushion !== false) B(0, lh+sh+sh*0.4, 0, L/2-1, sh*0.4, D/2-1, lighten(c,28));
+      break;
+    }
+    case 'Mesa de noche':{
+      const lh2 = H*0.08;
+      const bh2 = H*0.82;
+      const lr3 = 2.0;
+      const inX2 = L/2-lr3-1, inZ3 = D/2-lr3-1;
+      // legs
+      [[-inX2,lh2/2,-inZ3],[inX2,lh2/2,-inZ3],[-inX2,lh2/2,inZ3],[inX2,lh2/2,inZ3]]
+        .forEach(([bx,by,bz])=>B(bx,by,bz, lr3,lh2/2,lr3, cd));
+      // Body
+      B(0, lh2+bh2/2, 0, L/2, bh2/2, D/2, c);
+      // Single drawer line
+      B(0, lh2+bh2*0.55, -D/2+0.8, L/2-2, 1, 0.8, darken(c,18));
+      // Small knob
+      B(0, lh2+bh2*0.55, -D/2+0.4, 1.5, 1.5, 0.4, darken(c,30));
+      // Top surface cap
+      B(0, lh2+bh2+1.5, 0, L/2, 1.5, D/2, darken(c,8));
+      break;
+    }
+    case 'Tapicería / Cojinería':{
+      // Represents a cushion/pillow stack
+      const layers = 3;
+      const lh3 = H / layers;
+      for(let i=0; i<layers; i++){
+        const squish = 1 - i*0.08;
+        const col2 = i%2===0 ? c : lighten(c,20);
+        B(0, i*lh3+lh3/2, 0, L/2*squish, lh3/2*0.7, D/2*squish, col2);
+      }
+      // Welting lines on front cushion
+      B(0, lh3/2, -(D/2-0.8), L/2-2, 0.8, 0.8, darken(c,15));
+      break;
+    }
     default:
       B(0, H/2, 0, L/2,H/2,D/2, c);
   }
@@ -1191,10 +1407,28 @@ function draw3d(){
 
   // Sort all boxes by center depth (painter's algorithm)
   boxes.sort((a,b)=>{
+    if(a.special) return 1;  // specials always on top
+    if(b.special) return -1;
     const da=depth(a.cx,a.cy,a.cz), db=depth(b.cx,b.cy,b.cz);
     return da-db;
   });
-  boxes.forEach(b=>box(b.cx,b.cy,b.cz, b.hx,b.hy,b.hz, b.col));
+  boxes.forEach(b=>{
+    if(b.special === 'mesa_top'){
+      const {forma, L:bL, D:bD, tt, lh, c:bc} = b;
+      if(forma === 'Circular'){
+        const R = Math.min(bL,bD)*0.45;
+        drawEllipseSide(0, 0, 0, R, R, lh+tt, lh, bc);
+        drawEllipseTop( 0, 0, 0, R, R, lh+tt, bc);
+      } else if(forma === 'Oval'){
+        drawEllipseSide(0, 0, 0, bL/2, bD/2*0.65, lh+tt, lh, bc);
+        drawEllipseTop( 0, 0, 0, bL/2, bD/2*0.65, lh+tt, bc);
+      } else {
+        box(0, lh+tt/2, 0, bL/2, tt/2, bD/2, bc);
+      }
+    } else {
+      box(b.cx,b.cy,b.cz, b.hx,b.hy,b.hz, b.col);
+    }
+  });
 
   // ── DIMENSION COTAS drawn AFTER furniture ──
   const floor = 0, ceil = H;
@@ -1221,12 +1455,21 @@ function updatePreview(){
   draw3d();
 
   const extras = state.extras.length ? state.extras.join(', ') : 'Ninguno';
+  // Build tipo label with sub-details
+  let tipoLabel = state.tipo;
+  if(state.tipo === 'Mesa de comedor' || state.tipo === 'Mesa de centro'){
+    tipoLabel += ` · ${state.mesaForma||'Rectangular'} · ${state.mesaPatas||'4 patas'}`;
+  } else if(state.tipo === 'Sillón / Sofá'){
+    const arms = (state.sofaArmL&&state.sofaArmR) ? 'Reposa brazos ambos lados' : state.sofaArmL ? 'Reposa brazo izq' : state.sofaArmR ? 'Reposa brazo der' : 'Sin reposa brazos';
+    tipoLabel += ` · ${state.sofaModules||3} módulos · ${arms}`;
+  }
+  const showTextile = TEXTILE_TIPOS.includes(state.tipo) && state.sofaCushion !== false;
   const specs = [
-    {k:'Tipo',       v:state.tipo + (state.subtipo ? ' · '+state.subtipo : '')},
+    {k:'Tipo',       v:tipoLabel},
     {k:'Material',   v:state.material},
     {k:'Acabado',    v:state.acabado},
     {k:'Tono',       v:state.color},
-    ...(TEXTILE_TIPOS.includes(state.tipo)?[{k:'Textil', v:state.textile}]:[]),
+    ...(showTextile?[{k:'Textil', v:state.textile||'Sombrella'}]:[]),
     {k:'Dimensiones',v:`${state.largo} × ${state.ancho} × ${state.alto} cm`},
     {k:'Ambiente',   v:state.ambiente},
   ];
@@ -1237,7 +1480,14 @@ function updatePreview(){
 
 async function sendToWhatsApp(){
   const nota = document.getElementById('nota-extra').value;
-  const subtipo = state.subtipo ? ' · ' + state.subtipo : '';
+  let subtipo = '';
+  if(state.tipo === 'Mesa de comedor' || state.tipo === 'Mesa de centro'){
+    subtipo = ` · ${state.mesaForma||'Rectangular'} · ${state.mesaPatas||'4 patas'}`;
+  } else if(state.tipo === 'Sillón / Sofá'){
+    const arms = (state.sofaArmL&&state.sofaArmR)?'Reposa brazos ambos lados':state.sofaArmL?'Reposa brazo izq':state.sofaArmR?'Reposa brazo der':'Sin reposa brazos';
+    const cush = state.sofaCushion !== false ? `Con cushion (${state.textile||'Sombrella'})` : 'Sin cushion';
+    subtipo = ` · ${state.sofaModules||3} módulos · ${arms} · ${cush}`;
+  }
   const textilLine = TEXTILE_TIPOS.includes(state.tipo) ? `\n🧵 *Textil:* ${state.textile}` : '';
   const inspoText = state.inspiracion.length
     ? state.inspiracion.map(i=>`• ${i.name}`).join('\n')
@@ -1259,7 +1509,7 @@ ${inspoText}${notaLine}
 ¡Gracias!`;
 
   // Send to Google Sheets (fire & forget)
-  const SHEETS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+  const SHEETS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // Reemplazá YOUR_SCRIPT_ID después de deployar el Apps Script
   const payload = {
     fecha: new Date().toISOString(),
     tipo: state.tipo + subtipo,
