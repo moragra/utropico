@@ -1219,7 +1219,7 @@ function draw3d(){
 
 function updatePreview(){
   draw3d();
-  document.getElementById('prev-titulo').textContent = state.tipo;
+
   const extras = state.extras.length ? state.extras.join(', ') : 'Ninguno';
   const specs = [
     {k:'Tipo',       v:state.tipo + (state.subtipo ? ' · '+state.subtipo : '')},
