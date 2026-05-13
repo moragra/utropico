@@ -337,13 +337,14 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
               <div class="step-num-badge">✦</div>
               <span class="step-label">Inspiración — seleccioná piezas que te gusten</span>
             </div>
-            <p style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-weight:300">Podés elegir una o varias. Se adjuntarán automáticamente a tu mensaje de WhatsApp.</p>
+            <p style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-weight:300">Elegí fotos de productos de nuestro catálogo. Se adjuntarán a tu mensaje de WhatsApp.</p>
             <div class="inspo-grid" id="inspoGrid"></div>
             <div class="selected-banner" id="selectedBanner">
               <span>✓</span> <span id="selectedCount">0 piezas seleccionadas</span> — se adjuntarán a tu cotización
             </div>
           </div>
 
+          <!-- STEP 1: TIPO -->
           <div class="config-step">
             <div class="step-head"><div class="step-num-badge">1</div><span class="step-label">Tipo de mueble</span></div>
             <div class="chip-group" id="step-tipo">
@@ -351,25 +352,98 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
               <div class="chip" data-val="Sillón / Sofá" onclick="sel(this,'tipo')"><span class="icon">🛋</span>Sillón / Sofá</div>
               <div class="chip" data-val="Mesa de centro" onclick="sel(this,'tipo')"><span class="icon">☕</span>Mesa centro</div>
               <div class="chip" data-val="Cama" onclick="sel(this,'tipo')"><span class="icon">🛏</span>Cama</div>
-              <div class="chip" data-val="Aparador / Vitrina" onclick="sel(this,'tipo')"><span class="icon">🗄</span>Aparador</div>
-              <div class="chip" data-val="Mueble exterior / Terraza" onclick="sel(this,'tipo')"><span class="icon">🌿</span>Terraza</div>
-              <div class="chip" data-val="Silla" onclick="sel(this,'tipo')"><span class="icon">🪑</span>Silla</div>
-              <div class="chip" data-val="Otro" onclick="sel(this,'tipo')"><span class="icon">✏️</span>Otro</div>
+              <div class="chip" data-val="Credenza / Consola" onclick="sel(this,'tipo')"><span class="icon">🗄</span>Credenza / Consola</div>
+              <div class="chip" data-val="Silla comedor" onclick="sel(this,'tipo')"><span class="icon">🪑</span>Silla comedor</div>
+              <div class="chip" data-val="Stool / Banqueta" onclick="sel(this,'tipo')"><span class="icon">🍄</span>Stool</div>
+              <div class="chip" data-val="Mesa de noche" onclick="sel(this,'tipo')"><span class="icon">🌙</span>Mesa de noche</div>
+              <div class="chip" data-val="Tapicería / Cojinería" onclick="sel(this,'tipo')"><span class="icon">🧵</span>Tapicería</div>
             </div>
           </div>
 
+          <!-- Sub-opciones dinámicas por tipo de mueble -->
+          <div class="config-step" id="step-subtipo-wrap" style="display:none">
+            <div class="step-head"><div class="step-num-badge">1b</div><span class="step-label" id="subtipo-label">Forma</span></div>
+            <div class="chip-group" id="step-subtipo"></div>
+          </div>
+
+          <!-- STEP 2: MATERIAL -->
           <div class="config-step">
             <div class="step-head"><div class="step-num-badge">2</div><span class="step-label">Material principal</span></div>
             <div class="chip-group" id="step-material">
-              <div class="chip selected" data-val="Madera Guanacaste" onclick="sel(this,'material')"><span class="icon">🪵</span>Guanacaste</div>
+              <div class="chip selected" data-val="Teca" onclick="sel(this,'material')"><span class="icon">🪵</span>Teca</div>
+              <div class="chip" data-val="Roble" onclick="sel(this,'material')"><span class="icon">🌳</span>Roble</div>
+              <div class="chip" data-val="Cenízaro" onclick="sel(this,'material')"><span class="icon">🌲</span>Cenízaro</div>
+              <div class="chip" data-val="Guanacaste" onclick="sel(this,'material')"><span class="icon">🌿</span>Guanacaste</div>
+              <div class="chip" data-val="Melina" onclick="sel(this,'material')"><span class="icon">🌱</span>Melina</div>
+              <div class="chip" data-val="Laurel" onclick="sel(this,'material')"><span class="icon">🍃</span>Laurel</div>
               <div class="chip" data-val="Rattan natural" onclick="sel(this,'material')"><span class="icon">🌾</span>Rattan</div>
-              <div class="chip" data-val="Combinación Guanacaste + Rattan" onclick="sel(this,'material')"><span class="icon">🌿</span>Combinación</div>
-              <div class="chip" data-val="Madera nativa (otra especie)" onclick="sel(this,'material')"><span class="icon">🌳</span>Otra madera</div>
             </div>
           </div>
 
+          <!-- STEP 3: ACABADO -->
           <div class="config-step">
-            <div class="step-head"><div class="step-num-badge">3</div><span class="step-label">Dimensiones aproximadas</span></div>
+            <div class="step-head"><div class="step-num-badge">3</div><span class="step-label">Acabado de la madera</span></div>
+            <div class="chip-group" id="step-acabado">
+              <div class="chip selected" data-val="Natural" onclick="sel(this,'acabado')">Natural</div>
+              <div class="chip" data-val="Mate" onclick="sel(this,'acabado')">Mate</div>
+              <div class="chip" data-val="Satinado" onclick="sel(this,'acabado')">Satinado</div>
+              <div class="chip" data-val="Aclarado" onclick="sel(this,'acabado')">Aclarado</div>
+            </div>
+          </div>
+
+          <!-- STEP 4: TONO N1-N8 -->
+          <div class="config-step">
+            <div class="step-head"><div class="step-num-badge">4</div><span class="step-label">Tono de madera</span></div>
+            <div class="swatch-group" id="step-color" style="flex-wrap:wrap;gap:.75rem">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                <div class="swatch selected" style="background:#c8943a;width:42px;height:42px" data-val="N1" data-hex="#c8943a" onclick="selColor(this)"></div>
+                <span class="swatch-label">N1</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                <div class="swatch" style="background:#8b5e2a;width:42px;height:42px" data-val="N2" data-hex="#8b5e2a" onclick="selColor(this)"></div>
+                <span class="swatch-label">N2</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                <div class="swatch" style="background:#3a3a38;width:42px;height:42px" data-val="N3" data-hex="#3a3a38" onclick="selColor(this)"></div>
+                <span class="swatch-label">N3</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                <div class="swatch" style="background:#1a1008;width:42px;height:42px" data-val="N4" data-hex="#1a1008" onclick="selColor(this)"></div>
+                <span class="swatch-label">N4</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                <div class="swatch" style="background:#d4c4a0;width:42px;height:42px" data-val="N5" data-hex="#d4c4a0" onclick="selColor(this)"></div>
+                <span class="swatch-label">N5</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                <div class="swatch" style="background:#7a6048;width:42px;height:42px" data-val="N6" data-hex="#7a6048" onclick="selColor(this)"></div>
+                <span class="swatch-label">N6</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                <div class="swatch" style="background:#8a6040;width:42px;height:42px" data-val="N7" data-hex="#8a6040" onclick="selColor(this)"></div>
+                <span class="swatch-label">N7</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                <div class="swatch" style="background:#5a3820;width:42px;height:42px" data-val="N8" data-hex="#5a3820" onclick="selColor(this)"></div>
+                <span class="swatch-label">N8</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 5: TEXTILE (conditional) -->
+          <div class="config-step" id="step-textile-wrap" style="display:none">
+            <div class="step-head"><div class="step-num-badge">5</div><span class="step-label">Textil</span></div>
+            <div class="chip-group" id="step-textile">
+              <div class="chip selected" data-val="Sombrella" onclick="sel(this,'textile')">Sombrella</div>
+              <div class="chip" data-val="Crypton" onclick="sel(this,'textile')">Crypton</div>
+              <div class="chip" data-val="Aquaclean" onclick="sel(this,'textile')">Aquaclean</div>
+              <div class="chip" data-val="Lino alto tránsito" onclick="sel(this,'textile')">Lino alto tránsito</div>
+            </div>
+          </div>
+
+          <!-- STEP 6: DIMENSIONES -->
+          <div class="config-step">
+            <div class="step-head"><div class="step-num-badge">6</div><span class="step-label">Dimensiones aproximadas</span></div>
             <div class="slider-row"><label>Largo</label><span class="dim-val" id="val-largo">160 cm</span></div>
             <input id="sl-largo" type="range" min="60" max="300" value="160" step="5" oninput="updateDim('largo',this.value)">
             <div style="height:.8rem"></div>
@@ -380,55 +454,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
             <input id="sl-alto" type="range" min="30" max="120" value="75" step="5" oninput="updateDim('alto',this.value)">
           </div>
 
-          <div class="config-step">
-            <div class="step-head"><div class="step-num-badge">4</div><span class="step-label">Acabado de la madera</span></div>
-            <div class="chip-group" id="step-acabado">
-              <div class="chip selected" data-val="Natural / Sin tratar" onclick="sel(this,'acabado')">Natural</div>
-              <div class="chip" data-val="Barniz mate" onclick="sel(this,'acabado')">Barniz mate</div>
-              <div class="chip" data-val="Barniz brillante" onclick="sel(this,'acabado')">Barniz brillante</div>
-              <div class="chip" data-val="Aceite de teca (exterior)" onclick="sel(this,'acabado')">Aceite teca</div>
-              <div class="chip" data-val="Pintura blanco crema" onclick="sel(this,'acabado')">Blanco crema</div>
-            </div>
-          </div>
-
-          <div class="config-step">
-            <div class="step-head"><div class="step-num-badge">5</div><span class="step-label">Tono predominante</span></div>
-            <div class="swatch-group" id="step-color">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
-                <div class="swatch selected" style="background:#c4954a" data-val="Miel / Ámbar natural" data-hex="#c4954a" onclick="selColor(this)"></div>
-                <span class="swatch-label">Miel</span>
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
-                <div class="swatch" style="background:#8a6035" data-val="Caoba oscuro" data-hex="#8a6035" onclick="selColor(this)"></div>
-                <span class="swatch-label">Caoba</span>
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
-                <div class="swatch" style="background:#d4b896" data-val="Claro / Blanqueado" data-hex="#d4b896" onclick="selColor(this)"></div>
-                <span class="swatch-label">Claro</span>
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
-                <div class="swatch" style="background:#4a3520" data-val="Wengué / Oscuro" data-hex="#4a3520" onclick="selColor(this)"></div>
-                <span class="swatch-label">Wengué</span>
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
-                <div class="swatch" style="background:#e8e0d0" data-val="Blanco crema" data-hex="#e8e0d0" onclick="selColor(this)"></div>
-                <span class="swatch-label">Crema</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="config-step">
-            <div class="step-head"><div class="step-num-badge">6</div><span class="step-label">Extras opcionales</span></div>
-            <div class="extra-grid" id="step-extras">
-              <label class="extra-item"><input type="checkbox" onchange="toggleExtra(this,'Cojines incluidos')"> Cojines incluidos</label>
-              <label class="extra-item"><input type="checkbox" onchange="toggleExtra(this,'Cubierta de vidrio')"> Cubierta de vidrio</label>
-              <label class="extra-item"><input type="checkbox" onchange="toggleExtra(this,'Tratamiento exterior/lluvia')"> Tratam. exterior</label>
-              <label class="extra-item"><input type="checkbox" onchange="toggleExtra(this,'Patas de metal negro')"> Patas metal negro</label>
-              <label class="extra-item"><input type="checkbox" onchange="toggleExtra(this,'Cajones o compartimientos')"> Cajones / Compart.</label>
-              <label class="extra-item"><input type="checkbox" onchange="toggleExtra(this,'Grabado / personalización')"> Grabado personal.</label>
-            </div>
-          </div>
-
+          <!-- STEP 7: AMBIENTE -->
           <div class="config-step">
             <div class="step-head"><div class="step-num-badge">7</div><span class="step-label">¿Para qué espacio es?</span></div>
             <div class="chip-group" id="step-ambiente">
@@ -440,9 +466,10 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
             </div>
           </div>
 
+          <!-- STEP 8: NOTA -->
           <div class="config-step" style="border-bottom:none">
             <div class="step-head"><div class="step-num-badge">8</div><span class="step-label">Nota o inspiración adicional (opcional)</span></div>
-            <textarea id="nota-extra" placeholder="Ej: quiero combinar las referencias seleccionadas, o tengo una idea específica..." style="width:100%;min-height:90px;background:var(--white);border:1.5px solid var(--border);border-radius:3px;padding:.8rem 1rem;font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--dark);resize:vertical;outline:none;font-weight:300" oninput="updatePreview()"></textarea>
+            <textarea id="nota-extra" placeholder="Ej: quiero una mesa oval con pata central, sin reposa brazos, referencias adjuntas..." style="width:100%;min-height:90px;background:var(--white);border:1.5px solid var(--border);border-radius:3px;padding:.8rem 1rem;font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--dark);resize:vertical;outline:none;font-weight:300" oninput="updatePreview()"></textarea>
           </div>
         </div>
 
@@ -454,32 +481,15 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
               <p style="font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(61,90,40,.4);text-align:center">Arrastrá para rotar · Preview 3D</p>
             </div>
             <div class="preview-info">
-              <p class="preview-title" id="prev-titulo">Mesa de comedor</p>
               <div class="preview-specs" id="prev-specs"></div>
-              <div id="inspo-preview" style="margin-bottom:1.25rem;display:none">
+              <div id="inspo-preview" style="margin-bottom:1rem;display:none">
                 <p style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Referencias seleccionadas</p>
                 <div id="inspo-thumbs" style="display:flex;gap:.4rem;flex-wrap:wrap"></div>
               </div>
               <button class="wa-btn" onclick="sendToWhatsApp()">
                 <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Enviar por WhatsApp
+                Cotizar por WhatsApp
               </button>
-              <p style="font-size:.62rem;color:var(--muted);margin-top:.65rem;text-align:center;letter-spacing:.06em">El mensaje incluirá tus especificaciones y referencias seleccionadas</p>
-            </div>
-          </div>
-        </div>
-            <div class="preview-info">
-              <p class="preview-title" id="prev-titulo">Mesa de comedor</p>
-              <div class="preview-specs" id="prev-specs"></div>
-              <div id="inspo-preview" style="margin-bottom:1.25rem;display:none">
-                <p style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem">Referencias seleccionadas</p>
-                <div id="inspo-thumbs" style="display:flex;gap:.4rem;flex-wrap:wrap"></div>
-              </div>
-              <button class="wa-btn" onclick="sendToWhatsApp()">
-                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Enviar por WhatsApp
-              </button>
-              <p style="font-size:.62rem;color:var(--muted);margin-top:.65rem;text-align:center;letter-spacing:.06em">El mensaje incluirá tus especificaciones y referencias seleccionadas</p>
             </div>
           </div>
         </div>
@@ -544,34 +554,36 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
   </div>
 </div>
 
-<a class="wa-float" href="https://wa.me/50688888888?text=Hola%20utropico%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20sus%20muebles" target="_blank" aria-label="WhatsApp">
+<a class="wa-float" href="https://wa.me/50687069393?text=Hola%20utropico%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20sus%20muebles" target="_blank" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
-const WA_NUMBER = '50688888888';
+const WA_NUMBER = '50687069393';
 
 const state = {
-  tipo:'Mesa de comedor', material:'Madera Guanacaste', acabado:'Natural / Sin tratar',
-  color:'Miel / Ámbar natural', colorHex:'#c4954a',
+  tipo:'Mesa de comedor', material:'Teca', acabado:'Natural',
+  color:'N1', colorHex:'#c8943a', textile:'Sombrella', subtipo:'',
   largo:160, ancho:90, alto:75, ambiente:'Villa / casa de playa',
   extras:[], inspiracion:[]
 };
 
 // Knowledge base — reemplazar con tus fotos reales (src: ruta o URL)
+// Inspiration KB — update src with product-only photos when available
+// Currently using best available shots; replace with clean product photos
 const KB = [
-  {id:'kb1', name:'Mesa comedor Guanacaste', cat:'Comedor', src:'fotos/p10.png'},
-  {id:'kb2', name:'Sillas rattan comedor', cat:'Comedor', src:'fotos/p01.png'},
-  {id:'kb3', name:'Mesa Guanacaste grande', cat:'Comedor', src:'fotos/p17.jpg'},
-  {id:'kb4', name:'Sala exterior teca', cat:'Terraza', src:'fotos/p02.jpg'},
-  {id:'kb5', name:'Chaise longue piscina', cat:'Terraza', src:'fotos/p03.jpg'},
-  {id:'kb6', name:'Sillas lounge rattan', cat:'Sala', src:'fotos/p12.png'},
-  {id:'kb7', name:'Sala interior madera', cat:'Sala', src:'fotos/p07.jpg'},
-  {id:'kb8', name:'Comedor + bancos', cat:'Comedor', src:'fotos/p15.jpg'},
-  {id:'kb9', name:'Dormitorio madera natural', cat:'Dormitorio', src:'fotos/p09.png'},
+  {id:'kb1', name:'Mesa comedor oval', cat:'Comedor', src:'fotos/p10.png'},
+  {id:'kb2', name:'Mesa comedor rectangular', cat:'Comedor', src:'fotos/p15.jpg'},
+  {id:'kb3', name:'Mesa Guanacaste 10p', cat:'Comedor', src:'fotos/p17.jpg'},
+  {id:'kb4', name:'Sillas rattan comedor', cat:'Comedor', src:'fotos/p01.png'},
+  {id:'kb5', name:'Sofá teca exterior', cat:'Sofá', src:'fotos/p23.jpg'},
+  {id:'kb6', name:'Sofá sala madera', cat:'Sofá', src:'fotos/p18.jpg'},
+  {id:'kb7', name:'Sillas lounge rattan', cat:'Sala', src:'fotos/p12.png'},
+  {id:'kb8', name:'Chaise longue teca', cat:'Exterior', src:'fotos/p06.jpg'},
+  {id:'kb9', name:'Cama con mesa de noche', cat:'Dormitorio', src:'fotos/p09.png'},
   {id:'kb10', name:'Cama cabecera madera', cat:'Dormitorio', src:'fotos/p11.png'},
-  {id:'kb11', name:'Dormitorio tropical', cat:'Dormitorio', src:'fotos/p20.jpg'},
-  {id:'kb12', name:'Sofás sala abierta', cat:'Sala', src:'fotos/p18.jpg'},
+  {id:'kb11', name:'Habitación teca', cat:'Dormitorio', src:'fotos/p20.jpg'},
+  {id:'kb12', name:'Credenza madera', cat:'Sala', src:'fotos/p19.jpg'},
 ];
 
 const gradients=['linear-gradient(145deg,#daeece,#a8cc80)','linear-gradient(145deg,#ccdbb8,#94b860)','linear-gradient(145deg,#e0d4b8,#c4a860)','linear-gradient(145deg,#d8e8c4,#a0c060)','linear-gradient(145deg,#c8d4a8,#8aaa50)','linear-gradient(145deg,#e4dcc8,#b8a070)','linear-gradient(145deg,#d0e0b8,#90b855)','linear-gradient(145deg,#dcd0b0,#b09050)'];
@@ -876,7 +888,32 @@ function sel(el,group){
   document.querySelectorAll('#step-'+group+' .chip').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
   state[group]=el.dataset.val;
+  if(group==='tipo') updateSubtipo(state[group]);
   updatePreview();
+}
+
+const SUBTIPO_OPTIONS = {
+  'Mesa de comedor': {label:'Forma de la mesa', opts:['Rectangular','Oval','Circular','Pata central','4 patas']},
+  'Mesa de centro':  {label:'Forma de la mesa', opts:['Rectangular','Oval','Circular','Pata central','4 patas']},
+  'Sillón / Sofá':   {label:'Configuración', opts:['Con reposa brazos','Sin reposa brazos','Esquinero (L)','Loveseat 2 puestos','3 puestos']},
+};
+const TEXTILE_TIPOS = ['Sillón / Sofá','Tapicería / Cojinería','Silla comedor','Stool / Banqueta'];
+
+function updateSubtipo(tipo){
+  const wrap = document.getElementById('step-subtipo-wrap');
+  const txtWrap = document.getElementById('step-textile-wrap');
+  const sub = SUBTIPO_OPTIONS[tipo];
+  if(sub){
+    document.getElementById('subtipo-label').textContent = sub.label;
+    const grp = document.getElementById('step-subtipo');
+    grp.innerHTML = sub.opts.map((o,i)=>`<div class="chip${i===0?' selected':''}" data-val="${o}" onclick="sel(this,'subtipo')">${o}</div>`).join('');
+    state.subtipo = sub.opts[0];
+    wrap.style.display = 'block';
+  } else {
+    wrap.style.display = 'none';
+    state.subtipo = '';
+  }
+  txtWrap.style.display = TEXTILE_TIPOS.includes(tipo) ? 'block' : 'none';
 }
 
 function selColor(el){
@@ -1185,39 +1222,60 @@ function updatePreview(){
   document.getElementById('prev-titulo').textContent = state.tipo;
   const extras = state.extras.length ? state.extras.join(', ') : 'Ninguno';
   const specs = [
+    {k:'Tipo',       v:state.tipo + (state.subtipo ? ' · '+state.subtipo : '')},
     {k:'Material',   v:state.material},
-    {k:'Dimensiones',v:`${state.largo} × ${state.ancho} × ${state.alto} cm`},
     {k:'Acabado',    v:state.acabado},
     {k:'Tono',       v:state.color},
+    ...(TEXTILE_TIPOS.includes(state.tipo)?[{k:'Textil', v:state.textile}]:[]),
+    {k:'Dimensiones',v:`${state.largo} × ${state.ancho} × ${state.alto} cm`},
     {k:'Ambiente',   v:state.ambiente},
-    {k:'Extras',     v:extras},
   ];
   document.getElementById('prev-specs').innerHTML = specs.map(s=>
     `<div class="spec-row"><span class="spec-key">${s.k}</span><span class="spec-val">${s.v}</span></div>`
   ).join('');
 }
 
-function sendToWhatsApp(){
-  const nota=document.getElementById('nota-extra').value;
-  const extras=state.extras.length?state.extras.join(', '):'Ninguno';
-  const inspoText=state.inspiracion.length
+async function sendToWhatsApp(){
+  const nota = document.getElementById('nota-extra').value;
+  const subtipo = state.subtipo ? ' · ' + state.subtipo : '';
+  const textilLine = TEXTILE_TIPOS.includes(state.tipo) ? `\n🧵 *Textil:* ${state.textile}` : '';
+  const inspoText = state.inspiracion.length
     ? state.inspiracion.map(i=>`• ${i.name}`).join('\n')
-    : 'Ninguna seleccionada';
-  const msg=`Hola utropico! 👋 Me gustaría cotizar un mueble:
+    : 'Ninguna';
+  const notaLine = nota ? `\n📝 *Notas:* ${nota}` : '';
 
-🪵 *Tipo:* ${state.tipo}
+  const msg = `Hola utropico! 👋 Me gustaría cotizar:
+
+🪵 *Pieza:* ${state.tipo}${subtipo}
 🌿 *Material:* ${state.material}
-📐 *Dimensiones:* ${state.largo} × ${state.ancho} × ${state.alto} cm
 ✨ *Acabado:* ${state.acabado}
-🎨 *Tono:* ${state.color}
+🎨 *Tono:* ${state.color}${textilLine}
+📐 *Dimensiones:* ${state.largo} × ${state.ancho} × ${state.alto} cm
 🏡 *Espacio:* ${state.ambiente}
-➕ *Extras:* ${extras}
 
-🖼 *Referencias que me gustan:*
-${inspoText}
-${nota?`\n📝 *Notas:* ${nota}`:''}
+🖼 *Referencias:*
+${inspoText}${notaLine}
 
 ¡Gracias!`;
+
+  // Send to Google Sheets (fire & forget)
+  const SHEETS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+  const payload = {
+    fecha: new Date().toISOString(),
+    tipo: state.tipo + subtipo,
+    material: state.material,
+    acabado: state.acabado,
+    tono: state.color,
+    textil: TEXTILE_TIPOS.includes(state.tipo) ? state.textile : '',
+    dimensiones: `${state.largo}x${state.ancho}x${state.alto}`,
+    ambiente: state.ambiente,
+    referencias: inspoText,
+    nota: nota,
+  };
+  try {
+    fetch(SHEETS_URL, {method:'POST', body:JSON.stringify(payload)}).catch(()=>{});
+  } catch(e){}
+
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
@@ -1302,6 +1360,7 @@ function renderProjects(list){}
 renderInspo();
 renderProjEditorial('all');
 renderCatalog('all');
+updateSubtipo(state.tipo);
 updatePreview();
 
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1});
