@@ -1164,7 +1164,7 @@ function openModal(id){
   document.getElementById('carouselNext').style.display = imgs.length>1?'flex':'none';
 
   // detail
-  document.getElementById('modalCat').textContent = CAT_LABELS[p.cat] || p.cat;
+  document.getElementById('modalCat').textContent = getCatLabels()[p.cat] || p.cat;
   document.getElementById('modalTitle').textContent = p.name;
   const badge = document.getElementById('modalBadge');
   if(p.badge){ badge.textContent=p.badge; badge.style.display='inline-block'; }
