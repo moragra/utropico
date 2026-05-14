@@ -507,6 +507,70 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 @media(max-width:768px){
   .inspo-grid{grid-template-columns:repeat(2,1fr)!important}
 }
+
+/* MOBILE PREVIEW DRAWER */
+.mobile-preview-bar{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  z-index:800;
+  background:#faf7f1;
+  border-top:1px solid rgba(68,60,30,.15);
+  padding:.75rem 1.25rem;
+  align-items:center;justify-content:space-between;
+  gap:1rem;
+  box-shadow:0 -4px 20px rgba(0,0,0,.08);
+}
+.mobile-preview-bar-left{display:flex;align-items:center;gap:.75rem}
+.mobile-preview-thumb{
+  width:48px;height:48px;border-radius:4px;
+  background:linear-gradient(135deg,#f0ebe0,#e0d8c0);
+  overflow:hidden;flex-shrink:0;
+}
+.mobile-preview-thumb canvas{width:100%!important;height:100%!important}
+.mobile-preview-label{font-size:.72rem;color:var(--mid)}
+.mobile-preview-label strong{display:block;font-size:.8rem;color:var(--dark);font-weight:500}
+.mobile-preview-open{
+  font-family:'Outfit',sans-serif;font-size:.7rem;letter-spacing:.1em;
+  text-transform:uppercase;border:1.5px solid #443c1e;
+  color:#443c1e;background:transparent;padding:.5rem 1rem;
+  border-radius:2px;cursor:pointer;white-space:nowrap;flex-shrink:0;
+}
+.mobile-preview-drawer{
+  position:fixed;bottom:0;left:0;right:0;
+  z-index:850;
+  background:#faf7f1;
+  border-radius:16px 16px 0 0;
+  padding:1.5rem 1.5rem 2rem;
+  transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 -8px 40px rgba(0,0,0,.15);
+  max-height:85vh;overflow-y:auto;
+}
+.mobile-preview-drawer.open{transform:translateY(0)}
+.mobile-drawer-handle{
+  width:36px;height:4px;background:rgba(68,60,30,.2);
+  border-radius:2px;margin:0 auto 1.25rem;
+}
+.mobile-drawer-close{
+  position:absolute;top:1.25rem;right:1.25rem;
+  background:none;border:none;font-size:1.2rem;cursor:pointer;
+  color:var(--mid);padding:.25rem;
+}
+#mobileOverlayPreview{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.4);z-index:840;
+}
+#mobileOverlayPreview.open{display:block}
+@media(max-width:1024px){
+  .mobile-preview-bar{display:flex}
+  /* Hide static preview on mobile — shown in drawer instead */
+  .preview-sticky{display:none!important}
+}
+@media(min-width:1025px){
+  .mobile-preview-bar{display:none!important}
+  .mobile-preview-drawer{display:none!important}
+  #mobileOverlayPreview{display:none!important}
+}
 </style>
 </head>
 <body>
@@ -1006,6 +1070,7 @@ function showTab(id){
   document.querySelectorAll('.tab-btn')[idx]?.classList.add('active');
   document.getElementById('tab-'+id)?.classList.add('active');
   document.getElementById('main')?.scrollIntoView({behavior:'smooth'});
+  setTimeout(showMobileBarIfNeeded, 100);
 }
 
 // ── CATALOG DATA ──
@@ -1871,6 +1936,7 @@ function draw3d(){
 
 function updatePreview(){
   draw3d();
+  if(window.innerWidth<=1024) updateMobileBar();
 
   const extras = state.extras.length ? state.extras.join(', ') : 'Ninguno';
   // Build tipo label with sub-details
@@ -2175,6 +2241,210 @@ let LANG = 'es';
 function tr(key){ return (T[LANG]||T.es)[key] || T.es[key] || key; }
 
 
+
+// ── MOBILE PREVIEW DRAWER ──
+function openMobileDrawer(){
+  document.getElementById('mobilePreviewDrawer').classList.add('open');
+  document.getElementById('mobileOverlayPreview').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(()=>{
+    initMobileCanvas();
+    draw3dOn(ctxMobile, mCW, mCH);
+  }, 80);
+}
+function closeMobileDrawer(){
+  document.getElementById('mobilePreviewDrawer').classList.remove('open');
+  document.getElementById('mobileOverlayPreview').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+let ctxMobile = null;
+let mCW = 320, mCH = 240;
+
+function initMobileCanvas(){
+  if(ctxMobile) return;
+  const cm = document.getElementById('canvas3dMobile');
+  if(!cm) return;
+  const dpr = window.devicePixelRatio||1;
+  const rect = cm.getBoundingClientRect();
+  mCW = rect.width || 320;
+  mCH = Math.round(mCW * 0.75);
+  cm.width  = mCW * dpr;
+  cm.height = mCH * dpr;
+  cm.style.width  = mCW + 'px';
+  cm.style.height = mCH + 'px';
+  ctxMobile = cm.getContext('2d');
+  ctxMobile.scale(dpr, dpr);
+
+  // Touch rotate
+  let mx=0, my=0, drag=false;
+  cm.addEventListener('touchstart', e=>{drag=true;mx=e.touches[0].clientX;my=e.touches[0].clientY;e.preventDefault();},{passive:false});
+  window.addEventListener('touchend', ()=>drag=false);
+  window.addEventListener('touchmove', e=>{
+    if(!drag) return;
+    rotY += (e.touches[0].clientX-mx)*.013;
+    rotX -= (e.touches[0].clientY-my)*.013;
+    rotX = Math.max(-.85,Math.min(1.1,rotX));
+    mx=e.touches[0].clientX; my=e.touches[0].clientY;
+    draw3dOn(ctxMobile, mCW, mCH);
+  },{passive:false});
+}
+
+// draw3dOn — same as draw3d but on any ctx/width/height
+function draw3dOn(targetCtx, W, H){
+  if(!targetCtx) return;
+  targetCtx.clearRect(0,0,W,H);
+  const bg = targetCtx.createRadialGradient(W/2,H/2,8,W/2,H/2,W*0.55);
+  bg.addColorStop(0,'#f5f0e6'); bg.addColorStop(1,'#e8dfc8');
+  targetCtx.fillStyle=bg; targetCtx.fillRect(0,0,W,H);
+
+  const {boxes, L, D, H:FH} = buildGeometry();
+
+  // Compute scale
+  const cosY=Math.cos(rotY),sinY=Math.sin(rotY),cosX=Math.cos(rotX),sinX=Math.sin(rotX);
+  const corners=[[-L/2,0,-D/2],[L/2,0,-D/2],[-L/2,FH,-D/2],[L/2,FH,-D/2],
+                  [-L/2,0,D/2],[L/2,0,D/2],[-L/2,FH,D/2],[L/2,FH,D/2]];
+  let minX2d=1e9,maxX2d=-1e9,minY2d=1e9,maxY2d=-1e9;
+  function proj2(x,y,z,sc){
+    const rx=x*cosY-z*sinY, rz=x*sinY+z*cosY;
+    const ry2=y*cosX-rz*sinX;
+    return [W/2+rx*sc, H/2-ry2*sc];
+  }
+  corners.forEach(([wx,wy,wz])=>{
+    const rx=wx*cosY-wz*sinY, rz=wx*sinY+wz*cosY, ry2=wy*cosX-rz*sinX;
+    minX2d=Math.min(minX2d,rx);maxX2d=Math.max(maxX2d,rx);
+    minY2d=Math.min(minY2d,-ry2);maxY2d=Math.max(maxY2d,-ry2);
+  });
+  const scale=Math.min((W*0.72)/Math.max(maxX2d-minX2d,1),(H*0.72)/Math.max(maxY2d-minY2d,1));
+
+  // Center offset
+  let minYS=1e9,maxYS=-1e9;
+  corners.forEach(([wx,wy,wz])=>{
+    const rx=wx*cosY-wz*sinY,rz=wx*sinY+wz*cosY,ry2=wy*cosX-rz*sinX;
+    const sy=H/2-ry2*scale;
+    minYS=Math.min(minYS,sy);maxYS=Math.max(maxYS,sy);
+  });
+  const offY=(H/2+10)-((minYS+maxYS)/2);
+
+  function projL(x,y,z){ return [W/2+( x*cosY-z*sinY)*scale, H/2-(y*cosX-(x*sinY+z*cosY)*sinX)*scale+offY]; }
+
+  // Shadow
+  const sc=projL(0,0,0);
+  const sl=projL(-L*0.45,0,0),sr=projL(L*0.45,0,0);
+  const sw=Math.hypot(sr[0]-sl[0],sr[1]-sl[1]);
+  targetCtx.beginPath();
+  targetCtx.ellipse(sc[0],sc[1],sw*0.62,sw*0.14,0,0,Math.PI*2);
+  targetCtx.fillStyle='rgba(0,0,0,0.10)';targetCtx.fill();
+
+  function depthL(x,y,z){const rz=x*sinY+z*cosY;return y*sinX+rz*cosX;}
+
+  // Draw boxes on targetCtx
+  function faceOn(pts3d,fillCol,strokeCol){
+    const pp=pts3d.map(([x,y,z])=>projL(x,y,z));
+    targetCtx.beginPath();targetCtx.moveTo(...pp[0]);
+    pp.slice(1).forEach(v=>targetCtx.lineTo(...v));targetCtx.closePath();
+    targetCtx.fillStyle=fillCol;targetCtx.fill();
+    targetCtx.strokeStyle=strokeCol;targetCtx.lineWidth=0.5;targetCtx.stroke();
+  }
+  function boxOn(cx,cy,cz,hx,hy,hz,col){
+    const x0=cx-hx,x1=cx+hx,y0=cy-hy,y1=cy+hy,z0=cz-hz,z1=cz+hz;
+    const faces=[
+      {pts:[[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]],b:1.0,d:depthL((x0+x1)/2,y1,(z0+z1)/2)},
+      {pts:[[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],b:0.72,d:depthL((x0+x1)/2,(y0+y1)/2,z1)},
+      {pts:[[x0,y0,z0],[x1,y0,z0],[x1,y1,z0],[x0,y1,z0]],b:0.72,d:depthL((x0+x1)/2,(y0+y1)/2,z0)},
+      {pts:[[x1,y0,z0],[x1,y0,z1],[x1,y1,z1],[x1,y1,z0]],b:0.56,d:depthL(x1,(y0+y1)/2,(z0+z1)/2)},
+      {pts:[[x0,y0,z0],[x0,y0,z1],[x0,y1,z1],[x0,y1,z0]],b:0.56,d:depthL(x0,(y0+y1)/2,(z0+z1)/2)},
+      {pts:[[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]],b:0.38,d:depthL((x0+x1)/2,y0,(z0+z1)/2)},
+    ];
+    faces.sort((a,b2)=>a.d-b2.d);
+    faces.forEach(f=>faceOn(f.pts,rgbMix(col,f.b),rgbMix(col,f.b*0.7)));
+  }
+
+  boxes.sort((a,b2)=>{
+    if(a.special)return 1;if(b2.special)return-1;
+    return depthL(a.cx,a.cy,a.cz)-depthL(b2.cx,b2.cy,b2.cz);
+  });
+  boxes.forEach(b2=>{
+    if(b2.special==='mesa_top'){
+      // simplified ellipse for mobile
+      const {forma,L:bL,D:bD,tt,lh,c:bc}=b2;
+      if(forma==='Circular'||forma==='Oval'){
+        const rx=forma==='Circular'?Math.min(bL,bD)*0.45:bL/2;
+        const rz=forma==='Circular'?rx:bD/2*0.65;
+        const N=16;
+        const pts=Array.from({length:N},(_,i)=>{const a=i/N*Math.PI*2;return[Math.cos(a)*rx,lh+tt,Math.sin(a)*rz];});
+        const pp=pts.map(([x,y,z])=>projL(x,y,z));
+        targetCtx.beginPath();targetCtx.moveTo(...pp[0]);pp.slice(1).forEach(p=>targetCtx.lineTo(...p));targetCtx.closePath();
+        targetCtx.fillStyle=rgbMix(bc,1);targetCtx.fill();
+        targetCtx.strokeStyle=rgbMix(bc,0.7);targetCtx.lineWidth=0.5;targetCtx.stroke();
+      } else {
+        boxOn(0,lh+tt/2,0,bL/2,tt/2,bD/2,bc);
+      }
+    } else {
+      boxOn(b2.cx,b2.cy,b2.cz,b2.hx,b2.hy,b2.hz,b2.col);
+    }
+  });
+
+  // Cotas
+  function cotaOn(x1,y1,x2,y2,label){
+    const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy);if(len<4)return;
+    const nx=-dy/len*4,ny=dx/len*4;
+    targetCtx.strokeStyle='rgba(45,74,30,0.5)';targetCtx.lineWidth=0.8;targetCtx.setLineDash([2,3]);
+    targetCtx.beginPath();targetCtx.moveTo(x1,y1);targetCtx.lineTo(x2,y2);targetCtx.stroke();
+    targetCtx.setLineDash([]);
+    [[x1,y1],[x2,y2]].forEach(([px,py])=>{
+      targetCtx.beginPath();targetCtx.moveTo(px-nx,py-ny);targetCtx.lineTo(px+nx,py+ny);targetCtx.stroke();
+    });
+    targetCtx.font='700 8.5px Outfit,sans-serif';targetCtx.textAlign='center';targetCtx.textBaseline='middle';
+    const tw=targetCtx.measureText(label).width+6;
+    const mx2=(x1+x2)/2,my2=(y1+y2)/2;
+    targetCtx.fillStyle='rgba(234,242,224,0.92)';
+    targetCtx.beginPath();targetCtx.roundRect?targetCtx.roundRect(mx2-tw/2,my2-7,tw,14,3):targetCtx.rect(mx2-tw/2,my2-7,tw,14);
+    targetCtx.fill();
+    targetCtx.fillStyle='#2d4a1e';targetCtx.fillText(label,mx2,my2);
+  }
+  const pLA=projL(-L/2,0,D/2+6),pLB=projL(L/2,0,D/2+6);
+  cotaOn(pLA[0],pLA[1]+11,pLB[0],pLB[1]+11,state.largo+' cm');
+  const pAA=projL(L/2+6,0,-D/2),pAB=projL(L/2+6,0,D/2);
+  cotaOn(pAA[0]+14,pAA[1],pAB[0]+14,pAB[1],state.ancho+' cm');
+  const pHA=projL(L/2+6,0,D/2+6),pHB=projL(L/2+6,FH,D/2+6);
+  cotaOn(pHA[0]+20,pHA[1],pHB[0]+20,pHB[1],state.alto+' cm');
+}
+
+function updateMobileBar(){
+  const typeEl=document.getElementById('mobilePreviewType');
+  const dimsEl=document.getElementById('mobilePreviewDims');
+  const specsEl=document.getElementById('mobilePreviewSpecs');
+  if(typeEl) typeEl.textContent=state.tipo;
+  if(dimsEl) dimsEl.textContent=state.largo+' × '+state.ancho+' × '+state.alto+' cm';
+  if(specsEl){
+    const rows=[{k:'Material',v:state.material},{k:'Acabado',v:state.acabado},{k:'Tono',v:state.color},{k:'Ambiente',v:state.ambiente}];
+    specsEl.innerHTML=rows.map(r=>`<div style="display:flex;justify-content:space-between;font-size:.78rem;padding:.55rem 0;border-bottom:1px solid rgba(68,60,30,.08)"><span style="color:var(--muted)">${r.k}</span><span style="color:var(--dark);font-weight:500">${r.v}</span></div>`).join('');
+  }
+  // Thumb — small 48px preview
+  const ct=document.getElementById('canvasMobileThumb');
+  if(ct){
+    const dpr=window.devicePixelRatio||1;
+    if(ct.width!==48*dpr){ct.width=48*dpr;ct.height=48*dpr;ct.style.width='48px';ct.style.height='48px';}
+    const tCtx=ct.getContext('2d');
+    tCtx.setTransform(dpr,0,0,dpr,0,0);
+    draw3dOn(tCtx,48,48);
+  }
+  // If drawer is open, redraw full preview
+  if(document.getElementById('mobilePreviewDrawer')?.classList.contains('open')){
+    draw3dOn(ctxMobile,mCW,mCH);
+  }
+}
+
+// Show bar only when on configurador tab on mobile
+function showMobileBarIfNeeded(){
+  const bar = document.getElementById('mobilePreviewBar');
+  if(!bar) return;
+  const isMobile = window.innerWidth <= 1024;
+  const isConfig = document.getElementById('tab-configurador')?.classList.contains('active');
+  bar.style.display = (isMobile && isConfig) ? 'flex' : 'none';
+}
+
 function navGo(tab){
   showTab(tab);
   if(document.getElementById('mobileMenu').classList.contains('open')) toggleNav();
@@ -2305,6 +2575,7 @@ renderInspo();
 })();
 
 renderInspo();
+showMobileBarIfNeeded();
 renderProjEditorial('all');
 renderCatalog('all');
 updateSubtipo(state.tipo);
@@ -2313,5 +2584,32 @@ updatePreview();
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1});
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
 </script>
+
+<!-- MOBILE PREVIEW BAR + DRAWER -->
+<div class="mobile-preview-bar" id="mobilePreviewBar">
+  <div class="mobile-preview-bar-left">
+    <div class="mobile-preview-thumb">
+      <canvas id="canvasMobileThumb" width="96" height="96" style="width:48px;height:48px"></canvas>
+    </div>
+    <div class="mobile-preview-label">
+      <strong id="mobilePreviewType">Mesa de comedor</strong>
+      <span id="mobilePreviewDims">160 × 90 × 75 cm</span>
+    </div>
+  </div>
+  <button class="mobile-preview-open" onclick="openMobileDrawer()">Ver preview →</button>
+</div>
+
+<div id="mobileOverlayPreview" onclick="closeMobileDrawer()"></div>
+<div class="mobile-preview-drawer" id="mobilePreviewDrawer">
+  <div class="mobile-drawer-handle"></div>
+  <button class="mobile-drawer-close" onclick="closeMobileDrawer()">✕</button>
+  <canvas id="canvas3dMobile" width="640" height="480" style="width:100%;border-radius:4px;background:linear-gradient(135deg,#f0ebe0,#e0d8c0)"></canvas>
+  <p style="font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(68,60,30,.4);text-align:center;margin:.5rem 0 1.25rem">Arrastrá para rotar · Preview 3D</p>
+  <div id="mobilePreviewSpecs" style="display:flex;flex-direction:column;gap:0;margin-bottom:1.25rem;border-top:1px solid rgba(68,60,30,.1)"></div>
+  <button class="wa-btn" onclick="sendToWhatsApp();closeMobileDrawer()">
+    <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:#fff;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Cotizar por WhatsApp
+  </button>
+</div>
 </body>
 </html>
