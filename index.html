@@ -1554,7 +1554,7 @@ ${inspoText}${notaLine}
 
 ¡Gracias!`;
 
-  // Send to Google Sheets
+  // Send to Google Sheets — must follow redirects (GAS uses them)
   const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz1DvA4IBFWS6xqZd01aAp5RaG4gSWtPkp5E0x6vkvXONx-b9oWQac1I-nBP9pq1IHGbw/exec';
   const params = new URLSearchParams({
     fecha:       new Date().toISOString(),
@@ -1568,7 +1568,11 @@ ${inspoText}${notaLine}
     referencias: inspoText,
     nota:        nota,
   });
-  fetch(SHEETS_URL + '?' + params.toString(), {mode:'no-cors'}).catch(()=>{});
+  fetch(SHEETS_URL + '?' + params.toString(), {
+    method: 'GET',
+    redirect: 'follow',
+    mode: 'no-cors',
+  }).catch(()=>{});
 
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
 }
