@@ -470,6 +470,43 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
   .modal-detail{padding:1.25rem}
   footer{padding:1.75rem 1.25rem;flex-direction:column;align-items:flex-start;gap:.5rem}
 }
+
+/* PORTFOLIO CAROUSEL */
+.proj-carousel-wrap{position:relative;overflow:hidden}
+.proj-editorial{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2rem;transition:opacity .35s}
+.proj-editorial.fading{opacity:0}
+.proj-carousel-nav{display:flex;align-items:center;justify-content:space-between;margin-top:2rem}
+.proj-carousel-dots{display:flex;gap:.5rem}
+.proj-carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(68,60,30,.2);cursor:pointer;transition:all .25s;border:none;padding:0}
+.proj-carousel-dot.active{background:#443c1e;transform:scale(1.25)}
+.proj-carousel-arrows{display:flex;gap:.75rem}
+.proj-arrow{width:42px;height:42px;border:1.5px solid rgba(68,60,30,.25);background:transparent;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#443c1e;transition:all .2s;font-family:serif}
+.proj-arrow:hover{background:#443c1e;color:#fff;border-color:#443c1e}
+.proj-arrow:disabled{opacity:.3;cursor:default}
+@media(max-width:768px){
+  .proj-editorial{grid-template-columns:1fr!important}
+  .proj-cell-img{aspect-ratio:3/2}
+}
+
+/* INSPO CAROUSEL */
+.inspo-cat-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem}
+.inspo-cat-tab{font-family:'Outfit',sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.38rem .9rem;border:1.5px solid rgba(68,60,30,.2);background:transparent;color:var(--muted);border-radius:20px;cursor:pointer;transition:all .2s}
+.inspo-cat-tab:hover{border-color:#443c1e;color:#443c1e}
+.inspo-cat-tab.active{background:#443c1e;color:#fff;border-color:#443c1e}
+.inspo-carousel-wrap{position:relative;overflow:hidden}
+.inspo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;transition:opacity .25s}
+.inspo-grid.fading{opacity:0}
+.inspo-carousel-nav{display:flex;align-items:center;justify-content:space-between;margin-top:.75rem}
+.inspo-carousel-dots{display:flex;gap:.4rem}
+.inspo-dot{width:6px;height:6px;border-radius:50%;background:rgba(68,60,30,.2);cursor:pointer;transition:all .2s;border:none;padding:0}
+.inspo-dot.active{background:#443c1e;transform:scale(1.3)}
+.inspo-arrows{display:flex;gap:.5rem}
+.inspo-arrow{width:32px;height:32px;border:1.5px solid rgba(68,60,30,.2);background:transparent;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#443c1e;transition:all .2s}
+.inspo-arrow:hover{background:#443c1e;color:#fff;border-color:#443c1e}
+.inspo-arrow:disabled{opacity:.3;cursor:default}
+@media(max-width:768px){
+  .inspo-grid{grid-template-columns:repeat(2,1fr)!important}
+}
 </style>
 </head>
 <body>
@@ -550,7 +587,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           <button class="proj-filter-btn" onclick="filterProjGrid(this,'airbnb')" data-cat="airbnb">🏡 Hotel / Airbnb</button>
         </div>
       </div>
-      <div id="projEditorialGrid"></div>
+      <div class="proj-carousel-wrap">
+        <div id="projEditorialGrid"></div>
+        <div class="proj-carousel-nav">
+          <div class="proj-carousel-dots" id="projDots"></div>
+          <div class="proj-carousel-arrows">
+            <button class="proj-arrow" id="projPrev" onclick="projCarouselMove(-1)">&#8592;</button>
+            <button class="proj-arrow" id="projNext" onclick="projCarouselMove(1)">&#8594;</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- CATÁLOGO -->
@@ -588,7 +634,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
               <span class="step-label">Inspiración — seleccioná piezas que te gusten</span>
             </div>
             <p style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-weight:300" data-i18n="inspo.sub">Elegí fotos de productos de nuestro catálogo. Se adjuntarán a tu mensaje de WhatsApp.</p>
-            <div class="inspo-grid" id="inspoGrid"></div>
+            <div class="inspo-carousel-wrap">
+              <div class="inspo-cat-tabs" id="inspoCatTabs"></div>
+              <div class="inspo-grid" id="inspoGrid"></div>
+              <div class="inspo-carousel-nav">
+                <div class="inspo-carousel-dots" id="inspoDots"></div>
+                <div class="inspo-arrows">
+                  <button class="inspo-arrow" id="inspoPrev" onclick="inspoMove(-1)">&#8592;</button>
+                  <button class="inspo-arrow" id="inspoNext" onclick="inspoMove(1)">&#8594;</button>
+                </div>
+              </div>
+            </div>
             <div class="selected-banner" id="selectedBanner">
               <span>✓</span> <span id="selectedCount">0 piezas seleccionadas</span> — se adjuntarán a tu cotización
             </div>
@@ -836,17 +892,83 @@ const KB = [
 
 const gradients=['linear-gradient(145deg,#daeece,#a8cc80)','linear-gradient(145deg,#ccdbb8,#94b860)','linear-gradient(145deg,#e0d4b8,#c4a860)','linear-gradient(145deg,#d8e8c4,#a0c060)','linear-gradient(145deg,#c8d4a8,#8aaa50)','linear-gradient(145deg,#e4dcc8,#b8a070)','linear-gradient(145deg,#d0e0b8,#90b855)','linear-gradient(145deg,#dcd0b0,#b09050)'];
 
+let inspoPage = 0;
+let inspoCat = 'all';
+const INSPO_PER_PAGE = 4;
+
+function getInspoItems(){
+  return inspoCat === 'all' ? KB : KB.filter(k=>k.cat===inspoCat);
+}
+
+function setInspoCat(cat){
+  inspoCat = cat;
+  inspoPage = 0;
+  document.querySelectorAll('.inspo-cat-tab').forEach(t=>t.classList.toggle('active', t.dataset.cat===cat));
+  const grid = document.getElementById('inspoGrid');
+  grid.classList.add('fading');
+  setTimeout(()=>renderInspo(), 200);
+}
+
+function inspoMove(dir){
+  const items = getInspoItems();
+  const pages = Math.ceil(items.length / INSPO_PER_PAGE);
+  inspoPage = Math.max(0, Math.min(pages-1, inspoPage+dir));
+  const grid = document.getElementById('inspoGrid');
+  grid.classList.add('fading');
+  setTimeout(()=>renderInspo(), 200);
+}
+
+function goToInspoPage(page){
+  inspoPage = page;
+  const grid = document.getElementById('inspoGrid');
+  grid.classList.add('fading');
+  setTimeout(()=>renderInspo(), 200);
+}
+
 function renderInspo(){
-  document.getElementById('inspoGrid').innerHTML = KB.map((item,i) => `
-    <div class="inspo-card" id="ic-${item.id}" onclick="toggleInspo('${item.id}','${item.name}')">
+  // Build category tabs from unique cats in KB
+  const cats = ['all', ...new Set(KB.map(k=>k.cat))];
+  const tabsEl = document.getElementById('inspoCatTabs');
+  if(tabsEl && tabsEl.children.length === 0){
+    const catLabels = {all:'Todos', Comedor:'Comedor', Sala:'Sala', Sofá:'Sofá', Exterior:'Exterior', Dormitorio:'Dormitorio'};
+    tabsEl.innerHTML = cats.map(cat=>
+      `<button class="inspo-cat-tab${cat===inspoCat?' active':''}" data-cat="${cat}" onclick="setInspoCat('${cat}')">${catLabels[cat]||cat}</button>`
+    ).join('');
+  }
+
+  const items = getInspoItems();
+  const pages = Math.ceil(items.length / INSPO_PER_PAGE);
+  inspoPage = Math.max(0, Math.min(pages-1, inspoPage));
+  const slice = items.slice(inspoPage*INSPO_PER_PAGE, inspoPage*INSPO_PER_PAGE+INSPO_PER_PAGE);
+
+  document.getElementById('inspoGrid').innerHTML = slice.map((item,i) => {
+    const gi = KB.indexOf(item);
+    return `
+    <div class="inspo-card${state.inspiracion.some(x=>x.id===item.id)?' picked':''}" id="ic-${item.id}" onclick="toggleInspo('${item.id}','${item.name}')">
       ${item.src
         ? `<img src="${item.src}" alt="${item.name}">`
-        : `<div class="inspo-ph" style="background:${gradients[i%8]};width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem"><span style="font-size:1.4rem">🪵</span><span class="inspo-ph-name">${item.name}</span></div>`
+        : `<div class="inspo-ph" style="background:${gradients[gi%8]};width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem"><span style="font-size:1.4rem">🪵</span><span class="inspo-ph-name">${item.name}</span></div>`
       }
       <div class="inspo-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <span class="inspo-tag">${item.cat}</span>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
+
+  document.getElementById('inspoGrid').classList.remove('fading');
+
+  // Dots
+  const dotsEl = document.getElementById('inspoDots');
+  if(dotsEl) dotsEl.innerHTML = pages > 1 ? Array.from({length:pages},(_,i)=>
+    `<button class="inspo-dot${i===inspoPage?' active':''}" onclick="goToInspoPage(${i})"></button>`
+  ).join('') : '';
+
+  // Arrows
+  const prev = document.getElementById('inspoPrev');
+  const next = document.getElementById('inspoNext');
+  if(prev) prev.disabled = inspoPage === 0;
+  if(next) next.disabled = inspoPage >= pages-1;
+  // Hide nav if only 1 page
+  const nav = document.querySelector('.inspo-carousel-nav');
+  if(nav) nav.style.display = pages > 1 ? 'flex' : 'none';
 }
 
 function toggleInspo(id, name){
@@ -1865,22 +1987,43 @@ const PROJ_SETS = {
   ],
 };
 
+let projCurrentCat = 'all';
+let projPage = 0;
+const PROJ_PER_PAGE = 2;
+
 function filterProjGrid(btn, cat){
   document.querySelectorAll('.proj-filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
+  projCurrentCat = cat;
+  projPage = 0;
   const grid = document.getElementById('projEditorialGrid');
   grid.querySelector('.proj-editorial')?.classList.add('fading');
   setTimeout(()=>renderProjEditorial(cat), 260);
 }
 
+function projCarouselMove(dir){
+  const items = getProjItems(projCurrentCat);
+  const pages = Math.ceil(items.length / PROJ_PER_PAGE);
+  projPage = Math.max(0, Math.min(pages-1, projPage+dir));
+  const grid = document.getElementById('projEditorialGrid');
+  grid.querySelector('.proj-editorial')?.classList.add('fading');
+  setTimeout(()=>renderProjEditorial(projCurrentCat), 220);
+}
+
+function getProjItems(cat){
+  const sets = PROJ_SETS[cat] || PROJ_SETS.all;
+  return [sets[0], ...sets.slice(1)];
+}
+
 function renderProjEditorial(cat){
-  const items = PROJ_SETS[cat] || PROJ_SETS.all;
-  const big = items[0];
-  const rest = items.slice(1);
-  const allItems = [big, ...rest];
+  const items = getProjItems(cat);
+  const pages = Math.ceil(items.length / PROJ_PER_PAGE);
+  projPage = Math.max(0, Math.min(pages-1, projPage));
+  const slice = items.slice(projPage*PROJ_PER_PAGE, projPage*PROJ_PER_PAGE+PROJ_PER_PAGE);
+
   const html = `
     <div class="proj-editorial">
-      ${allItems.map(p=>`
+      ${slice.map(p=>`
       <div class="proj-cell">
         <div class="proj-cell-img">
           ${p.img ? `<img src="${p.img}" alt="${p.name}" style="object-position:${p.pos||'center'}">` : `<div style="width:100%;height:100%;background:linear-gradient(145deg,#daeece,#a8cc80)"></div>`}
@@ -1893,6 +2036,26 @@ function renderProjEditorial(cat){
       </div>`).join('')}
     </div>`;
   document.getElementById('projEditorialGrid').innerHTML = html;
+
+  // Dots
+  const dotsEl = document.getElementById('projDots');
+  if(dotsEl){
+    dotsEl.innerHTML = Array.from({length:pages},(_,i)=>
+      `<button class="proj-carousel-dot${i===projPage?' active':''}" onclick="goToProjPage(${i})"></button>`
+    ).join('');
+  }
+  // Arrows
+  const prev = document.getElementById('projPrev');
+  const next = document.getElementById('projNext');
+  if(prev) prev.disabled = projPage === 0;
+  if(next) next.disabled = projPage >= pages-1;
+}
+
+function goToProjPage(page){
+  projPage = page;
+  const grid = document.getElementById('projEditorialGrid');
+  grid.querySelector('.proj-editorial')?.classList.add('fading');
+  setTimeout(()=>renderProjEditorial(projCurrentCat), 220);
 }
 
 // Keep old functions so nothing breaks
