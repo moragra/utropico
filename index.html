@@ -1068,8 +1068,9 @@ const CATALOG = [
   {id:'c2',cat:'sala',name:'Sofá Selva 3 puestos',material:'Rattan + estructura Guanacaste',dims:'220 × 95 × 85 cm',acabados:'Natural, barniz mate',extras:'Cojines disponibles',badge:null,imgs:[]},
   {id:'c3',cat:'sala',name:'Mesa de centro Guanacaste',material:'Madera Guanacaste sólida',dims:'120 × 65 × 42 cm',acabados:'Natural, barniz mate, aceite',extras:'Opción cubierta vidrio',badge:null,imgs:[]},
   {id:'c4',cat:'sala',name:'Aparador costero',material:'Madera Guanacaste',dims:'160 × 45 × 80 cm',acabados:'Natural, barniz mate',extras:'2 puertas, cajones opcionales',badge:null,imgs:[]},
-  {id:'p_agave',cat:'comedor',name:'Silla Agave',nameEN:'Agave Chair',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'—',acabados:'Mate, natural',acabadosEN:'Matte, natural',extras:null,badge:null,
-   imgs:['fotos/agave_chair_1.png','fotos/agave_chair_2.png','fotos/agave_chair_3.png']},
+  {id:'p_agave',cat:'comedor',name:'Silla Agave',nameEN:'Agave Chair',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate, natural',acabadosEN:'Matte, natural',badge:null,imgs:['fotos/agave_chair_1.png','fotos/agave_chair_2.png','fotos/agave_chair_3.png']},
+  {id:'p_bistro',cat:'comedor',name:'Silla Bistro',nameEN:'Bistro Chair',material:'Teca · sentadero textil',materialEN:'Teak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/bistro_chair_1.png','fotos/bistro_chair_2.png']},
+  {id:'p_nosara',cat:'comedor',name:'Silla Nosara',nameEN:'Nosara Chair',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/nosara_chair_1.jpg','fotos/nosara_chair_2.jpg']},
   // COMEDOR
   {id:'c5',cat:'comedor',name:'Mesa comedor oval',material:'Madera Guanacaste sólida',dims:'200 × 100 × 76 cm',acabados:'Natural, barniz mate, aceite teca',extras:'Hasta 8 personas',badge:'Más pedida',imgs:[]},
   {id:'c6',cat:'comedor',name:'Mesa comedor rectangular',material:'Madera Guanacaste sólida',dims:'180 × 90 × 76 cm',acabados:'Natural, barniz mate, aceite teca',extras:'Hasta 6 personas',badge:null,imgs:[]},
@@ -1174,10 +1175,9 @@ function openModal(id){
 
   const specs = [
     {k:LANG==='en'?'Material':'Material', v:(LANG==='en'&&p.materialEN)?p.materialEN:p.material},
-    {k:'Dimensiones', v:p.dims},
-    {k:'Acabados', v:p.acabados},
-    {k:'Extras', v:p.extras},
-  ];
+    {k:LANG==='en'?'Dimensions':'Dimensiones', v:p.dims},
+    {k:LANG==='en'?'Finish':'Acabados', v:(LANG==='en'&&p.acabadosEN)?p.acabadosEN:p.acabados},
+  ].filter(s=>s.v&&s.v!=='null'&&s.v!==null&&s.v!==undefined);
   document.getElementById('modalSpecs').innerHTML = specs.map(s=>`
     <div class="modal-spec">
       <span class="modal-spec-key">${s.k}</span>
@@ -1214,7 +1214,7 @@ function goToSlide(i){
 function cotizarPiezaWA(p){
   const pName=(LANG==='en'&&p.nameEN)?p.nameEN:p.name;
   const pMat=(LANG==='en'&&p.materialEN)?p.materialEN:p.material;
-  const msg = `Hola utropico! Me gustaría cotizar la siguiente pieza del catálogo:\n\n*Pieza:* ${pName}\n*Material:* ${pMat}\n*Dimensiones:* ${p.dims}\n*Acabados disponibles:* ${p.acabados}\n➕ *Extras:* ${p.extras}\n\n¿Me pueden dar más información? ¡Gracias!`;
+  const msg = `Hola utropico! Me gustaría cotizar la siguiente pieza del catálogo:\n\n*Pieza:* ${pName}\n*Material:* ${pMat}\n*Dimensiones:* ${p.dims}\n*Acabados disponibles:* ${(LANG==='en'&&p.acabadosEN)?p.acabadosEN:p.acabados}\n\n¿Me pueden dar más información? ¡Gracias!`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
