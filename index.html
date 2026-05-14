@@ -2442,7 +2442,9 @@ function showMobileBarIfNeeded(){
   if(!bar) return;
   const isMobile = window.innerWidth <= 1024;
   const isConfig = document.getElementById('tab-configurador')?.classList.contains('active');
-  bar.style.display = (isMobile && isConfig) ? 'flex' : 'none';
+  // Also check we're not at the top (hero section)
+  const pastHero = window.scrollY > (window.innerHeight * 0.5);
+  bar.style.display = (isMobile && isConfig && pastHero) ? 'flex' : 'none';
 }
 
 function navGo(tab){
@@ -2576,6 +2578,8 @@ renderInspo();
 
 renderInspo();
 showMobileBarIfNeeded();
+// Hide bar on scroll away from configurador
+window.addEventListener('scroll', showMobileBarIfNeeded, {passive:true});
 renderProjEditorial('all');
 renderCatalog('all');
 updateSubtipo(state.tipo);
@@ -2586,7 +2590,7 @@ document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
 </script>
 
 <!-- MOBILE PREVIEW BAR + DRAWER -->
-<div class="mobile-preview-bar" id="mobilePreviewBar">
+<div class="mobile-preview-bar" id="mobilePreviewBar" style="display:none">
   <div class="mobile-preview-bar-left">
     <div class="mobile-preview-thumb">
       <canvas id="canvasMobileThumb" width="96" height="96" style="width:48px;height:48px"></canvas>
