@@ -580,7 +580,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
     <span class="u">u</span>
     <span>
       <span class="tropico">tropico</span>
-      <span class="sub">Costa Rica · Muebles artesanales</span>
+      <span class="sub" data-i18n="logo.sub">Costa Rica · Muebles artesanales</span>
     </span>
   </a>
   <div class="nav-links" id="navLinks">
@@ -641,14 +641,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
     <div class="tab-panel active" id="tab-proyectos">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem">
         <div>
-          <p class="sec-label">Portfolio</p>
-          <h2 class="sec-h2">Proyectos <em>realizados</em></h2>
+          <p class="sec-label" data-i18n="proj.label">Portfolio</p>
+          <h2 class="sec-h2" data-i18n="proj.h2">Proyectos <em>realizados</em></h2>
         </div>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap" id="projFilters">
-          <button class="proj-filter-btn active" onclick="filterProjGrid(this,'all')" data-cat="all">Todos</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'villa')" data-cat="villa">🌊 Villas</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'gam')" data-cat="gam">🏙 GAM</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'airbnb')" data-cat="airbnb">🏡 Hotel / Airbnb</button>
+          <button class="proj-filter-btn active" onclick="filterProjGrid(this,'all')" data-cat="all" data-i18n="filter.all">Todos</button>
+          <button class="proj-filter-btn" onclick="filterProjGrid(this,'villa')" data-cat="villa" data-i18n="filter.villa">🌊 Villas</button>
+          <button class="proj-filter-btn" onclick="filterProjGrid(this,'gam')" data-cat="gam" data-i18n="filter.gam">🏙 GAM</button>
+          <button class="proj-filter-btn" onclick="filterProjGrid(this,'airbnb')" data-cat="airbnb" data-i18n="filter.airbnb">🏡 Hotel / Airbnb</button>
         </div>
       </div>
       <div class="proj-carousel-wrap">
@@ -671,12 +671,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         <p style="font-size:.88rem;color:var(--mid);margin-top:.75rem;font-weight:300;max-width:540px" data-i18n="cat.sub">Cada pieza es fabricada a mano. Las dimensiones indicadas son estándar — todas se adaptan a medida.</p>
       </div>
       <div class="cat-filters" id="catFilters">
-        <button class="cat-filter-btn active" onclick="filterCat(this,'all')">Todas las piezas</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'sala')">🛋 Sala</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'comedor')">🍽 Comedor</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'dormitorio')">🛏 Dormitorio</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'terraza')">🌿 Terraza</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'accesorios')">✦ Accesorios</button>
+        <button class="cat-filter-btn active" onclick="filterCat(this,'all')" data-i18n="cat.all">Todas las piezas</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'sala')" data-i18n="cat.filter.sala">🛋 Sala</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'comedor')" data-i18n="cat.filter.comedor">🍽 Comedor</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'dormitorio')" data-i18n="cat.filter.dormitorio">🛏 Dormitorio</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'terraza')" data-i18n="cat.filter.terraza">🌿 Terraza</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'accesorios')" data-i18n="cat.filter.accesorios">✦ Accesorios</button>
       </div>
       <div id="catContainer"></div>
     </div>
@@ -695,7 +695,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           <div class="config-step">
             <div class="step-head">
               <div class="step-num-badge">✦</div>
-              <span class="step-label">Inspiración — seleccioná piezas que te gusten</span>
+              <span class="step-label" data-i18n="inspo.title">Inspiración — seleccioná piezas que te gusten</span>
             </div>
             <p style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-weight:300" data-i18n="inspo.sub">Elegí fotos de productos de nuestro catálogo. Se adjuntarán a tu mensaje de WhatsApp.</p>
             <div class="inspo-carousel-wrap">
@@ -739,13 +739,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           <div class="config-step">
             <div class="step-head"><div class="step-num-badge">2</div><span class="step-label">Material principal</span></div>
             <div class="chip-group" id="step-material">
-              <div class="chip selected" data-val="Teca" onclick="sel(this,'material')"><span class="icon">🪵</span>Teca</div>
-              <div class="chip" data-val="Roble" onclick="sel(this,'material')"><span class="icon">🌳</span>Roble</div>
-              <div class="chip" data-val="Cenízaro" onclick="sel(this,'material')"><span class="icon">🌲</span>Cenízaro</div>
-              <div class="chip" data-val="Guanacaste" onclick="sel(this,'material')"><span class="icon">🌿</span>Guanacaste</div>
-              <div class="chip" data-val="Melina" onclick="sel(this,'material')"><span class="icon">🌱</span>Melina</div>
-              <div class="chip" data-val="Laurel" onclick="sel(this,'material')"><span class="icon">🍃</span>Laurel</div>
-              <div class="chip" data-val="Rattan natural" onclick="sel(this,'material')"><span class="icon">🌾</span>Rattan</div>
+              <div id="material-chips-wrap"></div>
             </div>
           </div>
 
@@ -753,10 +747,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           <div class="config-step">
             <div class="step-head"><div class="step-num-badge">3</div><span class="step-label">Acabado de la madera</span></div>
             <div class="chip-group" id="step-acabado">
-              <div class="chip selected" data-val="Natural" onclick="sel(this,'acabado')">Natural</div>
-              <div class="chip" data-val="Mate" onclick="sel(this,'acabado')">Mate</div>
-              <div class="chip" data-val="Satinado" onclick="sel(this,'acabado')">Satinado</div>
-              <div class="chip" data-val="Aclarado" onclick="sel(this,'acabado')">Aclarado</div>
+              <div id="acabado-chips-wrap"></div>
             </div>
           </div>
 
@@ -813,13 +804,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           <!-- STEP 6: DIMENSIONES -->
           <div class="config-step">
             <div class="step-head"><div class="step-num-badge">6</div><span class="step-label">Dimensiones aproximadas</span></div>
-            <div class="slider-row"><label>Largo</label><span class="dim-val" id="val-largo">160 cm</span></div>
+            <div class="slider-row"><label data-i18n="dims.largo">Largo</label><span class="dim-val" id="val-largo">160 cm</span></div>
             <input id="sl-largo" type="range" min="60" max="500" value="160" step="5" oninput="updateDim('largo',this.value)">
             <div style="height:.8rem"></div>
-            <div class="slider-row"><label>Ancho</label><span class="dim-val" id="val-ancho">90 cm</span></div>
+            <div class="slider-row"><label data-i18n="dims.ancho">Ancho</label><span class="dim-val" id="val-ancho">90 cm</span></div>
             <input id="sl-ancho" type="range" min="40" max="200" value="90" step="5" oninput="updateDim('ancho',this.value)">
             <div style="height:.8rem"></div>
-            <div class="slider-row"><label>Alto</label><span class="dim-val" id="val-alto">75 cm</span></div>
+            <div class="slider-row"><label data-i18n="dims.alto">Alto</label><span class="dim-val" id="val-alto">75 cm</span></div>
             <input id="sl-alto" type="range" min="30" max="120" value="75" step="5" oninput="updateDim('alto',this.value)">
           </div>
 
@@ -827,11 +818,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           <div class="config-step">
             <div class="step-head"><div class="step-num-badge">7</div><span class="step-label">¿Para qué espacio es?</span></div>
             <div class="chip-group" id="step-ambiente">
-              <div class="chip selected" data-val="Villa / casa de playa" onclick="sel(this,'ambiente')">🌊 Villa / playa</div>
-              <div class="chip" data-val="Apartamento o casa GAM" onclick="sel(this,'ambiente')">🏙 GAM</div>
-              <div class="chip" data-val="Terraza o jardín" onclick="sel(this,'ambiente')">🌿 Terraza</div>
-              <div class="chip" data-val="Hotel o Airbnb" onclick="sel(this,'ambiente')">🏡 Hotel / Airbnb</div>
-              <div class="chip" data-val="Oficina o comercio" onclick="sel(this,'ambiente')">💼 Oficina</div>
+              <div id="ambiente-chips-wrap"></div>
             </div>
           </div>
 
@@ -857,7 +844,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
               </div>
               <button class="wa-btn" onclick="sendToWhatsApp()">
                 <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Cotizar por WhatsApp
+                <span data-i18n="wa.btn">Cotizar por WhatsApp</span>
               </button>
             </div>
           </div>
@@ -879,10 +866,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           </div>
         </div>
         <div class="ases-cta-box">
-          <h3>"Tengo una idea pero no sé exactamente qué quiero."</h3>
+          <h3 data-i18n="ases.quote">"Tengo una idea pero no sé exactamente qué quiero."</h3>
           <p data-i18n="ases.body">No hay problema. Nuestro proceso de asesoría empieza con una conversación sin compromiso. Contanos qué espacio tenés, qué estilo te gusta, y nosotros te proponemos opciones.</p>
           
-          <button class="btn-rattan" onclick="startAsesoriaWA()">Iniciar asesoría por WhatsApp →</button>
+          <button class="btn-rattan" onclick="startAsesoriaWA()" data-i18n="ases.cta">Iniciar asesoría por WhatsApp →</button>
         </div>
       </div>
     </div>
@@ -917,7 +904,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Cotizar esta pieza
         </button>
-        <p class="modal-config-link" onclick="goToConfigurador()">O personalizala en el configurador →</p>
+        <p class="modal-config-link" data-i18n="modal.config" onclick="goToConfigurador()">O personalizala en el configurador →</p>
       </div>
     </div>
   </div>
@@ -994,7 +981,7 @@ function renderInspo(){
   const cats = ['all', ...new Set(KB.map(k=>k.cat))];
   const tabsEl = document.getElementById('inspoCatTabs');
   if(tabsEl && tabsEl.children.length === 0){
-    const catLabels = {all:'Todos', Comedor:'Comedor', Sala:'Sala', Sofá:'Sofá', Exterior:'Exterior', Dormitorio:'Dormitorio'};
+    const catLabels = {all:tr('inspo.cat.all'), Comedor:tr('inspo.cat.comedor'), Sala:tr('inspo.cat.sala'), 'Sofá':tr('inspo.cat.sofa'), Exterior:tr('inspo.cat.exterior'), Dormitorio:tr('inspo.cat.dormitorio')};
     tabsEl.innerHTML = cats.map(cat=>
       `<button class="inspo-cat-tab${cat===inspoCat?' active':''}" data-cat="${cat}" onclick="setInspoCat('${cat}')">${catLabels[cat]||cat}</button>`
     ).join('');
@@ -1100,7 +1087,7 @@ const CATALOG = [
   {id:'c17',cat:'accesorios',name:'Estante de pared rattan',material:'Rattan + madera',dims:'90 × 25 × 30 cm',acabados:'Natural',extras:'3 repisas',badge:null,imgs:[]},
 ];
 
-const CAT_LABELS = {sala:'Sala',comedor:'Comedor',dormitorio:'Dormitorio',terraza:'Terraza',accesorios:'Accesorios'};
+function getCatLabels(){function strip(s){return s.replace(/^[^a-zA-ZÀ-ž]+/,'').trim();}return {sala:strip(tr('cat.filter.sala')),comedor:strip(tr('cat.filter.comedor')),dormitorio:strip(tr('cat.filter.dormitorio')),terraza:strip(tr('cat.filter.terraza')),accesorios:strip(tr('cat.filter.accesorios'))};}
 const CAT_GRADIENTS = {
   sala:'linear-gradient(145deg,#daeece,#a8cc80)',
   comedor:'linear-gradient(145deg,#e8dcc0,#c4a060)',
@@ -1117,6 +1104,7 @@ function filterCat(btn, cat){
 
 function renderCatalog(filter){
   const container = document.getElementById('catContainer');
+  const CAT_LABELS = getCatLabels();
   const cats = filter==='all' ? Object.keys(CAT_LABELS) : [filter];
   let html = '';
   cats.forEach(cat=>{
@@ -1319,6 +1307,62 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
 
 
+
+function renderChips(){
+  // Tipo
+  const tipoData = [
+    {val:'Mesa de comedor',icon:'🍽',key:'tipo.mesa_comedor'},
+    {val:'Sillón / Sofá',icon:'🛋',key:'tipo.sofa'},
+    {val:'Mesa de centro',icon:'☕',key:'tipo.mesa_centro'},
+    {val:'Cama',icon:'🛏',key:'tipo.cama'},
+    {val:'Credenza / Consola',icon:'🗄',key:'tipo.credenza'},
+    {val:'Silla comedor',icon:'🪑',key:'tipo.silla'},
+    {val:'Stool / Banqueta',icon:'🍄',key:'tipo.stool'},
+    {val:'Mesa de noche',icon:'🌙',key:'tipo.noche'},
+  ];
+  const tipoWrap = document.getElementById('tipo-chips-wrap');
+  if(tipoWrap) tipoWrap.className = 'chip-group';
+  if(tipoWrap) tipoWrap.innerHTML = tipoData.map(d=>
+    `<div class="chip${state.tipo===d.val?' selected':''}" data-val="${d.val}" onclick="sel(this,'tipo')"><span class="icon">${d.icon}</span>${tr(d.key)}</div>`
+  ).join('');
+
+  // Material
+  const matData = [
+    {val:'Teca',icon:'🪵',key:'mat.teca'},{val:'Roble',icon:'🌳',key:'mat.roble'},
+    {val:'Cenízaro',icon:'🌲',key:'mat.cenizaro'},{val:'Guanacaste',icon:'🌿',key:'mat.guanacaste'},
+    {val:'Melina',icon:'🌱',key:'mat.melina'},{val:'Laurel',icon:'🍃',key:'mat.laurel'},
+    {val:'Rattan natural',icon:'🌾',key:'mat.rattan'},
+  ];
+  const matWrap = document.getElementById('material-chips-wrap');
+  if(matWrap) matWrap.className = 'chip-group';
+  if(matWrap) matWrap.innerHTML = matData.map(d=>
+    `<div class="chip${state.material===d.val?' selected':''}" data-val="${d.val}" onclick="sel(this,'material')"><span class="icon">${d.icon}</span>${tr(d.key)}</div>`
+  ).join('');
+
+  // Acabado
+  const acabData = [
+    {val:'Natural',key:'acab.natural'},{val:'Mate',key:'acab.mate'},
+    {val:'Satinado',key:'acab.satinado'},{val:'Aclarado',key:'acab.aclarado'},
+  ];
+  const acabWrap = document.getElementById('acabado-chips-wrap');
+  if(acabWrap) acabWrap.className = 'chip-group';
+  if(acabWrap) acabWrap.innerHTML = acabData.map(d=>
+    `<div class="chip${state.acabado===d.val?' selected':''}" data-val="${d.val}" onclick="sel(this,'acabado')">${tr(d.key)}</div>`
+  ).join('');
+
+  // Ambiente
+  const ambData = [
+    {val:'Villa / casa de playa',key:'amb.villa'},{val:'Apartamento o casa GAM',key:'amb.gam'},
+    {val:'Terraza o jardín',key:'amb.terraza'},{val:'Hotel o Airbnb',key:'amb.hotel'},
+    {val:'Oficina o comercio',key:'amb.oficina'},
+  ];
+  const ambWrap = document.getElementById('ambiente-chips-wrap');
+  if(ambWrap) ambWrap.className = 'chip-group';
+  if(ambWrap) ambWrap.innerHTML = ambData.map(d=>
+    `<div class="chip${state.ambiente===d.val?' selected':''}" data-val="${d.val}" onclick="sel(this,'ambiente')">${tr(d.key)}</div>`
+  ).join('');
+}
+
 function sel(el,group){
   document.querySelectorAll('#step-'+group+' .chip').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
@@ -1344,17 +1388,17 @@ function updateSubtipo(tipo){
   const txtWrap = document.getElementById('step-textile-wrap');
 
   if(tipo === 'Mesa de comedor' || tipo === 'Mesa de centro'){
-    document.getElementById('subtipo-label').textContent = 'Forma y patas';
+    document.getElementById('subtipo-label').textContent = tr('subtipo.label.mesa');
     document.getElementById('step-subtipo').innerHTML = `
       <div style="display:flex;flex-direction:column;gap:.75rem;width:100%">
         <div>
-          <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Forma</p>
+          <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">${tr("forma.label")||"Forma"}</p>
           <div class="chip-group">
-            ${MESA_FORMAS.map(f=>`<div class="chip${f===state.mesaForma?' selected':''}" onclick="setMesaForma(this,'${f}')">${f}</div>`).join('')}
+            ${MESA_FORMAS.map(f=>`<div class="chip${f===state.mesaForma?' selected':''}" onclick="setMesaForma(this,'${f}')">${tr('forma.'+f.toLowerCase().replace('á','a').replace('ú','u').replace('circular','circ').replace('oval','oval').replace('rectangular','rect'))}</div>`).join('')}
           </div>
         </div>
         <div>
-          <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Patas</p>
+          <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">${tr("patas.label")||"Patas"}</p>
           <div class="chip-group">
             ${(state.mesaForma==='Oval'||state.mesaForma==='Circular')
               ? `<div class="chip selected" onclick="setMesaPatas(this,'Pata central')">Pata central</div>`
@@ -1365,12 +1409,12 @@ function updateSubtipo(tipo){
       </div>`;
     wrap.style.display = 'block';
   } else if(tipo === 'Sillón / Sofá'){
-    document.getElementById('subtipo-label').textContent = 'Configuración modular';
+    document.getElementById('subtipo-label').textContent = tr('subtipo.label.sofa');
     document.getElementById('step-subtipo').innerHTML = `
       <div style="display:flex;flex-direction:column;gap:1rem;width:100%">
         <!-- Module counter -->
         <div style="display:flex;align-items:center;gap:1rem">
-          <p style="font-size:.78rem;color:var(--mid);font-weight:400;min-width:80px">Módulos</p>
+          <p style="font-size:.78rem;color:var(--mid);font-weight:400;min-width:80px">${tr('modules.label')}</p>
           <button onclick="changeMod(-1)" style="width:32px;height:32px;border:1.5px solid var(--border);background:transparent;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--moss)">−</button>
           <span id="mod-count" style="font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;color:var(--moss);min-width:24px;text-align:center">${state.sofaModules}</span>
           <button onclick="changeMod(1)"  style="width:32px;height:32px;border:1.5px solid var(--border);background:transparent;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--moss)">+</button>
@@ -1379,17 +1423,17 @@ function updateSubtipo(tipo){
         <div>
           <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Reposa brazos</p>
           <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-            <div class="chip${state.sofaArmL?' selected':''}" onclick="toggleArm('L')">← Izquierdo</div>
-            <div class="chip${state.sofaArmR?' selected':''}" onclick="toggleArm('R')">Derecho →</div>
-            <div class="chip" onclick="setNoArms()">Sin reposa brazos</div>
+            <div class="chip${state.sofaArmL?' selected':''}" onclick="toggleArm('L')">${tr('arm.left')}</div>
+            <div class="chip${state.sofaArmR?' selected':''}" onclick="toggleArm('R')">${tr('arm.right')}</div>
+            <div class="chip" onclick="setNoArms()">${tr('arm.none')}</div>
           </div>
         </div>
         <!-- Cushion -->
         <div>
           <p style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem">Sentadero con cushion</p>
           <div style="display:flex;gap:.5rem">
-            <div class="chip${state.sofaCushion?' selected':''}" onclick="setCushion(true)">Con cushion</div>
-            <div class="chip${!state.sofaCushion?' selected':''}" onclick="setCushion(false)">Sin cushion</div>
+            <div class="chip${state.sofaCushion?' selected':''}" onclick="setCushion(true)">${tr('cushion.yes')}</div>
+            <div class="chip${!state.sofaCushion?' selected':''}" onclick="setCushion(false)">${tr('cushion.no')}</div>
           </div>
         </div>
       </div>`;
@@ -2025,31 +2069,31 @@ function startAsesoriaWA(){
 const PROJ_SETS = {
   all: [
     {img:'fotos/p22.jpg', name:'Villa Residencial', loc:'Guanacaste', badge:'Sala + comedor', pos:'center center', big:true},
-    {img:'fotos/p21.jpg', name:'Casa Nosara', loc:'Nosara, Guanacaste', badge:null, pos:'center 40%'},
-    {img:'fotos/p10.png', name:'Comedor Guanacaste', loc:'Pacífico Central', badge:null, pos:'center center'},
-    {img:'fotos/p06.jpg', name:'Sala exterior', loc:'Guanacaste', badge:null, pos:'center center'},
-    {img:'fotos/p23.jpg', name:'Terraza + piscina', loc:'Guanacaste', badge:null, pos:'center 60%'},
+    {img:'fotos/p21.jpg', name:'Casa Nosara', loc:'Nosara, Guanacaste', badge:'Proyecto completo', pos:'center 40%'},
+    {img:'fotos/p10.png', name:'Comedor Guanacaste', loc:'Pacífico Central', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p06.jpg', name:'Sala exterior', loc:'Guanacaste', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p23.jpg', name:'Terraza + piscina', loc:'Guanacaste', badge:'Proyecto completo', pos:'center 60%'},
   ],
   villa: [
     {img:'fotos/p22.jpg', name:'Villa Residencial', loc:'Guanacaste', badge:'Proyecto completo', pos:'center center', big:true},
-    {img:'fotos/p23.jpg', name:'Terraza + piscina', loc:'Guanacaste', badge:null, pos:'center 60%'},
-    {img:'fotos/p13.jpg', name:'Casa de playa', loc:'Pacífico Central', badge:null, pos:'center center'},
-    {img:'fotos/p02.png', name:'Sala terraza', loc:'Santa Teresa', badge:null, pos:'center center'},
-    {img:'fotos/p05.png', name:'Villa selva', loc:'Pacífico Norte', badge:null, pos:'center center'},
+    {img:'fotos/p23.jpg', name:'Terraza + piscina', loc:'Guanacaste', badge:'Proyecto completo', pos:'center 60%'},
+    {img:'fotos/p13.jpg', name:'Casa de playa', loc:'Pacífico Central', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p02.png', name:'Sala terraza', loc:'Santa Teresa', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p05.png', name:'Villa selva', loc:'Pacífico Norte', badge:'Proyecto completo', pos:'center center'},
   ],
   gam: [
     {img:'fotos/p07.jpg', name:'Residencia Santa Ana', loc:'Santa Ana, San José', badge:'Sala + comedor', pos:'center center', big:true},
-    {img:'fotos/p08.png', name:'Comedor moderno', loc:'San José, GAM', badge:null, pos:'center center'},
-    {img:'fotos/p18.jpg', name:'Living room', loc:'GAM', badge:null, pos:'center center'},
-    {img:'fotos/p19.jpg', name:'Cocina + comedor', loc:'San José', badge:null, pos:'center center'},
-    {img:'fotos/p15.jpg', name:'Comedor con bancas', loc:'GAM', badge:null, pos:'center center'},
+    {img:'fotos/p08.png', name:'Comedor moderno', loc:'San José, GAM', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p18.jpg', name:'Living room', loc:'GAM', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p19.jpg', name:'Cocina + comedor', loc:'San José', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p15.jpg', name:'Comedor con bancas', loc:'GAM', badge:'Proyecto completo', pos:'center center'},
   ],
   airbnb: [
     {img:'fotos/p01.png', name:'Restaurante tropical', loc:'Nosara, Guanacaste', badge:'Mobiliario completo', pos:'center center', big:true},
-    {img:'fotos/p14.jpg', name:'Hotel · Lobby', loc:'Guanacaste', badge:null, pos:'center center'},
-    {img:'fotos/p17.jpg', name:'Comedor exterior', loc:'Pacífico Norte', badge:null, pos:'center center'},
-    {img:'fotos/p11.png', name:'Suite · Dormitorio', loc:'GAM', badge:null, pos:'center center'},
-    {img:'fotos/p20.jpg', name:'Habitación boutique', loc:'Pacífico', badge:null, pos:'center center'},
+    {img:'fotos/p14.jpg', name:'Hotel · Lobby', loc:'Guanacaste', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p17.jpg', name:'Comedor exterior', loc:'Pacífico Norte', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p11.png', name:'Suite · Dormitorio', loc:'GAM', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/p20.jpg', name:'Habitación boutique', loc:'Pacífico', badge:'Proyecto completo', pos:'center center'},
   ],
 };
 
@@ -2181,6 +2225,29 @@ const T = {
     "wa.refs": "\uD83D\uDDBC *Referencias:*",
     "wa.thanks": "\u00a1Gracias!",
     "ases.wa.msg": "Hola utropico! Me gustar\u00eda recibir asesor\u00eda personalizada para un proyecto de muebles. \u00bfPueden ayudarme?",
+    "logo.sub": "Costa Rica · Muebles artesanales",
+    "dims.alto": "Alto",
+    "dims.ancho": "Ancho",
+    "dims.largo": "Largo",
+    "filter.all": "Todos", "filter.villa": "🌊 Villas", "filter.gam": "🏙 GAM", "filter.airbnb": "🏡 Hotel / Airbnb",
+    "tipo.mesa_comedor": "Mesa comedor", "tipo.sofa": "Sill\u00f3n / Sof\u00e1", "tipo.mesa_centro": "Mesa centro",
+    "tipo.cama": "Cama", "tipo.credenza": "Credenza / Consola", "tipo.silla": "Silla comedor",
+    "tipo.stool": "Stool", "tipo.noche": "Mesa de noche", "tipo.tapiceria": "Tapicerría",
+    "subtipo.label.mesa": "Forma y patas", "subtipo.label.sofa": "Configuraci\u00f3n modular",
+    "forma.rect": "Rectangular", "forma.oval": "Oval", "forma.circ": "Circular",
+    "patas.4": "4 patas", "patas.central": "Pata central",
+    "arm.left": "${tr('arm.left')}", "arm.right": "${tr('arm.right')}", "arm.none": "Sin reposa brazos",
+    "cushion.yes": "Con cushion", "cushion.no": "Sin cushion",
+    "modules.label": "M\u00f3dulos",
+    "mat.teca": "Teca", "mat.roble": "Roble", "mat.cenizaro": "Cen\u00edzaro",
+    "mat.guanacaste": "Guanacaste", "mat.melina": "Melina", "mat.laurel": "Laurel", "mat.rattan": "Rattan",
+    "acab.natural": "Natural", "acab.mate": "Mate", "acab.satinado": "Satinado", "acab.aclarado": "Aclarado",
+    "amb.villa": "🌊 Villa / playa", "amb.gam": "🏙 GAM", "amb.terraza": "🌿 Terraza",
+    "amb.hotel": "🏡 Hotel / Airbnb", "amb.oficina": "💼 Oficina",
+    "inspo.cat.all": "Todos", "inspo.cat.comedor": "Comedor", "inspo.cat.sala": "Sala",
+    "inspo.cat.sofa": "Sof\u00e1", "inspo.cat.exterior": "Exterior", "inspo.cat.dormitorio": "Dormitorio",
+    "cat.filter.sala": "🛋 Sala", "cat.filter.comedor": "🍽 Comedor",
+    "cat.filter.dormitorio": "🛏 Dormitorio", "cat.filter.terraza": "🌿 Terraza", "cat.filter.accesorios": "✦ Accesorios",
     "mq": "Madera Guanacaste \u00b7 Rattan natural \u00b7 Nosara \u00b7 Santa Teresa \u00b7 Dise\u00f1o artesanal \u00b7 A medida \u00b7 Piezas \u00fanicas \u00b7 Zona Pac\u00edfico \u00b7 Gran \u00c1rea Metropolitana \u00b7 Materiales sostenibles"
   },
   en: {
@@ -2196,6 +2263,7 @@ const T = {
     "config.label": "Custom", "config.h2": "Design your <em>perfect piece</em>",
     "config.sub": "Choose every detail and select inspiration photos. We will connect you with our team via WhatsApp when you are ready.",
     "inspo.title": "Inspiration \u2014 select pieces you like",
+    "inspo.title": "Inspiration — select pieces you like",
     "inspo.sub": "Choose product photos from our catalog. They will be attached to your WhatsApp message.",
     "inspo.count1": "piece selected", "inspo.count": "pieces selected",
     "s1": "Type of furniture", "s2": "Primary material", "s3": "Wood finish",
@@ -2233,6 +2301,28 @@ const T = {
     "wa.refs": "\uD83D\uDDBC *References:*",
     "wa.thanks": "Thank you!",
     "ases.wa.msg": "Hi utropico! I would like personalized advisory for a furniture project. Can you help me?",
+    "logo.sub": "Costa Rica · Artisan Furniture",
+    "proj.h2": "Completed <em>projects</em>",
+    "filter.all": "All", "filter.villa": "🌊 Villas", "filter.gam": "🏙 GAM", "filter.airbnb": "🏡 Hotel / Airbnb",
+    "tipo.mesa_comedor": "Dining table", "tipo.sofa": "Sofa / Armchair", "tipo.mesa_centro": "Coffee table",
+    "tipo.cama": "Bed", "tipo.credenza": "Credenza / Console", "tipo.silla": "Dining chair",
+    "tipo.stool": "Stool", "tipo.noche": "Nightstand", "tipo.tapiceria": "Upholstery",
+    "subtipo.label.mesa": "Shape & legs", "subtipo.label.sofa": "Modular config",
+    "forma.rect": "Rectangular", "forma.oval": "Oval", "forma.circ": "Circular",
+    "patas.4": "4 legs", "patas.central": "Central leg",
+    "arm.left": "← Left arm", "arm.right": "Right arm →", "arm.none": "No armrests",
+    "cushion.yes": "With cushion", "cushion.no": "Without cushion",
+    "modules.label": "Modules",
+    "mat.teca": "Teak", "mat.roble": "Oak", "mat.cenizaro": "Cenizaro",
+    "mat.guanacaste": "Guanacaste", "mat.melina": "Melina", "mat.laurel": "Laurel", "mat.rattan": "Rattan",
+    "acab.natural": "Natural", "acab.mate": "Matte", "acab.satinado": "Satin", "acab.aclarado": "Bleached",
+    "amb.villa": "🌊 Villa / beach", "amb.gam": "🏙 GAM", "amb.terraza": "🌿 Terrace",
+    "amb.hotel": "🏡 Hotel / Airbnb", "amb.oficina": "💼 Office",
+    "inspo.cat.all": "All", "inspo.cat.comedor": "Dining", "inspo.cat.sala": "Living",
+    "inspo.cat.sofa": "Sofa", "inspo.cat.exterior": "Outdoor", "inspo.cat.dormitorio": "Bedroom",
+    "cat.filter.sala": "🛋 Living", "cat.filter.comedor": "🍽 Dining",
+    "cat.filter.dormitorio": "🛏 Bedroom", "cat.filter.terraza": "🌿 Outdoor", "cat.filter.accesorios": "✦ Accessories",
+    "ases.quote": "\u201CI have an idea but I\u2019m not exactly sure what I want.\u201D",
     "mq": "Guanacaste Wood \u00b7 Natural Rattan \u00b7 Nosara \u00b7 Santa Teresa \u00b7 Artisan Design \u00b7 Custom Made \u00b7 One of a Kind \u00b7 Pacific Zone \u00b7 Greater Metro Area \u00b7 Sustainable Materials"
   }
 };
@@ -2469,69 +2559,73 @@ function toggleLang(){
 }
 
 function applyLang(){
-  // Static elements with data-i18n
+  // 1. Update all static data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k = el.getAttribute('data-i18n');
     const v = tr(k);
+    if(!v) return;
     if(el.tagName==='TEXTAREA'||el.tagName==='INPUT') el.placeholder = v;
     else el.innerHTML = v;
   });
   // Tabs handled by data-i18n
+  renderChips();
+  updateSubtipo(state.tipo);
+
+  // Reset inspo tabs so they re-render with new lang
+  const inspoCatTabsEl = document.getElementById('inspoCatTabs');
+  if(inspoCatTabsEl) inspoCatTabsEl.innerHTML='';
+  renderInspo();
+  // Re-render catalog with translated labels
+  const activeCatBtn2 = document.querySelector('.cat-filter-btn.active');
+  if(activeCatBtn2) renderCatalog(activeCatBtn2.dataset.cat||'all');
   // Nav handled by data-i18n
   // Marquee
   const mq = document.querySelector('.marquee-inner');
   if(mq){ const t2=tr('mq'); mq.innerHTML=t2+' \u00b7 '+t2; }
   // Re-render dynamic sections to pick up translated labels
-  
-// Nav transparent on hero, solid on scroll
-(function(){
-  const nav = document.getElementById('siteNav');
-  function updateNav(){
-    if(window.scrollY > 80){
-      nav.style.background = 'rgba(250,247,241,0.97)';
-      nav.style.borderBottom = '1px solid rgba(90,54,24,0.13)';
-      nav.style.backdropFilter = 'blur(10px)';
-      nav.querySelectorAll('a').forEach(a=>{ if(!a.classList.contains('nav-pill')) a.style.color=''; });
-      const logoU = nav.querySelector('.logo-mark .u');
-      const logoSub = nav.querySelector('.logo-mark .tropico');
-      const logoSubSub = nav.querySelector('.logo-mark .sub');
-      if(logoU) logoU.style.color='';
-      if(logoSub) logoSub.style.color='';
-      if(logoSubSub) logoSubSub.style.color='';
-      const hbSpans = nav.querySelectorAll('.hamburger span');
-      hbSpans.forEach(s=>s.style.background='');
-      const langBtns = nav.querySelectorAll('.lang-btn');
-      langBtns.forEach(b=>{b.style.color='';b.style.borderColor='';b.style.background='';});
-    } else {
-      nav.style.background = 'linear-gradient(to bottom,rgba(18,14,8,.45) 0%,transparent 100%)';
-      nav.style.borderBottom = 'none';
-      nav.style.backdropFilter = 'none';
-      nav.querySelectorAll('a').forEach(a=>{ if(!a.classList.contains('nav-pill')) a.style.color='rgba(255,255,255,0.92)'; });
-      const logoU = nav.querySelector('.logo-mark .u');
-      const logoSub = nav.querySelector('.logo-mark .tropico');
-      const logoSubSub = nav.querySelector('.logo-mark .sub');
-      if(logoU) logoU.style.color='rgba(255,255,255,0.95)';
-      if(logoSub) logoSub.style.color='rgba(255,255,255,0.75)';
-      if(logoSubSub) logoSubSub.style.color='rgba(255,255,255,0.55)';
-      const hbSpans = nav.querySelectorAll('.hamburger span');
-      hbSpans.forEach(s=>s.style.background='rgba(255,255,255,0.9)');
-      const langBtns = nav.querySelectorAll('.lang-btn');
-      langBtns.forEach(b=>{b.style.color='rgba(255,255,255,0.9)';b.style.borderColor='rgba(255,255,255,0.4)';b.style.background='transparent';});
-    }
-  }
-  window.addEventListener('scroll', updateNav, {passive:true});
-  updateNav();
-})();
-
-renderInspo();
-  const activeProjBtn = document.querySelector('.proj-filter-btn.active');
-  if(activeProjBtn) renderProjEditorial(activeProjBtn.dataset.cat||'all');
-  const activeCatBtn = document.querySelector('.cat-filter-btn.active');
-  if(activeCatBtn) filterCat(activeCatBtn, activeCatBtn.dataset.cat||'all');
-  updateSubtipo(state.tipo);
-  updateInspoUI();
 }
 
+// Nav transparent on hero, solid on scroll
+(function(){
+  const nav = document.getElementById('siteNav');
+  function updateNav(){
+    if(window.scrollY > 80){
+      nav.style.background = 'rgba(250,247,241,0.97)';
+      nav.style.borderBottom = '1px solid rgba(90,54,24,0.13)';
+      nav.style.backdropFilter = 'blur(10px)';
+      nav.querySelectorAll('a').forEach(a=>{ if(!a.classList.contains('nav-pill')) a.style.color=''; });
+      const logoU = nav.querySelector('.logo-mark .u');
+      const logoSub = nav.querySelector('.logo-mark .tropico');
+      const logoSubSub = nav.querySelector('.logo-mark .sub');
+      if(logoU) logoU.style.color='';
+      if(logoSub) logoSub.style.color='';
+      if(logoSubSub) logoSubSub.style.color='';
+      const hbSpans = nav.querySelectorAll('.hamburger span');
+      hbSpans.forEach(s=>s.style.background='');
+      const langBtns = nav.querySelectorAll('.lang-btn');
+      langBtns.forEach(b=>{b.style.color='';b.style.borderColor='';b.style.background='';});
+    } else {
+      nav.style.background = 'linear-gradient(to bottom,rgba(18,14,8,.45) 0%,transparent 100%)';
+      nav.style.borderBottom = 'none';
+      nav.style.backdropFilter = 'none';
+      nav.querySelectorAll('a').forEach(a=>{ if(!a.classList.contains('nav-pill')) a.style.color='rgba(255,255,255,0.92)'; });
+      const logoU = nav.querySelector('.logo-mark .u');
+      const logoSub = nav.querySelector('.logo-mark .tropico');
+      const logoSubSub = nav.querySelector('.logo-mark .sub');
+      if(logoU) logoU.style.color='rgba(255,255,255,0.95)';
+      if(logoSub) logoSub.style.color='rgba(255,255,255,0.75)';
+      if(logoSubSub) logoSubSub.style.color='rgba(255,255,255,0.55)';
+      const hbSpans = nav.querySelectorAll('.hamburger span');
+      hbSpans.forEach(s=>s.style.background='rgba(255,255,255,0.9)');
+      const langBtns = nav.querySelectorAll('.lang-btn');
+      langBtns.forEach(b=>{b.style.color='rgba(255,255,255,0.9)';b.style.borderColor='rgba(255,255,255,0.4)';b.style.background='transparent';});
+    }
+  }
+  window.addEventListener('scroll', updateNav, {passive:true});
+  updateNav();
+})();
+
+
 
 
 
@@ -2577,6 +2671,7 @@ renderInspo();
 })();
 
 renderInspo();
+renderChips();
 showMobileBarIfNeeded();
 // Hide bar on scroll away from configurador
 window.addEventListener('scroll', showMobileBarIfNeeded, {passive:true});
