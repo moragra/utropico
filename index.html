@@ -589,10 +589,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
     <a href="#main" onclick="navGo('configurador')" data-i18n="tab.2">Diseñá tu pieza</a>
     <a href="#main" onclick="navGo('asesoria')" data-i18n="tab.3">Asesoría</a>
     <a href="#main" onclick="navGo('configurador')" class="nav-pill" data-i18n="nav.cta">Cotizar →</a>
-    <button class="lang-btn" onclick="toggleLang()" id="langBtn">🇬🇧 EN</button>
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">EN</button>
   </div>
   <div class="nav-mobile-controls">
-    <button class="lang-btn" onclick="toggleLang()" id="langBtnMobile">🇬🇧 EN</button>
+    <button class="lang-btn" onclick="toggleLang()" id="langBtnMobile">EN</button>
     <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -646,9 +646,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         </div>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap" id="projFilters">
           <button class="proj-filter-btn active" onclick="filterProjGrid(this,'all')" data-cat="all" data-i18n="filter.all">Todos</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'villa')" data-cat="villa" data-i18n="filter.villa">🌊 Villas</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'gam')" data-cat="gam" data-i18n="filter.gam">🏙 GAM</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'airbnb')" data-cat="airbnb" data-i18n="filter.airbnb">🏡 Hotel / Airbnb</button>
+          <button class="proj-filter-btn" onclick="filterProjGrid(this,'villa')" data-cat="villa" data-i18n="filter.villa">Villas</button>
+          <button class="proj-filter-btn" onclick="filterProjGrid(this,'gam')" data-cat="gam" data-i18n="filter.gam">GAM</button>
+          <button class="proj-filter-btn" onclick="filterProjGrid(this,'airbnb')" data-cat="airbnb" data-i18n="filter.airbnb">Hotel / Airbnb</button>
         </div>
       </div>
       <div class="proj-carousel-wrap">
@@ -672,11 +672,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
       </div>
       <div class="cat-filters" id="catFilters">
         <button class="cat-filter-btn active" onclick="filterCat(this,'all')" data-i18n="cat.all">Todas las piezas</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'sala')" data-i18n="cat.filter.sala">🛋 Sala</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'comedor')" data-i18n="cat.filter.comedor">🍽 Comedor</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'dormitorio')" data-i18n="cat.filter.dormitorio">🛏 Dormitorio</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'terraza')" data-i18n="cat.filter.terraza">🌿 Terraza</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'accesorios')" data-i18n="cat.filter.accesorios">✦ Accesorios</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'sala')" data-i18n="cat.filter.sala">Sala</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'comedor')" data-i18n="cat.filter.comedor">Comedor</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'dormitorio')" data-i18n="cat.filter.dormitorio">Dormitorio</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'terraza')" data-i18n="cat.filter.terraza">Terraza</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'accesorios')" data-i18n="cat.filter.accesorios">Accesorios</button>
       </div>
       <div id="catContainer"></div>
     </div>
@@ -718,14 +718,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           <div class="config-step">
             <div class="step-head"><div class="step-num-badge">1</div><span class="step-label">Tipo de mueble</span></div>
             <div class="chip-group" id="step-tipo">
-              <div class="chip selected" data-val="Mesa de comedor" onclick="sel(this,'tipo')"><span class="icon">🍽</span>Mesa comedor</div>
-              <div class="chip" data-val="Sillón / Sofá" onclick="sel(this,'tipo')"><span class="icon">🛋</span>Sillón / Sofá</div>
-              <div class="chip" data-val="Mesa de centro" onclick="sel(this,'tipo')"><span class="icon">☕</span>Mesa centro</div>
-              <div class="chip" data-val="Cama" onclick="sel(this,'tipo')"><span class="icon">🛏</span>Cama</div>
-              <div class="chip" data-val="Credenza / Consola" onclick="sel(this,'tipo')"><span class="icon">🗄</span>Credenza / Consola</div>
-              <div class="chip" data-val="Silla comedor" onclick="sel(this,'tipo')"><span class="icon">🪑</span>Silla comedor</div>
-              <div class="chip" data-val="Stool / Banqueta" onclick="sel(this,'tipo')"><span class="icon">🍄</span>Stool</div>
-              <div class="chip" data-val="Mesa de noche" onclick="sel(this,'tipo')"><span class="icon">🌙</span>Mesa de noche</div>
+              <div class="chip selected" data-val="Mesa de comedor" onclick="sel(this,'tipo')">Mesa comedor</div>
+              <div class="chip" data-val="Sillón / Sofá" onclick="sel(this,'tipo')">Sillón / Sofá</div>
+              <div class="chip" data-val="Mesa de centro" onclick="sel(this,'tipo')">Mesa centro</div>
+              <div class="chip" data-val="Cama" onclick="sel(this,'tipo')">Cama</div>
+              <div class="chip" data-val="Credenza / Consola" onclick="sel(this,'tipo')">Credenza / Consola</div>
+              <div class="chip" data-val="Silla comedor" onclick="sel(this,'tipo')">Silla comedor</div>
+              <div class="chip" data-val="Stool / Banqueta" onclick="sel(this,'tipo')">Stool</div>
+              <div class="chip" data-val="Mesa de noche" onclick="sel(this,'tipo')">Mesa de noche</div>
             </div>
           </div>
 
@@ -1210,7 +1210,7 @@ function goToSlide(i){
 }
 
 function cotizarPiezaWA(p){
-  const msg = `Hola utropico! 👋 Me gustaría cotizar la siguiente pieza del catálogo:\n\n🪵 *Pieza:* ${p.name}\n📦 *Material:* ${p.material}\n📐 *Dimensiones:* ${p.dims}\n✨ *Acabados disponibles:* ${p.acabados}\n➕ *Extras:* ${p.extras}\n\n¿Me pueden dar más información? ¡Gracias!`;
+  const msg = `Hola utropico! Me gustaría cotizar la siguiente pieza del catálogo:\n\n*Pieza:* ${p.name}\n*Material:* ${p.material}\n*Dimensiones:* ${p.dims}\n*Acabados disponibles:* ${p.acabados}\n➕ *Extras:* ${p.extras}\n\n¿Me pueden dar más información? ¡Gracias!`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
@@ -1311,14 +1311,14 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 function renderChips(){
   // Tipo
   const tipoData = [
-    {val:'Mesa de comedor',icon:'🍽',key:'tipo.mesa_comedor'},
-    {val:'Sillón / Sofá',icon:'🛋',key:'tipo.sofa'},
-    {val:'Mesa de centro',icon:'☕',key:'tipo.mesa_centro'},
-    {val:'Cama',icon:'🛏',key:'tipo.cama'},
-    {val:'Credenza / Consola',icon:'🗄',key:'tipo.credenza'},
-    {val:'Silla comedor',icon:'🪑',key:'tipo.silla'},
-    {val:'Stool / Banqueta',icon:'🍄',key:'tipo.stool'},
-    {val:'Mesa de noche',icon:'🌙',key:'tipo.noche'},
+    {val:'Mesa de comedor',key:'tipo.mesa_comedor'},
+    {val:'Sillón / Sofá',key:'tipo.sofa'},
+    {val:'Mesa de centro',key:'tipo.mesa_centro'},
+    {val:'Cama',key:'tipo.cama'},
+    {val:'Credenza / Consola',key:'tipo.credenza'},
+    {val:'Silla comedor',key:'tipo.silla'},
+    {val:'Stool / Banqueta',key:'tipo.stool'},
+    {val:'Mesa de noche',key:'tipo.noche'},
   ];
   const tipoWrap = document.getElementById('tipo-chips-wrap');
   if(tipoWrap) tipoWrap.className = 'chip-group';
@@ -1328,10 +1328,10 @@ function renderChips(){
 
   // Material
   const matData = [
-    {val:'Teca',icon:'🪵',key:'mat.teca'},{val:'Roble',icon:'🌳',key:'mat.roble'},
-    {val:'Cenízaro',icon:'🌲',key:'mat.cenizaro'},{val:'Guanacaste',icon:'🌿',key:'mat.guanacaste'},
-    {val:'Melina',icon:'🌱',key:'mat.melina'},{val:'Laurel',icon:'🍃',key:'mat.laurel'},
-    {val:'Rattan natural',icon:'🌾',key:'mat.rattan'},
+    {val:'Teca',key:'mat.teca'},{val:'Roble',key:'mat.roble'},
+    {val:'Cenízaro',key:'mat.cenizaro'},{val:'Guanacaste',key:'mat.guanacaste'},
+    {val:'Melina',key:'mat.melina'},{val:'Laurel',key:'mat.laurel'},
+    {val:'Rattan natural',key:'mat.rattan'},
   ];
   const matWrap = document.getElementById('material-chips-wrap');
   if(matWrap) matWrap.className = 'chip-group';
@@ -2229,7 +2229,7 @@ const T = {
     "dims.alto": "Alto",
     "dims.ancho": "Ancho",
     "dims.largo": "Largo",
-    "filter.all": "Todos", "filter.villa": "🌊 Villas", "filter.gam": "🏙 GAM", "filter.airbnb": "🏡 Hotel / Airbnb",
+    "filter.all": "Todos", "filter.villa": "Villas", "filter.gam": "GAM", "filter.airbnb": "Hotel / Airbnb",
     "tipo.mesa_comedor": "Mesa comedor", "tipo.sofa": "Sill\u00f3n / Sof\u00e1", "tipo.mesa_centro": "Mesa centro",
     "tipo.cama": "Cama", "tipo.credenza": "Credenza / Consola", "tipo.silla": "Silla comedor",
     "tipo.stool": "Stool", "tipo.noche": "Mesa de noche", "tipo.tapiceria": "Tapicerría",
@@ -2242,12 +2242,12 @@ const T = {
     "mat.teca": "Teca", "mat.roble": "Roble", "mat.cenizaro": "Cen\u00edzaro",
     "mat.guanacaste": "Guanacaste", "mat.melina": "Melina", "mat.laurel": "Laurel", "mat.rattan": "Rattan",
     "acab.natural": "Natural", "acab.mate": "Mate", "acab.satinado": "Satinado", "acab.aclarado": "Aclarado",
-    "amb.villa": "🌊 Villa / playa", "amb.gam": "🏙 GAM", "amb.terraza": "🌿 Terraza",
-    "amb.hotel": "🏡 Hotel / Airbnb", "amb.oficina": "💼 Oficina",
+    "amb.villa": "Villa / playa", "amb.gam": "GAM", "amb.terraza": "Terraza",
+    "amb.hotel": "Hotel / Airbnb", "amb.oficina": "Oficina",
     "inspo.cat.all": "Todos", "inspo.cat.comedor": "Comedor", "inspo.cat.sala": "Sala",
     "inspo.cat.sofa": "Sof\u00e1", "inspo.cat.exterior": "Exterior", "inspo.cat.dormitorio": "Dormitorio",
-    "cat.filter.sala": "🛋 Sala", "cat.filter.comedor": "🍽 Comedor",
-    "cat.filter.dormitorio": "🛏 Dormitorio", "cat.filter.terraza": "🌿 Terraza", "cat.filter.accesorios": "✦ Accesorios",
+    "cat.filter.sala": "Sala", "cat.filter.comedor": "Comedor",
+    "cat.filter.dormitorio": "Dormitorio", "cat.filter.terraza": "Terraza", "cat.filter.accesorios": "✦ Accesorios",
     "mq": "Madera Guanacaste \u00b7 Rattan natural \u00b7 Nosara \u00b7 Santa Teresa \u00b7 Dise\u00f1o artesanal \u00b7 A medida \u00b7 Piezas \u00fanicas \u00b7 Zona Pac\u00edfico \u00b7 Gran \u00c1rea Metropolitana \u00b7 Materiales sostenibles"
   },
   en: {
@@ -2303,7 +2303,7 @@ const T = {
     "ases.wa.msg": "Hi utropico! I would like personalized advisory for a furniture project. Can you help me?",
     "logo.sub": "Costa Rica · Artisan Furniture",
     "proj.h2": "Completed <em>projects</em>",
-    "filter.all": "All", "filter.villa": "🌊 Villas", "filter.gam": "🏙 GAM", "filter.airbnb": "🏡 Hotel / Airbnb",
+    "filter.all": "All", "filter.villa": "Villas", "filter.gam": "GAM", "filter.airbnb": "Hotel / Airbnb",
     "tipo.mesa_comedor": "Dining table", "tipo.sofa": "Sofa / Armchair", "tipo.mesa_centro": "Coffee table",
     "tipo.cama": "Bed", "tipo.credenza": "Credenza / Console", "tipo.silla": "Dining chair",
     "tipo.stool": "Stool", "tipo.noche": "Nightstand", "tipo.tapiceria": "Upholstery",
@@ -2316,12 +2316,12 @@ const T = {
     "mat.teca": "Teak", "mat.roble": "Oak", "mat.cenizaro": "Cenizaro",
     "mat.guanacaste": "Guanacaste", "mat.melina": "Melina", "mat.laurel": "Laurel", "mat.rattan": "Rattan",
     "acab.natural": "Natural", "acab.mate": "Matte", "acab.satinado": "Satin", "acab.aclarado": "Bleached",
-    "amb.villa": "🌊 Villa / beach", "amb.gam": "🏙 GAM", "amb.terraza": "🌿 Terrace",
-    "amb.hotel": "🏡 Hotel / Airbnb", "amb.oficina": "💼 Office",
+    "amb.villa": "Villa / beach", "amb.gam": "GAM", "amb.terraza": "Terrace",
+    "amb.hotel": "Hotel / Airbnb", "amb.oficina": "Office",
     "inspo.cat.all": "All", "inspo.cat.comedor": "Dining", "inspo.cat.sala": "Living",
     "inspo.cat.sofa": "Sofa", "inspo.cat.exterior": "Outdoor", "inspo.cat.dormitorio": "Bedroom",
-    "cat.filter.sala": "🛋 Living", "cat.filter.comedor": "🍽 Dining",
-    "cat.filter.dormitorio": "🛏 Bedroom", "cat.filter.terraza": "🌿 Outdoor", "cat.filter.accesorios": "✦ Accessories",
+    "cat.filter.sala": "Living", "cat.filter.comedor": "Dining",
+    "cat.filter.dormitorio": "Bedroom", "cat.filter.terraza": "Outdoor", "cat.filter.accesorios": "✦ Accessories",
     "ases.quote": "\u201CI have an idea but I\u2019m not exactly sure what I want.\u201D",
     "mq": "Guanacaste Wood \u00b7 Natural Rattan \u00b7 Nosara \u00b7 Santa Teresa \u00b7 Artisan Design \u00b7 Custom Made \u00b7 One of a Kind \u00b7 Pacific Zone \u00b7 Greater Metro Area \u00b7 Sustainable Materials"
   }
