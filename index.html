@@ -1068,6 +1068,8 @@ const CATALOG = [
   {id:'c2',cat:'sala',name:'Sofá Selva 3 puestos',material:'Rattan + estructura Guanacaste',dims:'220 × 95 × 85 cm',acabados:'Natural, barniz mate',extras:'Cojines disponibles',badge:null,imgs:[]},
   {id:'c3',cat:'sala',name:'Mesa de centro Guanacaste',material:'Madera Guanacaste sólida',dims:'120 × 65 × 42 cm',acabados:'Natural, barniz mate, aceite',extras:'Opción cubierta vidrio',badge:null,imgs:[]},
   {id:'c4',cat:'sala',name:'Aparador costero',material:'Madera Guanacaste',dims:'160 × 45 × 80 cm',acabados:'Natural, barniz mate',extras:'2 puertas, cajones opcionales',badge:null,imgs:[]},
+  {id:'p_agave',cat:'comedor',name:'Silla Agave',nameEN:'Agave Chair',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'—',acabados:'Mate, natural',acabadosEN:'Matte, natural',extras:null,badge:null,
+   imgs:['fotos/agave_chair_1.png','fotos/agave_chair_2.png','fotos/agave_chair_3.png']},
   // COMEDOR
   {id:'c5',cat:'comedor',name:'Mesa comedor oval',material:'Madera Guanacaste sólida',dims:'200 × 100 × 76 cm',acabados:'Natural, barniz mate, aceite teca',extras:'Hasta 8 personas',badge:'Más pedida',imgs:[]},
   {id:'c6',cat:'comedor',name:'Mesa comedor rectangular',material:'Madera Guanacaste sólida',dims:'180 × 90 × 76 cm',acabados:'Natural, barniz mate, aceite teca',extras:'Hasta 6 personas',badge:null,imgs:[]},
@@ -1125,8 +1127,8 @@ function renderCatalog(filter){
           <div class="cat-hover-hint"><span>Ver detalle</span></div>
         </div>
         <div class="cat-foot">
-          <p class="cat-foot-name">${p.name}</p>
-          <p class="cat-foot-mat">${p.material}</p>
+          <p class="cat-foot-name">${LANG==='en'&&p.nameEN?p.nameEN:p.name}</p>
+          <p class="cat-foot-mat">${LANG==='en'&&p.materialEN?p.materialEN:p.material}</p>
         </div>
       </div>`;
     });
@@ -1165,13 +1167,13 @@ function openModal(id){
 
   // detail
   document.getElementById('modalCat').textContent = getCatLabels()[p.cat] || p.cat;
-  document.getElementById('modalTitle').textContent = p.name;
+  document.getElementById('modalTitle').textContent = (LANG==='en'&&p.nameEN)?p.nameEN:p.name;
   const badge = document.getElementById('modalBadge');
   if(p.badge){ badge.textContent=p.badge; badge.style.display='inline-block'; }
   else { badge.style.display='none'; }
 
   const specs = [
-    {k:'Material', v:p.material},
+    {k:LANG==='en'?'Material':'Material', v:(LANG==='en'&&p.materialEN)?p.materialEN:p.material},
     {k:'Dimensiones', v:p.dims},
     {k:'Acabados', v:p.acabados},
     {k:'Extras', v:p.extras},
@@ -1210,7 +1212,9 @@ function goToSlide(i){
 }
 
 function cotizarPiezaWA(p){
-  const msg = `Hola utropico! Me gustaría cotizar la siguiente pieza del catálogo:\n\n*Pieza:* ${p.name}\n*Material:* ${p.material}\n*Dimensiones:* ${p.dims}\n*Acabados disponibles:* ${p.acabados}\n➕ *Extras:* ${p.extras}\n\n¿Me pueden dar más información? ¡Gracias!`;
+  const pName=(LANG==='en'&&p.nameEN)?p.nameEN:p.name;
+  const pMat=(LANG==='en'&&p.materialEN)?p.materialEN:p.material;
+  const msg = `Hola utropico! Me gustaría cotizar la siguiente pieza del catálogo:\n\n*Pieza:* ${pName}\n*Material:* ${pMat}\n*Dimensiones:* ${p.dims}\n*Acabados disponibles:* ${p.acabados}\n➕ *Extras:* ${p.extras}\n\n¿Me pueden dar más información? ¡Gracias!`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
@@ -1323,7 +1327,7 @@ function renderChips(){
   const tipoWrap = document.getElementById('tipo-chips-wrap');
   if(tipoWrap) tipoWrap.className = 'chip-group';
   if(tipoWrap) tipoWrap.innerHTML = tipoData.map(d=>
-    `<div class="chip${state.tipo===d.val?' selected':''}" data-val="${d.val}" onclick="sel(this,'tipo')"><span class="icon">${d.icon}</span>${tr(d.key)}</div>`
+    `<div class="chip${state.tipo===d.val?' selected':''}" data-val="${d.val}" onclick="sel(this,'tipo')">${tr(d.key)}</div>`
   ).join('');
 
   // Material
@@ -1336,7 +1340,7 @@ function renderChips(){
   const matWrap = document.getElementById('material-chips-wrap');
   if(matWrap) matWrap.className = 'chip-group';
   if(matWrap) matWrap.innerHTML = matData.map(d=>
-    `<div class="chip${state.material===d.val?' selected':''}" data-val="${d.val}" onclick="sel(this,'material')"><span class="icon">${d.icon}</span>${tr(d.key)}</div>`
+    `<div class="chip${state.material===d.val?' selected':''}" data-val="${d.val}" onclick="sel(this,'material')">${tr(d.key)}</div>`
   ).join('');
 
   // Acabado
