@@ -60,7 +60,7 @@ section{padding:6rem 4rem}
 .tab-btn:hover{color:var(--moss)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
-.config-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:2.5rem;align-items:start}
+.config-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:2.5rem;align-items:start;width:100%;min-width:0}
 .config-step{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
 .config-step:last-child{border-bottom:none;margin-bottom:0}
 .step-head{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
@@ -226,10 +226,149 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
 .modal-wa-btn svg{width:18px;height:18px;fill:#fff;flex-shrink:0}
 .modal-config-link{text-align:center;font-size:.72rem;color:var(--muted);margin-top:.5rem;cursor:pointer;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px}
 .modal-config-link:hover{color:var(--moss)}
+
+/* LANG TOGGLE */
+.lang-btn{background:transparent;border:1.5px solid var(--border);color:var(--mid);font-family:'Outfit',sans-serif;font-size:.7rem;letter-spacing:.1em;padding:.4rem .85rem;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lang-btn:hover{border-color:var(--moss);color:var(--moss)}
+
+/* RESPONSIVE — tablet */
+@media(max-width:1024px){
+  nav{padding:1rem 2rem}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:7rem 2.5rem 3rem}
+  .hero-right,.hero-right img,.ph-full{min-height:55vw}
+  .about-strip{grid-template-columns:1fr;padding:4rem 2rem;gap:1.5rem}
+  section{padding:4rem 2rem}
+  .config-layout{grid-template-columns:1fr}
+  .preview-sticky{position:relative;top:0}
+  .proj-editorial{grid-template-rows:200px 200px}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .asesoria-grid{grid-template-columns:1fr;gap:2.5rem}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
+  .modal-box{grid-template-columns:1fr;max-height:95vh}
+  .modal-carousel{min-height:280px}
+}
+
+/* RESPONSIVE — mobile */
+@media(max-width:768px){
+  nav{padding:.9rem 1.5rem}
+  nav ul{gap:.75rem}
+  nav ul a{font-size:.68rem}
+  .logo-mark .u{font-size:1.3rem}
+  .logo-mark .tropico{font-size:.62rem}
+  .hero-h1{font-size:2.4rem}
+  .hero-left{padding:6rem 1.5rem 2.5rem}
+  .hero-right,.hero-right img{min-height:65vw}
+  .proj-editorial{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px}
+  .proj-cell:first-child{grid-row:1/2;grid-column:1/3}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .inspo-grid{grid-template-columns:repeat(3,1fr)}
+  .page-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tab-btn{padding:.75rem 1rem;font-size:.65rem;white-space:nowrap}
+  .process-grid{grid-template-columns:1fr}
+  section{padding:3rem 1.5rem}
+  .modal-box{border-radius:0;max-height:100vh}
+  .modal-carousel{min-height:240px}
+  .swatch-group{gap:.5rem}
+}
+
+/* RESPONSIVE — small mobile */
+@media(max-width:480px){
+  nav{padding:.8rem 1rem}
+  nav ul{gap:.5rem}
+  .logo-mark .sub{display:none}
+  .lang-btn{font-size:.62rem;padding:.35rem .65rem}
+  .hero-h1{font-size:1.9rem}
+  .hero-left{padding:5.5rem 1.25rem 2rem}
+  .hero-actions{flex-direction:column}
+  .btn-solid,.btn-outline{width:100%;justify-content:center}
+  .about-strip{padding:3rem 1.25rem}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .inspo-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-editorial{grid-template-columns:1fr;grid-template-rows:repeat(5,200px)}
+  .proj-cell:first-child{grid-row:1/2;grid-column:1/2}
+  .page-tabs{gap:0}
+  .tab-btn{font-size:.6rem;padding:.65rem .75rem}
+  #canvas3d{height:200px}
+  .preview-canvas{padding:.75rem .5rem .5rem}
+  .chip{font-size:.7rem;padding:.38rem .7rem}
+  section{padding:2.5rem 1.25rem}
+  .wa-float{width:46px;height:46px;bottom:1.25rem;right:1.25rem}
+  .modal-box{max-height:100dvh}
+  .modal-detail{padding:1.25rem}
+  .extra-grid{grid-template-columns:1fr}
+  .swatch{width:34px;height:34px}
+  footer{padding:1.5rem 1.25rem;flex-direction:column;gap:.5rem;text-align:center}
+}
+
+/* NAV HAMBURGER */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem;z-index:1003;position:relative}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--moss);border-radius:2px;transition:all .3s}
+.nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.nav-right{display:flex;align-items:center}
+.nav-right ul{list-style:none;display:flex;gap:2rem;align-items:center}
+.nav-right ul a{text-decoration:none;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);transition:color .2s}
+.nav-right ul a:hover{color:var(--moss)}
+@media(max-width:768px){
+  nav{padding:.9rem 1.5rem}
+  .nav-hamburger{display:flex}
+  .nav-right{
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    background-color:#faf7f1;
+    display:none;
+    flex-direction:column;
+    padding:1.5rem 2rem 2rem;
+    z-index:1002;
+  }
+  .nav-right.open{display:flex}
+  .nav-right ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    margin-top:1rem;
+    flex:1;
+  }
+  .nav-right ul li{width:100%}
+  .nav-right ul li + li{border-top:1px solid rgba(90,54,24,0.13)}
+  .nav-right ul li:first-child{border-top:1px solid rgba(90,54,24,0.13)}
+  .nav-right ul a{
+    display:block;
+    width:100%;
+    padding:1rem 0;
+    font-size:.88rem;
+    font-family:'Outfit',sans-serif;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#46402f;
+    text-decoration:none;
+  }
+  .nav-pill{
+    display:inline-block!important;
+    background:#3a5225!important;
+    color:#fff!important;
+    padding:.75rem 1.5rem!important;
+    border-radius:2px!important;
+    font-size:.78rem!important;
+    letter-spacing:.12em;
+    margin-top:1rem;
+    width:auto!important;
+  }
+  .nav-right ul li:last-child{border:none;margin-top:.75rem}
+  .lang-btn{margin-top:0}  .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999}
+  .nav-overlay.open{display:block}
+}
+@media(max-width:480px){
+  nav{padding:.8rem 1rem}
+}
 </style>
 </head>
 <body>
 
+<div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>
 <nav>
   <a href="#" class="logo-mark">
     <span class="u">u</span>
@@ -238,22 +377,29 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
       <span class="sub">Costa Rica · Muebles artesanales</span>
     </span>
   </a>
-  <ul>
-    <li><a href="#main" onclick="showTab('proyectos')">Proyectos</a></li>
-    <li><a href="#main" onclick="showTab('configurador')">Configurar mueble</a></li>
-    <li><a href="#main" onclick="showTab('asesoria')">Asesoría</a></li>
-    <li><a href="#main" onclick="showTab('configurador')" class="nav-pill">Cotizar →</a></li>
-  </ul>
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-right" id="navRight">
+    <ul>
+      <li><a href="#main" onclick="showTab('proyectos');closeNav()" data-i18n="tab.0">Proyectos</a></li>
+      <li><a href="#main" onclick="showTab('catalogo');closeNav()" data-i18n="tab.1">Catálogo</a></li>
+      <li><a href="#main" onclick="showTab('configurador');closeNav()" data-i18n="tab.2">Configurar mueble</a></li>
+      <li><a href="#main" onclick="showTab('asesoria');closeNav()" data-i18n="tab.3">Asesoría</a></li>
+      <li><a href="#main" onclick="showTab('configurador');closeNav()" class="nav-pill" data-i18n="nav.cta">Cotizar →</a></li>
+      <li><button class="lang-btn" onclick="toggleLang()" id="langBtn">🇬🇧 EN</button></li>
+    </ul>
+  </div>
 </nav>
 
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-tag">Hecho a mano en Costa Rica</p>
-    <h1 class="hero-h1">Donde la madera<br>se convierte en<br><em>hogar.</em></h1>
-    <p class="hero-p">Muebles artesanales en madera Guanacaste y rattan para villas en el Pacífico y residencias en la GAM. Cada pieza, única.</p>
+    <p class="hero-tag" data-i18n="hero.tag">Hecho a mano en Costa Rica</p>
+    <h1 class="hero-h1" data-i18n="hero.h1">Donde la madera<br>se convierte en<br><em>hogar.</em></h1>
+    <p class="hero-p" data-i18n="hero.p">Muebles artesanales en madera Guanacaste y rattan para villas en el Pacífico y residencias en la GAM. Cada pieza, única.</p>
     <div class="hero-actions">
-      <a href="#main" class="btn btn-solid" onclick="showTab('configurador')">Configurar mi mueble →</a>
-      <a href="#main" class="btn btn-outline" onclick="showTab('proyectos')">Ver proyectos</a>
+      <a href="#main" class="btn btn-solid" onclick="showTab('configurador')" data-i18n="hero.cta1">Configurar mi mueble →</a>
+      <a href="#main" class="btn btn-outline" onclick="showTab('proyectos')" data-i18n="hero.cta2">Ver proyectos</a>
     </div>
   </div>
   <div class="hero-right">
@@ -280,10 +426,10 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
 <section id="main" style="padding:5rem 4rem">
   <div class="fade">
     <div class="page-tabs">
-      <button class="tab-btn active" onclick="showTab('proyectos')">Proyectos</button>
-      <button class="tab-btn" onclick="showTab('catalogo')">Catálogo</button>
-      <button class="tab-btn" onclick="showTab('configurador')">Configurar mueble</button>
-      <button class="tab-btn" onclick="showTab('asesoria')">Asesoría personalizada</button>
+      <button class="tab-btn active" onclick="showTab('proyectos')" data-i18n="tab.0">Proyectos</button>
+      <button class="tab-btn" onclick="showTab('catalogo')" data-i18n="tab.1">Catálogo</button>
+      <button class="tab-btn" onclick="showTab('configurador')" data-i18n="tab.2">Configurar mueble</button>
+      <button class="tab-btn" onclick="showTab('asesoria')" data-i18n="tab.3">Asesoría personalizada</button>
     </div>
 
     <!-- PROYECTOS -->
@@ -294,10 +440,10 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
           <h2 class="sec-h2">Proyectos <em>realizados</em></h2>
         </div>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap" id="projFilters">
-          <button class="proj-filter-btn active" onclick="filterProjGrid(this,'all')">Todos</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'villa')">🌊 Villas</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'gam')">🏙 GAM</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'airbnb')">🏡 Hotel / Airbnb</button>
+          <button class="proj-filter-btn active" onclick="filterProjGrid(this,'all')" data-cat="all">Todos</button>
+          <button class="proj-filter-btn" onclick="filterProjGrid(this,'villa')" data-cat="villa">🌊 Villas</button>
+          <button class="proj-filter-btn" onclick="filterProjGrid(this,'gam')" data-cat="gam">🏙 GAM</button>
+          <button class="proj-filter-btn" onclick="filterProjGrid(this,'airbnb')" data-cat="airbnb">🏡 Hotel / Airbnb</button>
         </div>
       </div>
       <div id="projEditorialGrid"></div>
@@ -306,9 +452,9 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
     <!-- CATÁLOGO -->
     <div class="tab-panel" id="tab-catalogo">
       <div style="margin-bottom:2rem">
-        <p class="sec-label">Catálogo</p>
-        <h2 class="sec-h2">Nuestras <em>piezas</em></h2>
-        <p style="font-size:.88rem;color:var(--mid);margin-top:.75rem;font-weight:300;max-width:540px">Cada pieza es fabricada a mano. Las dimensiones indicadas son estándar — todas se adaptan a medida.</p>
+        <p class="sec-label" data-i18n="cat.label">Catálogo</p>
+        <h2 class="sec-h2" data-i18n="cat.h2">Nuestras <em>piezas</em></h2>
+        <p style="font-size:.88rem;color:var(--mid);margin-top:.75rem;font-weight:300;max-width:540px" data-i18n="cat.sub">Cada pieza es fabricada a mano. Las dimensiones indicadas son estándar — todas se adaptan a medida.</p>
       </div>
       <div class="cat-filters" id="catFilters">
         <button class="cat-filter-btn active" onclick="filterCat(this,'all')">Todas las piezas</button>
@@ -324,9 +470,9 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
     <!-- CONFIGURADOR -->
     <div class="tab-panel" id="tab-configurador">
       <div style="margin-bottom:2.5rem">
-        <p class="sec-label">Configurador</p>
-        <h2 class="sec-h2">Diseñá tu <em>pieza ideal</em></h2>
-        <p style="font-size:.88rem;color:var(--mid);margin-top:.75rem;font-weight:300;max-width:520px">Elegí cada detalle y seleccioná fotos de inspiración de nuestro portafolio. Al terminar te conectamos con nuestro equipo por WhatsApp con todo listo.</p>
+        <p class="sec-label" data-i18n="config.label">Configurador</p>
+        <h2 class="sec-h2" data-i18n="config.h2">Diseñá tu <em>pieza ideal</em></h2>
+        <p style="font-size:.88rem;color:var(--mid);margin-top:.75rem;font-weight:300;max-width:520px" data-i18n="config.sub">Elegí cada detalle y seleccioná fotos de inspiración de nuestro portafolio. Al terminar te conectamos con nuestro equipo por WhatsApp con todo listo.</p>
       </div>
       <div class="config-layout">
         <div class="config-steps">
@@ -337,7 +483,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
               <div class="step-num-badge">✦</div>
               <span class="step-label">Inspiración — seleccioná piezas que te gusten</span>
             </div>
-            <p style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-weight:300">Elegí fotos de productos de nuestro catálogo. Se adjuntarán a tu mensaje de WhatsApp.</p>
+            <p style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-weight:300" data-i18n="inspo.sub">Elegí fotos de productos de nuestro catálogo. Se adjuntarán a tu mensaje de WhatsApp.</p>
             <div class="inspo-grid" id="inspoGrid"></div>
             <div class="selected-banner" id="selectedBanner">
               <span>✓</span> <span id="selectedCount">0 piezas seleccionadas</span> — se adjuntarán a tu cotización
@@ -499,18 +645,18 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
     <div class="tab-panel" id="tab-asesoria">
       <div class="asesoria-grid">
         <div>
-          <p class="sec-label">Asesoría personalizada</p>
-          <h2 class="sec-h2">Te acompañamos en<br>cada <em>decisión.</em></h2>
+          <p class="sec-label" data-i18n="ases.label">Asesoría personalizada</p>
+          <h2 class="sec-h2" data-i18n="ases.h2">Te acompañamos en<br>cada <em>decisión.</em></h2>
           <div class="asesoria-features">
-            <div class="af-item"><div class="af-icon">🌿</div><div><p class="af-title">Consulta de espacio</p><p class="af-text">Analizamos tu espacio para recomendarte piezas que se adapten con la arquitectura, luz y estilo de tu proyecto.</p></div></div>
-            <div class="af-item"><div class="af-icon">🪵</div><div><p class="af-title">Selección de materiales</p><p class="af-text">Te explicamos las diferencias entre maderas, acabados y materiales según el ambiente — interior vs exterior, humedad, mantenimiento.</p></div></div>
-            <div class="af-item"><div class="af-icon">📐</div><div><p class="af-title">Diseño a medida</p><p class="af-text">Si tenés una idea específica o necesitás adaptar una pieza a medidas exactas, nuestro equipo te ayuda a definir cada detalle.</p></div></div>
-            <div class="af-item"><div class="af-icon">🚚</div><div><p class="af-title">Entrega e instalación</p><p class="af-text">Coordinamos logística para todo Costa Rica — Pacífico Norte, Central, y GAM. Instalamos y dejamos todo en su lugar.</p></div></div>
+            <div class="af-item"><div class="af-icon">🌿</div><div><p class="af-title" data-i18n="f1.title">Consulta de espacio</p><p class="af-text" data-i18n="f1.text">Analizamos tu espacio para recomendarte piezas que se adapten con la arquitectura, luz y estilo de tu proyecto.</p></div></div>
+            <div class="af-item"><div class="af-icon">🪵</div><div><p class="af-title" data-i18n="f2.title">Selección de materiales</p><p class="af-text" data-i18n="f2.text">Te explicamos las diferencias entre maderas, acabados y materiales según el ambiente — interior vs exterior, humedad, mantenimiento.</p></div></div>
+            <div class="af-item"><div class="af-icon">📐</div><div><p class="af-title" data-i18n="f3.title">Diseño a medida</p><p class="af-text" data-i18n="f3.text">Si tenés una idea específica o necesitás adaptar una pieza a medidas exactas, nuestro equipo te ayuda a definir cada detalle.</p></div></div>
+            <div class="af-item"><div class="af-icon">🚚</div><div><p class="af-title" data-i18n="f4.title">Entrega e instalación</p><p class="af-text" data-i18n="f4.text">Coordinamos logística para todo Costa Rica — Pacífico Norte, Central, y GAM. Instalamos y dejamos todo en su lugar.</p></div></div>
           </div>
         </div>
         <div class="ases-cta-box">
           <h3>"Tengo una idea pero no sé exactamente qué quiero."</h3>
-          <p>No hay problema. Nuestro proceso de asesoría empieza con una conversación sin compromiso. Contanos qué espacio tenés, qué estilo te gusta, y nosotros te proponemos opciones.</p>
+          <p data-i18n="ases.body">No hay problema. Nuestro proceso de asesoría empieza con una conversación sin compromiso. Contanos qué espacio tenés, qué estilo te gusta, y nosotros te proponemos opciones.</p>
           
           <button class="btn-rattan" onclick="startAsesoriaWA()">Iniciar asesoría por WhatsApp →</button>
         </div>
@@ -521,7 +667,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
 
 <footer>
   <span class="foot-logo">utropico</span>
-  <p>© 2025 utropico · Costa Rica · Muebles artesanales</p>
+  <p data-i18n="footer.copy">© 2025 utropico · Costa Rica · Muebles artesanales</p>
   <p>hola@utropico.cr · +506 8XXX-XXXX</p>
 </footer>
 
@@ -612,7 +758,7 @@ function updateInspoUI(){
   const n = state.inspiracion.length;
   const banner = document.getElementById('selectedBanner');
   banner.classList.toggle('show', n>0);
-  document.getElementById('selectedCount').textContent = n + (n===1?' pieza seleccionada':' piezas seleccionadas');
+  document.getElementById('selectedCount').textContent = n + ' ' + (n===1?tr('inspo.count1'):tr('inspo.count'));
 
   const preview = document.getElementById('inspo-preview');
   const thumbs = document.getElementById('inspo-thumbs');
@@ -1540,7 +1686,7 @@ async function sendToWhatsApp(){
     : 'Ninguna';
   const notaLine = nota ? `\n📝 *Notas:* ${nota}` : '';
 
-  const msg = `Hola utropico! 👋 Me gustaría cotizar:
+  const msg = `${tr('wa.greeting')}
 
 🪵 *Pieza:* ${state.tipo}${subtipo}
 🌿 *Material:* ${state.material}
@@ -1549,13 +1695,13 @@ async function sendToWhatsApp(){
 📐 *Dimensiones:* ${state.largo} × ${state.ancho} × ${state.alto} cm
 🏡 *Espacio:* ${state.ambiente}
 
-🖼 *Referencias:*
+${tr('wa.refs')}
 ${inspoText}${notaLine}
 
-¡Gracias!`;
+${tr('wa.thanks')}`;
 
   // Send to Google Sheets — must follow redirects (GAS uses them)
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz1DvA4IBFWS6xqZd01aAp5RaG4gSWtPkp5E0x6vkvXONx-b9oWQac1I-nBP9pq1IHGbw/exec';
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwrYA5QknsHc0EuVXEq77t817f798jxPAjWSNuSZYE--BT69XTbDnG840D_s3KuXiSBLg/exec';
   const params = new URLSearchParams({
     fecha:       new Date().toISOString(),
     tipo:        state.tipo + subtipo,
@@ -1578,7 +1724,7 @@ ${inspoText}${notaLine}
 }
 
 function startAsesoriaWA(){
-  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola utropico! Me gustaría recibir asesoría personalizada para un proyecto de muebles. ¿Pueden ayudarme?')}`,'_blank');
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(tr('ases.wa.msg'))}`,'_blank');
 }
 
 // ── PROJECTS DATA ──
@@ -1655,6 +1801,163 @@ function renderProjEditorial(cat){
 function filterProj(btn,cat){}
 function renderProjects(list){}
 
+
+// ── i18n ──
+const T = {
+  es: {
+    "nav.cta": "Cotizar \u2192",
+    "hero.tag": "Hecho a mano en Costa Rica",
+    "hero.h1": "Donde la madera<br>se convierte en<br><em>hogar.</em>",
+    "hero.p": "Muebles artesanales en madera Guanacaste y rattan para villas en el Pac\u00edfico y residencias en la GAM. Cada pieza, \u00fanica.",
+    "hero.cta1": "Configurar mi mueble \u2192",
+    "hero.cta2": "Ver proyectos",
+    "tab.0": "Proyectos", "tab.1": "Cat\u00e1logo", "tab.2": "Configurar mueble", "tab.3": "Asesor\u00eda personalizada",
+    "proj.label": "Portfolio", "proj.h2": "Proyectos <em>realizados</em>",
+    "filter.all": "Todos", "filter.villa": "\uD83C\uDF0A Villas", "filter.gam": "\uD83C\uDFD9 GAM", "filter.airbnb": "\uD83C\uDFE1 Hotel / Airbnb",
+    "config.label": "Configurador", "config.h2": "Dise\u00f1\u00e1 tu <em>pieza ideal</em>",
+    "config.sub": "Eleg\u00ed cada detalle y selecci\u00f3na fotos de inspiraci\u00f3n de nuestro portafolio. Al terminar te conectamos con nuestro equipo por WhatsApp con todo listo.",
+    "inspo.title": "Inspiraci\u00f3n \u2014 selecci\u00f3na piezas que te gusten",
+    "inspo.sub": "Eleg\u00ed fotos de productos de nuestro cat\u00e1logo. Se adjuntar\u00e1n a tu mensaje de WhatsApp.",
+    "inspo.count1": "pieza seleccionada", "inspo.count": "piezas seleccionadas",
+    "s1": "Tipo de mueble", "s2": "Material principal", "s3": "Acabado de la madera",
+    "s4": "Tono de madera", "s5": "Textil", "s6": "Dimensiones aproximadas",
+    "s7": "\u00bfPara qu\u00e9 espacio es?", "s8": "Nota o inspiraci\u00f3n adicional (opcional)",
+    "nota.ph": "Ej: quiero una mesa oval con pata central, sin reposa brazos, referencias adjuntas...",
+    "wa.btn": "Cotizar por WhatsApp",
+    "refs.label": "Referencias seleccionadas",
+    "cat.label": "Cat\u00e1logo", "cat.h2": "Nuestras <em>piezas</em>",
+    "cat.sub": "Cada pieza es fabricada a mano. Las dimensiones indicadas son est\u00e1ndar \u2014 todas se adaptan a medida.",
+    "cat.all": "Todas las piezas", "cat.sala": "\uD83D\uDEC4 Sala", "cat.comedor": "\uD83C\uDF7D Comedor",
+    "cat.dormitorio": "\uD83D\uDECF Dormitorio", "cat.terraza": "\uD83C\uDF3F Terraza", "cat.accesorios": "\u2736 Accesorios",
+    "cat.cta": "Cotizar esta pieza \u2192",
+    "modal.cta": "Cotizar esta pieza",
+    "modal.config": "O personaliz\u00e1la en el configurador \u2192",
+    "ases.label": "Asesor\u00eda personalizada",
+    "ases.h2": "Te acompa\u00f1amos en<br>cada <em>decisi\u00f3n.</em>",
+    "f1.title": "Consulta de espacio",
+    "f1.text": "Analizamos tu espacio para recomendarte piezas que se adapten con la arquitectura, luz y estilo de tu proyecto.",
+    "f2.title": "Selecci\u00f3n de materiales",
+    "f2.text": "Te explicamos las diferencias entre maderas, acabados y materiales seg\u00fan el ambiente \u2014 interior vs exterior, humedad, mantenimiento.",
+    "f3.title": "Dise\u00f1o a medida",
+    "f3.text": "Si ten\u00e9s una idea espec\u00edfica o necesit\u00e1s adaptar una pieza a medidas exactas, nuestro equipo te ayuda a definir cada detalle.",
+    "f4.title": "Entrega e instalaci\u00f3n",
+    "f4.text": "Coordinamos log\u00edstica para todo Costa Rica \u2014 Pac\u00edfico Norte, Central, y GAM. Instalamos y dejamos todo en su lugar.",
+    "ases.quote": "\u201cTengo una idea pero no s\u00e9 exactamente qu\u00e9 quiero.\u201d",
+    "ases.body": "No hay problema. Nuestro proceso de asesor\u00eda empieza con una conversaci\u00f3n sin compromiso. Cont\u00e1nos qu\u00e9 espacio ten\u00e9s, qu\u00e9 estilo te gusta, y nosotros te proponemos opciones.",
+    "ases.cta": "Iniciar asesor\u00eda por WhatsApp \u2192",
+    "about.label": "Nuestra historia",
+    "about.h2": "De los bosques de Costa Rica<br>a tu <em>espacio de vida.</em>",
+    "about.p1": "Trabajamos con madera Guanacaste, teca y rattan para crear piezas que respetan el tr\u00f3pico. Nuestros artesanos construyen cada mueble a mano \u2014 sin producci\u00f3n en serie, sin atajos.",
+    "about.p2": "Atendemos villas en Nosara, Santa Teresa y el Pac\u00edfico, residencias en la GAM, hoteles y proyectos de inversi\u00f3n en todo Costa Rica.",
+    "footer.copy": "\u00a9 2025 utropico \u00b7 Costa Rica \u00b7 Muebles artesanales",
+    "wa.greeting": "Hola utropico! \uD83D\uDC4B Me gustar\u00eda cotizar:",
+    "wa.refs": "\uD83D\uDDBC *Referencias:*",
+    "wa.thanks": "\u00a1Gracias!",
+    "ases.wa.msg": "Hola utropico! Me gustar\u00eda recibir asesor\u00eda personalizada para un proyecto de muebles. \u00bfPueden ayudarme?",
+    "mq": "Madera Guanacaste \u00b7 Rattan natural \u00b7 Nosara \u00b7 Santa Teresa \u00b7 Dise\u00f1o artesanal \u00b7 A medida \u00b7 Piezas \u00fanicas \u00b7 Zona Pac\u00edfico \u00b7 Gran \u00c1rea Metropolitana \u00b7 Materiales sostenibles"
+  },
+  en: {
+    "nav.cta": "Get a quote \u2192",
+    "hero.tag": "Handcrafted in Costa Rica",
+    "hero.h1": "Where wood<br>becomes<br><em>home.</em>",
+    "hero.p": "Artisan furniture in Guanacaste wood and rattan for Pacific villas and residences. Every piece, one of a kind.",
+    "hero.cta1": "Design my piece \u2192",
+    "hero.cta2": "View projects",
+    "tab.0": "Projects", "tab.1": "Catalog", "tab.2": "Design a piece", "tab.3": "Advisory",
+    "proj.label": "Portfolio", "proj.h2": "Completed <em>projects</em>",
+    "filter.all": "All", "filter.villa": "\uD83C\uDF0A Villas", "filter.gam": "\uD83C\uDFD9 GAM", "filter.airbnb": "\uD83C\uDFE1 Hotel / Airbnb",
+    "config.label": "Configurator", "config.h2": "Design your <em>perfect piece</em>",
+    "config.sub": "Choose every detail and select inspiration photos. We will connect you with our team via WhatsApp when you are ready.",
+    "inspo.title": "Inspiration \u2014 select pieces you like",
+    "inspo.sub": "Choose product photos from our catalog. They will be attached to your WhatsApp message.",
+    "inspo.count1": "piece selected", "inspo.count": "pieces selected",
+    "s1": "Type of furniture", "s2": "Primary material", "s3": "Wood finish",
+    "s4": "Wood tone", "s5": "Fabric", "s6": "Approximate dimensions",
+    "s7": "What space is it for?", "s8": "Notes or additional inspiration (optional)",
+    "nota.ph": "e.g. oval table with central leg, no armrests, based on attached references...",
+    "wa.btn": "Get a quote on WhatsApp",
+    "refs.label": "Selected references",
+    "cat.label": "Catalog", "cat.h2": "Our <em>pieces</em>",
+    "cat.sub": "Every piece is handmade. Listed dimensions are standard \u2014 all can be customized.",
+    "cat.all": "All pieces", "cat.sala": "\uD83D\uDEC4 Living room", "cat.comedor": "\uD83C\uDF7D Dining",
+    "cat.dormitorio": "\uD83D\uDECF Bedroom", "cat.terraza": "\uD83C\uDF3F Outdoor", "cat.accesorios": "\u2736 Accessories",
+    "cat.cta": "Quote this piece \u2192",
+    "modal.cta": "Quote this piece",
+    "modal.config": "Or customize it in the configurator \u2192",
+    "ases.label": "Personalized advisory",
+    "ases.h2": "We guide you through<br>every <em>decision.</em>",
+    "f1.title": "Space consultation",
+    "f1.text": "We analyze your space and recommend pieces that work with the architecture, light and style of your project.",
+    "f2.title": "Material selection",
+    "f2.text": "We walk you through the differences between woods, finishes and materials depending on the environment \u2014 indoor vs outdoor, humidity, maintenance.",
+    "f3.title": "Custom design",
+    "f3.text": "If you have a specific idea or need a piece adapted to exact measurements, our team helps you define every detail.",
+    "f4.title": "Delivery and installation",
+    "f4.text": "We coordinate logistics across all of Costa Rica \u2014 North Pacific, Central Pacific, and GAM. We install everything and leave it perfect.",
+    "ases.quote": "\u201cI have an idea but I am not exactly sure what I want.\u201d",
+    "ases.body": "No problem. Our advisory process starts with a no-commitment conversation. Tell us about your space and style, and we will propose options.",
+    "ases.cta": "Start advisory on WhatsApp \u2192",
+    "about.label": "Our story",
+    "about.h2": "From the forests of Costa Rica<br>to your <em>living space.</em>",
+    "about.p1": "We work with Guanacaste wood, teak and rattan to create pieces that honor the tropics. Our craftsmen build every piece by hand \u2014 no mass production, no shortcuts.",
+    "about.p2": "We serve villas in Nosara, Santa Teresa and the Pacific, residences in the GAM, hotels and investment projects throughout Costa Rica.",
+    "footer.copy": "\u00a9 2025 utropico \u00b7 Costa Rica \u00b7 Artisan Furniture",
+    "wa.greeting": "Hi utropico! \uD83D\uDC4B I would like to get a quote for:",
+    "wa.refs": "\uD83D\uDDBC *References:*",
+    "wa.thanks": "Thank you!",
+    "ases.wa.msg": "Hi utropico! I would like personalized advisory for a furniture project. Can you help me?",
+    "mq": "Guanacaste Wood \u00b7 Natural Rattan \u00b7 Nosara \u00b7 Santa Teresa \u00b7 Artisan Design \u00b7 Custom Made \u00b7 One of a Kind \u00b7 Pacific Zone \u00b7 Greater Metro Area \u00b7 Sustainable Materials"
+  }
+};
+
+let LANG = 'es';
+function tr(key){ return (T[LANG]||T.es)[key] || T.es[key] || key; }
+
+function toggleLang(){
+  LANG = LANG === 'es' ? 'en' : 'es';
+  document.getElementById('langBtn').textContent = LANG === 'es' ? '\uD83C\uDDEC\uD83C\uDDE7 EN' : '\uD83C\uDDE8\uD83C\uDDF7 ES';
+  applyLang();
+}
+
+function applyLang(){
+  // Static elements with data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    const v = tr(k);
+    if(el.tagName==='TEXTAREA'||el.tagName==='INPUT') el.placeholder = v;
+    else el.innerHTML = v;
+  });
+  // Tabs handled by data-i18n
+  // Nav handled by data-i18n
+  // Marquee
+  const mq = document.querySelector('.marquee-inner');
+  if(mq){ const t2=tr('mq'); mq.innerHTML=t2+' \u00b7 '+t2; }
+  // Re-render dynamic sections to pick up translated labels
+  renderInspo();
+  const activeProjBtn = document.querySelector('.proj-filter-btn.active');
+  if(activeProjBtn) renderProjEditorial(activeProjBtn.dataset.cat||'all');
+  const activeCatBtn = document.querySelector('.cat-filter-btn.active');
+  if(activeCatBtn) filterCat(activeCatBtn, activeCatBtn.dataset.cat||'all');
+  updateSubtipo(state.tipo);
+  updateInspoUI();
+}
+
+
+function toggleNav(){
+  const nav = document.getElementById('navRight');
+  const btn = document.getElementById('navHamburger');
+  const overlay = document.getElementById('navOverlay');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+  overlay.classList.toggle('open');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+function closeNav(){
+  document.getElementById('navRight').classList.remove('open');
+  document.getElementById('navHamburger').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 renderInspo();
 renderProjEditorial('all');
 renderCatalog('all');
