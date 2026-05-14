@@ -2228,6 +2228,8 @@ function applyLang(){
       if(logoSubSub) logoSubSub.style.color='';
       const hbSpans = nav.querySelectorAll('.hamburger span');
       hbSpans.forEach(s=>s.style.background='');
+      const langBtns = nav.querySelectorAll('.lang-btn');
+      langBtns.forEach(b=>{b.style.color='';b.style.borderColor='';b.style.background='';});
     } else {
       nav.style.background = 'linear-gradient(to bottom,rgba(18,14,8,.45) 0%,transparent 100%)';
       nav.style.borderBottom = 'none';
@@ -2241,6 +2243,8 @@ function applyLang(){
       if(logoSubSub) logoSubSub.style.color='rgba(255,255,255,0.55)';
       const hbSpans = nav.querySelectorAll('.hamburger span');
       hbSpans.forEach(s=>s.style.background='rgba(255,255,255,0.9)');
+      const langBtns = nav.querySelectorAll('.lang-btn');
+      langBtns.forEach(b=>{b.style.color='rgba(255,255,255,0.9)';b.style.borderColor='rgba(255,255,255,0.4)';b.style.background='transparent';});
     }
   }
   window.addEventListener('scroll', updateNav, {passive:true});
@@ -2277,6 +2281,8 @@ renderInspo();
       if(logoSubSub) logoSubSub.style.color='';
       const hbSpans = nav.querySelectorAll('.hamburger span');
       hbSpans.forEach(s=>s.style.background='');
+      const langBtns = nav.querySelectorAll('.lang-btn');
+      langBtns.forEach(b=>{b.style.color='';b.style.borderColor='';b.style.background='';});
     } else {
       nav.style.background = 'linear-gradient(to bottom,rgba(18,14,8,.45) 0%,transparent 100%)';
       nav.style.borderBottom = 'none';
@@ -2290,6 +2296,8 @@ renderInspo();
       if(logoSubSub) logoSubSub.style.color='rgba(255,255,255,0.55)';
       const hbSpans = nav.querySelectorAll('.hamburger span');
       hbSpans.forEach(s=>s.style.background='rgba(255,255,255,0.9)');
+      const langBtns = nav.querySelectorAll('.lang-btn');
+      langBtns.forEach(b=>{b.style.color='rgba(255,255,255,0.9)';b.style.borderColor='rgba(255,255,255,0.4)';b.style.background='transparent';});
     }
   }
   window.addEventListener('scroll', updateNav, {passive:true});
