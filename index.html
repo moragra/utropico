@@ -185,9 +185,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
 .cat-empty{text-align:center;padding:4rem 2rem;color:var(--muted);font-size:.88rem}
 
 /* PROJECT EDITORIAL GRID */
-.proj-filter-btn{font-family:'Outfit',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.2rem;border:1.5px solid var(--border);background:transparent;color:var(--mid);border-radius:20px;cursor:pointer;transition:all .2s}
-.proj-filter-btn:hover{border-color:var(--moss);color:var(--moss)}
-.proj-filter-btn.active{background:var(--moss);color:#fff;border-color:var(--moss)}
+
 .proj-editorial{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2rem;transition:opacity .3s}
 .proj-editorial.fading{opacity:0}
 .proj-cell{cursor:pointer}
@@ -641,16 +639,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 
     <!-- PROYECTOS -->
     <div class="tab-panel active" id="tab-proyectos">
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem">
+      <div style="margin-bottom:2rem">
         <div>
           <p class="sec-label" data-i18n="proj.label">Portfolio</p>
           <h2 class="sec-h2" data-i18n="proj.h2">Proyectos <em>realizados</em></h2>
-        </div>
-        <div style="display:flex;gap:.5rem;flex-wrap:wrap" id="projFilters">
-          <button class="proj-filter-btn active" onclick="filterProjGrid(this,'all')" data-cat="all" data-i18n="filter.all">Todos</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'villa')" data-cat="villa" data-i18n="filter.villa">Villas</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'gam')" data-cat="gam" data-i18n="filter.gam">GAM</button>
-          <button class="proj-filter-btn" onclick="filterProjGrid(this,'airbnb')" data-cat="airbnb" data-i18n="filter.airbnb">Hotel / Airbnb</button>
         </div>
       </div>
       <div class="proj-carousel-wrap">
@@ -2077,32 +2069,12 @@ function startAsesoriaWA(){
 // Layout: [big left spanning 2 rows] + [4 small cells]
 const PROJ_SETS = {
   all: [
-    {img:'fotos/p22.jpg', name:'Villa Residencial', loc:'Guanacaste', badge:'Sala + comedor', pos:'center center', big:true},
-    {img:'fotos/p21.jpg', name:'Casa Nosara', loc:'Nosara, Guanacaste', badge:'Proyecto completo', pos:'center 40%'},
-    {img:'fotos/p10.png', name:'Comedor Guanacaste', loc:'Pacífico Central', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p06.jpg', name:'Sala exterior', loc:'Guanacaste', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p23.jpg', name:'Terraza + piscina', loc:'Guanacaste', badge:'Proyecto completo', pos:'center 60%'},
-  ],
-  villa: [
-    {img:'fotos/p22.jpg', name:'Villa Residencial', loc:'Guanacaste', badge:'Proyecto completo', pos:'center center', big:true},
-    {img:'fotos/p23.jpg', name:'Terraza + piscina', loc:'Guanacaste', badge:'Proyecto completo', pos:'center 60%'},
-    {img:'fotos/p13.jpg', name:'Casa de playa', loc:'Pacífico Central', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p02.png', name:'Sala terraza', loc:'Santa Teresa', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p05.png', name:'Villa selva', loc:'Pacífico Norte', badge:'Proyecto completo', pos:'center center'},
-  ],
-  gam: [
-    {img:'fotos/p07.jpg', name:'Residencia Santa Ana', loc:'Santa Ana, San José', badge:'Sala + comedor', pos:'center center', big:true},
-    {img:'fotos/p08.png', name:'Comedor moderno', loc:'San José, GAM', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p18.jpg', name:'Living room', loc:'GAM', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p19.jpg', name:'Cocina + comedor', loc:'San José', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p15.jpg', name:'Comedor con bancas', loc:'GAM', badge:'Proyecto completo', pos:'center center'},
-  ],
-  airbnb: [
-    {img:'fotos/p01.png', name:'Restaurante tropical', loc:'Nosara, Guanacaste', badge:'Mobiliario completo', pos:'center center', big:true},
-    {img:'fotos/p14.jpg', name:'Hotel · Lobby', loc:'Guanacaste', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p17.jpg', name:'Comedor exterior', loc:'Pacífico Norte', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p11.png', name:'Suite · Dormitorio', loc:'GAM', badge:'Proyecto completo', pos:'center center'},
-    {img:'fotos/p20.jpg', name:'Habitación boutique', loc:'Pacífico', badge:'Proyecto completo', pos:'center center'},
+    {img:'fotos/casa_pinilla_sofaybutacas.png',      name:'Casa Pinilla',     loc:'Guanacaste',   badge:'Sofá y butacas',          pos:'center center'},
+    {img:'fotos/casa_dos_playas_butacas.jpg',         name:'Casa Dos Playas',  loc:'Pacífico',     badge:'Butacas',                 pos:'center center'},
+    {img:'fotos/casa_la_bandida_sofa.jpg',            name:'Casa La Bandida',  loc:'Pacífico',     badge:'Sofá',                    pos:'center center'},
+    {img:'fotos/casa_oasis_mesaysillas.jpg',          name:'Casa Oasis',       loc:'Pacífico',     badge:'Mesa y sillas',           pos:'center center'},
+    {img:'fotos/casa_dominick_sofasymesa.png',        name:'Casa Dominick',    loc:'Pacífico',     badge:'Sofás y mesa',            pos:'center center'},
+    {img:'fotos/casa_naia_bancabutacaystools.png',    name:'Casa Naia',        loc:'Pacífico',     badge:'Banca, butacas y stools', pos:'center center'},
   ],
 };
 
@@ -2121,6 +2093,7 @@ function filterProjGrid(btn, cat){
 }
 
 function projCarouselMove(dir){
+  resetProjAutoplay();
   const items = getProjItems(projCurrentCat);
   const pages = Math.ceil(items.length / PROJ_PER_PAGE);
   projPage = Math.max(0, Math.min(pages-1, projPage+dir));
@@ -2175,7 +2148,27 @@ function goToProjPage(page){
   const grid = document.getElementById('projEditorialGrid');
   grid.querySelector('.proj-editorial')?.classList.add('fading');
   setTimeout(()=>renderProjEditorial(projCurrentCat), 220);
+  resetProjAutoplay();
 }
+
+// Auto-advance carousel every 5 seconds
+let projAutoplayTimer = null;
+function startProjAutoplay(){
+  projAutoplayTimer = setInterval(()=>{
+    const items = getProjItems(projCurrentCat);
+    const pages = Math.ceil(items.length / PROJ_PER_PAGE);
+    projPage = (projPage + 1) % pages;
+    const grid = document.getElementById('projEditorialGrid');
+    grid.querySelector('.proj-editorial')?.classList.add('fading');
+    setTimeout(()=>renderProjEditorial(projCurrentCat), 220);
+  }, 5000);
+}
+function resetProjAutoplay(){
+  clearInterval(projAutoplayTimer);
+  startProjAutoplay();
+}
+// Start on load
+setTimeout(startProjAutoplay, 500);
 
 // Keep old functions so nothing breaks
 function filterProj(btn,cat){}
