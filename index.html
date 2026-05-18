@@ -1093,10 +1093,6 @@ function showTab(id){
 // Para agregar fotos: imgs:['fotos/pieza1-a.jpg','fotos/pieza1-b.jpg','fotos/pieza1-c.jpg']
 const CATALOG = [
   // SALA
-  {id:'c1',cat:'sala',name:'Sillón Palmera',material:'Rattan natural',dims:'85 × 90 × 95 cm',acabados:'Natural, barniz mate',extras:'Cojines disponibles',badge:'Bestseller',imgs:[]},
-  {id:'c2',cat:'sala',name:'Sofá Selva 3 puestos',material:'Rattan + estructura Guanacaste',dims:'220 × 95 × 85 cm',acabados:'Natural, barniz mate',extras:'Cojines disponibles',badge:null,imgs:[]},
-  {id:'c3',cat:'sala',name:'Mesa de centro Guanacaste',material:'Madera Guanacaste sólida',dims:'120 × 65 × 42 cm',acabados:'Natural, barniz mate, aceite',extras:'Opción cubierta vidrio',badge:null,imgs:[]},
-  {id:'c4',cat:'sala',name:'Aparador costero',material:'Madera Guanacaste',dims:'160 × 45 × 80 cm',acabados:'Natural, barniz mate',extras:'2 puertas, cajones opcionales',badge:null,imgs:[]},
   {id:'p_agave',cat:'comedor',name:'Silla Agave',nameEN:'Agave Chair',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate, natural',acabadosEN:'Matte, natural',badge:null,imgs:['fotos/agave_chair_1.png','fotos/agave_chair_2.png','fotos/agave_chair_3.png']},
   {id:'p_bistro',cat:'comedor',name:'Silla Bistro',nameEN:'Bistro Chair',material:'Teca · sentadero textil',materialEN:'Teak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/bistro_chair_1.png','fotos/bistro_chair_2.png']},
   {id:'p_nosara',cat:'comedor',name:'Silla Nosara',nameEN:'Nosara Chair',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/nosara_chair_1.png','fotos/nosara_chair_2.png']},
@@ -1118,11 +1114,17 @@ const CATALOG = [
   {id:'p_nipa',cat:'sala',name:'Sofá Nipa',nameEN:'Nipa Sofa',material:'Textil de alto tránsito',materialEN:'High-traffic textile',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/nipa_sofa_1.png']},
   {id:'p_taboga',cat:'sala',name:'Sofá Taboga',nameEN:'Taboga Sofa',material:'Textil de alto tránsito',materialEN:'High-traffic textile',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/taboga_sofa_1.png']},
   {id:'p_zolu',cat:'sala',name:'Sofá Zolu',nameEN:'Zolu Sofa',material:'Textil de alto tránsito',materialEN:'High-traffic textile',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/zolu_sofa_1.png']},
+  {id:'p_coa',cat:'comedor',name:'Mesa Coa',nameEN:'Coa Table',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/coa_sofa_1.png']},
+  {id:'p_coco',cat:'comedor',name:'Mesa Coco',nameEN:'Coco Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/coco_table_1.png']},
+  {id:'p_duna',cat:'comedor',name:'Mesa Duna',nameEN:'Duna Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N3',acabadosEN:'Matte · Tone N3',badge:null,imgs:['fotos/duna_table_1.png']},
+  {id:'p_grace',cat:'comedor',name:'Mesa Grace',nameEN:'Grace Table',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/grace_table_1.png']},
+  {id:'p_mar',cat:'comedor',name:'Mesa Mar',nameEN:'Mar Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/mar_table_1.png']},
+  {id:'p_mara',cat:'comedor',name:'Mesa Mara',nameEN:'Mara Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/mara_table_1.png']},
+  {id:'p_nalu',cat:'comedor',name:'Mesa Nalu',nameEN:'Nalu Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/nalu_table_1.png']},
+  {id:'p_oaxaca',cat:'comedor',name:'Mesa Oaxaca',nameEN:'Oaxaca Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/oaxaca_table_1.png']},
+  {id:'p_palma',cat:'comedor',name:'Mesa Palma',nameEN:'Palma Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N4',acabadosEN:'Matte · Tone N4',badge:null,imgs:['fotos/palma_table_1.png']},
+  {id:'p_riva',cat:'comedor',name:'Mesa Riva',nameEN:'Riva Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N8',acabadosEN:'Satin · Tone N8',badge:null,imgs:['fotos/riva_table_1.png']},
   // COMEDOR
-  {id:'c5',cat:'comedor',name:'Mesa comedor oval',material:'Madera Guanacaste sólida',dims:'200 × 100 × 76 cm',acabados:'Natural, barniz mate, aceite teca',extras:'Hasta 8 personas',badge:'Más pedida',imgs:[]},
-  {id:'c6',cat:'comedor',name:'Mesa comedor rectangular',material:'Madera Guanacaste sólida',dims:'180 × 90 × 76 cm',acabados:'Natural, barniz mate, aceite teca',extras:'Hasta 6 personas',badge:null,imgs:[]},
-  {id:'c7',cat:'comedor',name:'Silla comedor rattan',material:'Rattan natural + estructura madera',dims:'48 × 52 × 92 cm',acabados:'Natural',extras:'Cojín opcional',badge:null,imgs:[]},
-  {id:'c8',cat:'comedor',name:'Banca Guanacaste',material:'Madera Guanacaste sólida',dims:'160 × 40 × 48 cm',acabados:'Natural, barniz',extras:'Para comedor o entrada',badge:null,imgs:[]},
   // DORMITORIO
   {id:'c9',cat:'dormitorio',name:'Cama tronco Queen',material:'Madera Guanacaste sólida',dims:'160 × 200 cm (queen)',acabados:'Natural, barniz mate',extras:'Cabecera incluida',badge:null,imgs:[]},
   {id:'c10',cat:'dormitorio',name:'Cama tronco King',material:'Madera Guanacaste sólida',dims:'200 × 200 cm (king)',acabados:'Natural, barniz mate',extras:'Cabecera incluida',badge:'Nuevo',imgs:[]},
