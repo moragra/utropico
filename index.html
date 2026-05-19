@@ -704,6 +704,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         <button class="cat-filter-btn" onclick="filterCat(this,'sala')" data-i18n="cat.filter.sala">Sala</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'comedor')" data-i18n="cat.filter.comedor">Comedor</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'dormitorio')" data-i18n="cat.filter.dormitorio">Dormitorio</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'consola')" data-i18n="cat.filter.consola">Consolas</button>
       </div>
       <div id="catContainer"></div>
     </div>
@@ -1145,13 +1146,17 @@ const CATALOG = [
   {id:'p_bed_posh',cat:'dormitorio',name:'Cama Posh',nameEN:'Posh Bed',material:'Roble · headboard textil',materialEN:'Oak · textile headboard',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/posh_bed_1.png']},
   {id:'p_bed_siena',cat:'dormitorio',name:'Cama Siena',nameEN:'Siena Bed',material:'Textil',materialEN:'Textile',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/siena_bed_1.png']},
   {id:'p_bed_tikal',cat:'dormitorio',name:'Cama Tikal',nameEN:'Tikal Bed',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N7',acabadosEN:'Matte · Tone N7',badge:null,imgs:['fotos/tikal_bed_1.png']},
+  {id:'p_kira',cat:'consola',name:'Console Kira',nameEN:'Kira Console',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N5',acabadosEN:'Satin · Tone N5',badge:null,imgs:['fotos/kira_console_1.png']},
+  {id:'p_nara',cat:'consola',name:'Console Nara',nameEN:'Nara Console',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N5',acabadosEN:'Satin · Tone N5',badge:null,imgs:['fotos/nara_console_1.png']},
+  {id:'p_savi',cat:'consola',name:'Console Savi',nameEN:'Savi Console',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N4',acabadosEN:'Matte · Tone N4',badge:null,imgs:['fotos/savi_console_1.png']},
+  {id:'p_tara',cat:'consola',name:'Console Tara',nameEN:'Tara Console',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/tara_console_1.png']},
   // COMEDOR
   // DORMITORIO
   // TERRAZA
   // ACCESORIOS
 ];
 
-function getCatLabels(){function strip(s){return s.replace(/^[^a-zA-ZÀ-ž]+/,'').trim();}return {sala:strip(tr('cat.filter.sala')),comedor:strip(tr('cat.filter.comedor')),dormitorio:strip(tr('cat.filter.dormitorio'))};}
+function getCatLabels(){function strip(s){return s.replace(/^[^a-zA-ZÀ-ž]+/,'').trim();}return {sala:strip(tr('cat.filter.sala')),comedor:strip(tr('cat.filter.comedor')),dormitorio:strip(tr('cat.filter.dormitorio')),consola:strip(tr('cat.filter.consola'))};}
 const CAT_GRADIENTS = {
   sala:'linear-gradient(145deg,#f5f0e8,#ede5d5)',
   comedor:'linear-gradient(145deg,#f5f0e8,#ede5d5)',
@@ -2313,7 +2318,7 @@ const T = {
     "inspo.cat.all": "Todos", "inspo.cat.comedor": "Comedor", "inspo.cat.sala": "Sala",
     "inspo.cat.sofa": "Sof\u00e1", "inspo.cat.exterior": "Exterior", "inspo.cat.dormitorio": "Dormitorio",
     "cat.filter.sala": "Sala", "cat.filter.comedor": "Comedor",
-    "cat.filter.dormitorio": "Dormitorio", "cat.filter.terraza": "Terraza", "cat.filter.accesorios": "✦ Accesorios",
+    "cat.filter.dormitorio": "Dormitorio", "cat.filter.terraza": "Terraza", "cat.filter.accesorios": "✦ Accesorios", "cat.filter.consola": "Consolas",
     "mq": "Madera Guanacaste \u00b7 Rattan natural \u00b7 Nosara \u00b7 Santa Teresa \u00b7 Dise\u00f1o artesanal \u00b7 A medida \u00b7 Piezas \u00fanicas \u00b7 Zona Pac\u00edfico \u00b7 Gran \u00c1rea Metropolitana \u00b7 Materiales sostenibles"
   },
   en: {
@@ -2387,7 +2392,7 @@ const T = {
     "inspo.cat.all": "All", "inspo.cat.comedor": "Dining", "inspo.cat.sala": "Living",
     "inspo.cat.sofa": "Sofa", "inspo.cat.exterior": "Outdoor", "inspo.cat.dormitorio": "Bedroom",
     "cat.filter.sala": "Living", "cat.filter.comedor": "Dining",
-    "cat.filter.dormitorio": "Bedroom", "cat.filter.terraza": "Outdoor", "cat.filter.accesorios": "Accessories",
+    "cat.filter.dormitorio": "Bedroom", "cat.filter.terraza": "Outdoor", "cat.filter.accesorios": "Accessories", "cat.filter.consola": "Consoles",
     "ases.quote": "\u201CI have an idea but I\u2019m not exactly sure what I want.\u201D",
     "mq": "Guanacaste Wood \u00b7 Natural Rattan \u00b7 Nosara \u00b7 Santa Teresa \u00b7 Artisan Design \u00b7 Custom Made \u00b7 One of a Kind \u00b7 Pacific Zone \u00b7 Greater Metro Area \u00b7 Sustainable Materials"
   }
