@@ -704,7 +704,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         <button class="cat-filter-btn" onclick="filterCat(this,'sala')" data-i18n="cat.filter.sala">Sala</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'comedor')" data-i18n="cat.filter.comedor">Comedor</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'dormitorio')" data-i18n="cat.filter.dormitorio">Dormitorio</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'terraza')" data-i18n="cat.filter.terraza">Terraza</button>
       </div>
       <div id="catContainer"></div>
     </div>
@@ -1149,13 +1148,10 @@ const CATALOG = [
   // COMEDOR
   // DORMITORIO
   // TERRAZA
-  {id:'c13',cat:'terraza',name:'Set terraza 4 sillas',material:'Rattan natural tratado exterior',dims:'Mesa 90×90 + 4 sillas',acabados:'Natural con aceite teca',extras:'Resistente a lluvia, cojines opcionales',badge:'Bestseller',imgs:[]},
-  {id:'c14',cat:'terraza',name:'Sofá esquinero terraza',material:'Rattan natural tratado exterior',dims:'280 × 200 × 75 cm',acabados:'Natural con aceite teca',extras:'Cojines impermeables disponibles',badge:null,imgs:[]},
-  {id:'c15',cat:'terraza',name:'Hamaca con estructura',material:'Rattan + Guanacaste',dims:'200 × 120 × 110 cm',acabados:'Natural, aceite teca',extras:'Tela incluida, varios colores',badge:null,imgs:[]},
   // ACCESORIOS
 ];
 
-function getCatLabels(){function strip(s){return s.replace(/^[^a-zA-ZÀ-ž]+/,'').trim();}return {sala:strip(tr('cat.filter.sala')),comedor:strip(tr('cat.filter.comedor')),dormitorio:strip(tr('cat.filter.dormitorio')),terraza:strip(tr('cat.filter.terraza'))};}
+function getCatLabels(){function strip(s){return s.replace(/^[^a-zA-ZÀ-ž]+/,'').trim();}return {sala:strip(tr('cat.filter.sala')),comedor:strip(tr('cat.filter.comedor')),dormitorio:strip(tr('cat.filter.dormitorio'))};}
 const CAT_GRADIENTS = {
   sala:'linear-gradient(145deg,#f5f0e8,#ede5d5)',
   comedor:'linear-gradient(145deg,#f5f0e8,#ede5d5)',
