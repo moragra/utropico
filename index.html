@@ -619,11 +619,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
     </span>
   </a>
   <div class="nav-links" id="navLinks">
-    <a href="#main" onclick="navGo('proyectos')" data-i18n="tab.0">Proyectos</a>
-    <a href="#main" onclick="navGo('catalogo')" data-i18n="tab.1">Catálogo</a>
-    <a href="#main" onclick="navGo('configurador')" data-i18n="tab.2" style="display:none">Diseñá tu pieza</a>
-    <a href="#main" onclick="navGo('asesoria')" data-i18n="tab.3">Asesoría</a>
-    <a href="#main" onclick="navGo('catalogo')" class="nav-pill" data-i18n="nav.cta">Cotizar →</a>
+    <a href="#" onclick="navGo('proyectos',event)" data-i18n="tab.0">Proyectos</a>
+    <a href="#" onclick="navGo('catalogo',event)" data-i18n="tab.1">Catálogo</a>
+    <a href="#" onclick="navGo('configurador',event)" data-i18n="tab.2" style="display:none">Diseñá tu pieza</a>
+    <a href="#" onclick="navGo('asesoria',event)" data-i18n="tab.3">Asesoría</a>
+    <a href="#" onclick="navGo('catalogo',event)" class="nav-pill" data-i18n="nav.cta">Cotizar →</a>
     <button class="lang-btn" onclick="toggleLang()" id="langBtn">EN</button>
   </div>
   <div class="nav-mobile-controls">
@@ -635,11 +635,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 </nav>
 <div id="mobileMenu">
   <button class="mobile-close" onclick="toggleNav()">✕</button>
-  <a href="#main" onclick="navGo('proyectos')" data-i18n="tab.0">Proyectos</a>
-  <a href="#main" onclick="navGo('catalogo')" data-i18n="tab.1">Catálogo</a>
-  <a href="#main" onclick="navGo('configurador')" data-i18n="tab.2" style="display:none">Diseñá tu pieza</a>
-  <a href="#main" onclick="navGo('asesoria')" data-i18n="tab.3">Asesoría</a>
-  <a href="#main" onclick="navGo('configurador')" class="mobile-cta" data-i18n="nav.cta">Cotizar →</a>
+  <a href="#" onclick="navGo('proyectos',event)" data-i18n="tab.0">Proyectos</a>
+  <a href="#" onclick="navGo('catalogo',event)" data-i18n="tab.1">Catálogo</a>
+  <a href="#" onclick="navGo('configurador',event)" data-i18n="tab.2" style="display:none">Diseñá tu pieza</a>
+  <a href="#" onclick="navGo('asesoria',event)" data-i18n="tab.3">Asesoría</a>
+  <a href="#" onclick="navGo('configurador',event)" class="mobile-cta" data-i18n="nav.cta">Cotizar →</a>
 </div>
 <div id="mobileOverlay" onclick="toggleNav()"></div>
 
@@ -1089,12 +1089,14 @@ function showTab(id){
   document.getElementById('tab-'+id)?.classList.add('active');
   document.getElementById('main')?.scrollIntoView({behavior:'smooth'});
   setTimeout(showMobileBarIfNeeded, 100);
-  if(typeof setURL==='function') setURL(id);
+  // Set URL after scroll to prevent #main from overwriting it
+  setTimeout(()=>{ if(typeof setURL==='function') setURL(id); }, 10);
   if(id==='catalogo'){
+    // Force render with slight delay to ensure tab is visible
     setTimeout(()=>{
       const btn = document.querySelector('#catFilters .cat-filter-btn.active');
       renderCatalog(btn?.dataset?.cat || 'all');
-    }, 50);
+    }, 80);
   }
 }
 
@@ -2710,9 +2712,10 @@ function projModalWA(){
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-function navGo(tab){
+function navGo(tab,e){
+  if(e) e.preventDefault();
   showTab(tab);
-  if(document.getElementById('mobileMenu').classList.contains('open')) toggleNav();
+  if(document.getElementById('mobileMenu')?.classList.contains('open')) toggleNav();
 }
 function toggleNav(){
   const menu = document.getElementById('mobileMenu');
