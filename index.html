@@ -700,9 +700,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         <p style="font-size:.88rem;color:var(--mid);margin-top:.75rem;font-weight:300;max-width:540px" data-i18n="cat.sub">Cada pieza es fabricada a mano. Las dimensiones indicadas son estándar — todas se adaptan a medida.</p>
       </div>
       <div class="cat-filters" id="catFilters">
-        <button class="cat-filter-btn active" onclick="filterCat(this,'all')" data-cat="all" data-i18n="cat.all">Todas las piezas</button>
+        <button class="cat-filter-btn active" onclick="filterCat(this,'mesas_comedor')" data-cat="mesas_comedor" data-i18n="cat.filter.mesas_comedor">Mesas de comedor</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'sillas')" data-cat="sillas" data-i18n="cat.filter.sillas">Sillas</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'stools')" data-cat="stools" data-i18n="cat.filter.stools">Stools</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'cafe')" data-cat="cafe" data-i18n="cat.filter.cafe">Mesas de café</button>
-        <button class="cat-filter-btn" onclick="filterCat(this,'comedor')" data-cat="comedor" data-i18n="cat.filter.comedor">Comedor</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'consola')" data-cat="consola" data-i18n="cat.filter.consola">Consolas</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'dormitorio')" data-cat="dormitorio" data-i18n="cat.filter.dormitorio">Dormitorio</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'noche')" data-cat="noche" data-i18n="cat.filter.noche">Mesas de noche</button>
@@ -1095,7 +1096,7 @@ function showTab(id){
     // Force render with slight delay to ensure tab is visible
     setTimeout(()=>{
       const btn = document.querySelector('#catFilters .cat-filter-btn.active');
-      renderCatalog(btn?.dataset?.cat || 'all');
+      renderCatalog(btn?.dataset?.cat || 'mesas_comedor');
     }, 80);
   }
 }
@@ -1110,46 +1111,46 @@ const CATALOG = [
   {id:'p_oisa',cat:'cafe',name:'Mesa de café Oisa',nameEN:'Oisa Coffee Table',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/oisa_coffee_table_1.png']},
   {id:'p_tahi',cat:'cafe',name:'Mesa de café Tahi',nameEN:'Tahi Coffee Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/tahi_coffee_table_1.png']},
   {id:'p_vela',cat:'cafe',name:'Mesa de café Vela',nameEN:'Vela Coffee Table',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/vela_coffee_table_1.png']},
-  {id:'p_coa',cat:'comedor',name:'Mesa Coa',nameEN:'Coa Table',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/coa_table_1.png']},
-  {id:'p_coco',cat:'comedor',name:'Mesa Coco',nameEN:'Coco Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/coco_table_1.png']},
-  {id:'p_duna',cat:'comedor',name:'Mesa Duna',nameEN:'Duna Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N3',acabadosEN:'Matte · Tone N3',badge:null,imgs:['fotos/duna_table_1.png']},
-  {id:'p_grace',cat:'comedor',name:'Mesa Grace',nameEN:'Grace Table',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/grace_table_1.png']},
-  {id:'p_mar',cat:'comedor',name:'Mesa Mar',nameEN:'Mar Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/mar_table_1.png']},
-  {id:'p_mara',cat:'comedor',name:'Mesa Mara',nameEN:'Mara Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/mara_table_1.png']},
-  {id:'p_nalu',cat:'comedor',name:'Mesa Nalu',nameEN:'Nalu Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/nalu_table_1.png']},
-  {id:'p_oaxaca',cat:'comedor',name:'Mesa Oaxaca',nameEN:'Oaxaca Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/oaxaca_table_1.png']},
-  {id:'p_palma',cat:'comedor',name:'Mesa Palma',nameEN:'Palma Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N4',acabadosEN:'Matte · Tone N4',badge:null,imgs:['fotos/palma_table_1.png']},
-  {id:'p_riva',cat:'comedor',name:'Mesa Riva',nameEN:'Riva Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N8',acabadosEN:'Satin · Tone N8',badge:null,imgs:['fotos/riva_table_1.png']},
-  {id:'p_agave',cat:'comedor',name:'Silla Agave',nameEN:'Agave Chair',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate, natural',acabadosEN:'Matte, natural',badge:null,imgs:['fotos/agave_chair_1.png','fotos/agave_chair_2.png','fotos/agave_chair_3.png']},
-  {id:'p_artesana',cat:'comedor',name:'Silla Artesana',nameEN:'Artesana Chair',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/artesana_chair_1.png']},
-  {id:'p_bistro',cat:'comedor',name:'Silla Bistro',nameEN:'Bistro Chair',material:'Teca · sentadero textil',materialEN:'Teak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/bistro_chair_1.png','fotos/bistro_chair_2.png']},
-  {id:'p_bliss',cat:'comedor',name:'Silla Bliss',nameEN:'Bliss Chair',material:'Roble · sentadero textil',materialEN:'Oak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/bliss_chair_1.png','fotos/bliss_chair_2.png']},
-  {id:'p_daas',cat:'comedor',name:'Silla Daas',nameEN:'Daas Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/daas_chair_1.png','fotos/daas_chair_2.png','fotos/daas_chair_3.png']},
-  {id:'p_eras',cat:'comedor',name:'Silla Eras',nameEN:'Eras Chair',material:'Roble · rattan',materialEN:'Oak · rattan',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/eras_chair_1.png']},
-  {id:'p_leah',cat:'comedor',name:'Silla Leah',nameEN:'Leah Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/leah_chair_1.png','fotos/leah_chair_2.png']},
-  {id:'p_mid',cat:'comedor',name:'Silla Mid',nameEN:'Mid Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/mid_chair_1.png','fotos/mid_chair_2.png','fotos/mid_chair_3.png']},
-  {id:'p_neva',cat:'comedor',name:'Silla Neva',nameEN:'Neva Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N6',acabadosEN:'Matte · Tone N6',badge:null,imgs:['fotos/neva_chair_1.png']},
-  {id:'p_nosara',cat:'comedor',name:'Silla Nosara',nameEN:'Nosara Chair',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/nosara_chair_1.png','fotos/nosara_chair_2.png']},
-  {id:'p_oasis',cat:'comedor',name:'Silla Oasis',nameEN:'Oasis Chair',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/oasis_chair_1.png']},
-  {id:'p_oia',cat:'comedor',name:'Silla Oia',nameEN:'Oia Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/oia_chair_1.png','fotos/oia_chair_2.png']},
-  {id:'p_oleo',cat:'comedor',name:'Silla Oleo',nameEN:'Oleo Chair',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/oleo_chair_1.png','fotos/oleo_chair_2.png']},
-  {id:'p_oxaca',cat:'comedor',name:'Silla Oxaca',nameEN:'Oxaca Chair',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/oxaca_chair_1.png']},
-  {id:'p_provenza',cat:'comedor',name:'Silla Provenza',nameEN:'Provenza Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/provenza_chair_1.png','fotos/provenza_chair_2.png','fotos/provenza_chair_3.png']},
-  {id:'p_tulum',cat:'comedor',name:'Silla Tulum',nameEN:'Tulum Chair',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/tulum_chair_1.png','fotos/tulum_chair_2.png']},
-  {id:'p_stool_bistro',cat:'comedor',name:'Stool Bistro',nameEN:'Bistro Stool',material:'Teca · sentadero textil',materialEN:'Teak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/bistro_stool_1.png']},
-  {id:'p_stool_caribe',cat:'comedor',name:'Stool Caribe',nameEN:'Caribe Stool',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/caribe_stool_1.png']},
-  {id:'p_stool_ceiba',cat:'comedor',name:'Stool Ceiba',nameEN:'Ceiba Stool',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/ceiba_stool_1.png']},
-  {id:'p_stool_ivy',cat:'comedor',name:'Stool Ivy',nameEN:'Ivy Stool',material:'Roble · sentadero textil',materialEN:'Oak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/ivy_stool_1.png']},
-  {id:'p_stool_kuna',cat:'comedor',name:'Stool Kuna',nameEN:'Kuna Stool',material:'Roble · sentadero textil',materialEN:'Oak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/kuna_stool_1.png']},
-  {id:'p_stool_lani',cat:'comedor',name:'Stool Lani',nameEN:'Lani Stool',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/lani_stool_1.png']},
-  {id:'p_stool_mangle',cat:'comedor',name:'Stool Mangle',nameEN:'Mangle Stool',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N7',acabadosEN:'Matte · Tone N7',badge:null,imgs:['fotos/mangle_stool_1.png']},
-  {id:'p_stool_maui',cat:'comedor',name:'Stool Maui',nameEN:'Maui Stool',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/maui_stool_1.png']},
-  {id:'p_stool_olas',cat:'comedor',name:'Stool Olas',nameEN:'Olas Stool',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/olas_stool_1.png']},
-  {id:'p_stool_oleo',cat:'comedor',name:'Stool Oleo',nameEN:'Oleo Stool',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N8',acabadosEN:'Satin · Tone N8',badge:null,imgs:['fotos/oleo_stool_1.png']},
-  {id:'p_stool_pavones',cat:'comedor',name:'Stool Pavones',nameEN:'Pavones Stool',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/pavones_stool_1.png']},
-  {id:'p_stool_reef',cat:'comedor',name:'Stool Reef',nameEN:'Reef Stool',material:'Cenízaro · sentadero textil',materialEN:'Cenizaro · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/reef_stool_1.png']},
-  {id:'p_stool_zulu',cat:'comedor',name:'Stool Zulu',nameEN:'Zulu Stool',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/zulu_stool_1.png']},
-  {id:'p_stool_zuma',cat:'comedor',name:'Stool Zuma',nameEN:'Zuma Stool',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/zuma_stool_1.png']},
+  {id:'p_coa',cat:'mesas_comedor',name:'Mesa Coa',nameEN:'Coa Table',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/coa_table_1.png']},
+  {id:'p_coco',cat:'mesas_comedor',name:'Mesa Coco',nameEN:'Coco Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/coco_table_1.png']},
+  {id:'p_duna',cat:'mesas_comedor',name:'Mesa Duna',nameEN:'Duna Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N3',acabadosEN:'Matte · Tone N3',badge:null,imgs:['fotos/duna_table_1.png']},
+  {id:'p_grace',cat:'mesas_comedor',name:'Mesa Grace',nameEN:'Grace Table',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/grace_table_1.png']},
+  {id:'p_mar',cat:'mesas_comedor',name:'Mesa Mar',nameEN:'Mar Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/mar_table_1.png']},
+  {id:'p_mara',cat:'mesas_comedor',name:'Mesa Mara',nameEN:'Mara Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/mara_table_1.png']},
+  {id:'p_nalu',cat:'mesas_comedor',name:'Mesa Nalu',nameEN:'Nalu Table',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/nalu_table_1.png']},
+  {id:'p_oaxaca',cat:'mesas_comedor',name:'Mesa Oaxaca',nameEN:'Oaxaca Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/oaxaca_table_1.png']},
+  {id:'p_palma',cat:'mesas_comedor',name:'Mesa Palma',nameEN:'Palma Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N4',acabadosEN:'Matte · Tone N4',badge:null,imgs:['fotos/palma_table_1.png']},
+  {id:'p_riva',cat:'mesas_comedor',name:'Mesa Riva',nameEN:'Riva Table',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N8',acabadosEN:'Satin · Tone N8',badge:null,imgs:['fotos/riva_table_1.png']},
+  {id:'p_agave',cat:'sillas',name:'Silla Agave',nameEN:'Agave Chair',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate, natural',acabadosEN:'Matte, natural',badge:null,imgs:['fotos/agave_chair_1.png','fotos/agave_chair_2.png','fotos/agave_chair_3.png']},
+  {id:'p_artesana',cat:'sillas',name:'Silla Artesana',nameEN:'Artesana Chair',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/artesana_chair_1.png']},
+  {id:'p_bistro',cat:'sillas',name:'Silla Bistro',nameEN:'Bistro Chair',material:'Teca · sentadero textil',materialEN:'Teak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/bistro_chair_1.png','fotos/bistro_chair_2.png']},
+  {id:'p_bliss',cat:'sillas',name:'Silla Bliss',nameEN:'Bliss Chair',material:'Roble · sentadero textil',materialEN:'Oak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/bliss_chair_1.png','fotos/bliss_chair_2.png']},
+  {id:'p_daas',cat:'sillas',name:'Silla Daas',nameEN:'Daas Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/daas_chair_1.png','fotos/daas_chair_2.png','fotos/daas_chair_3.png']},
+  {id:'p_eras',cat:'sillas',name:'Silla Eras',nameEN:'Eras Chair',material:'Roble · rattan',materialEN:'Oak · rattan',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/eras_chair_1.png']},
+  {id:'p_leah',cat:'sillas',name:'Silla Leah',nameEN:'Leah Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/leah_chair_1.png','fotos/leah_chair_2.png']},
+  {id:'p_mid',cat:'sillas',name:'Silla Mid',nameEN:'Mid Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/mid_chair_1.png','fotos/mid_chair_2.png','fotos/mid_chair_3.png']},
+  {id:'p_neva',cat:'sillas',name:'Silla Neva',nameEN:'Neva Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N6',acabadosEN:'Matte · Tone N6',badge:null,imgs:['fotos/neva_chair_1.png']},
+  {id:'p_nosara',cat:'sillas',name:'Silla Nosara',nameEN:'Nosara Chair',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/nosara_chair_1.png','fotos/nosara_chair_2.png']},
+  {id:'p_oasis',cat:'sillas',name:'Silla Oasis',nameEN:'Oasis Chair',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/oasis_chair_1.png']},
+  {id:'p_oia',cat:'sillas',name:'Silla Oia',nameEN:'Oia Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/oia_chair_1.png','fotos/oia_chair_2.png']},
+  {id:'p_oleo',cat:'sillas',name:'Silla Oleo',nameEN:'Oleo Chair',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/oleo_chair_1.png','fotos/oleo_chair_2.png']},
+  {id:'p_oxaca',cat:'sillas',name:'Silla Oxaca',nameEN:'Oxaca Chair',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/oxaca_chair_1.png']},
+  {id:'p_provenza',cat:'sillas',name:'Silla Provenza',nameEN:'Provenza Chair',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/provenza_chair_1.png','fotos/provenza_chair_2.png','fotos/provenza_chair_3.png']},
+  {id:'p_tulum',cat:'sillas',name:'Silla Tulum',nameEN:'Tulum Chair',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/tulum_chair_1.png','fotos/tulum_chair_2.png']},
+  {id:'p_stool_bistro',cat:'stools',name:'Stool Bistro',nameEN:'Bistro Stool',material:'Teca · sentadero textil',materialEN:'Teak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/bistro_stool_1.png']},
+  {id:'p_stool_caribe',cat:'stools',name:'Stool Caribe',nameEN:'Caribe Stool',material:'Teca · sentadero tejido',materialEN:'Teak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/caribe_stool_1.png']},
+  {id:'p_stool_ceiba',cat:'stools',name:'Stool Ceiba',nameEN:'Ceiba Stool',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/ceiba_stool_1.png']},
+  {id:'p_stool_ivy',cat:'stools',name:'Stool Ivy',nameEN:'Ivy Stool',material:'Roble · sentadero textil',materialEN:'Oak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/ivy_stool_1.png']},
+  {id:'p_stool_kuna',cat:'stools',name:'Stool Kuna',nameEN:'Kuna Stool',material:'Roble · sentadero textil',materialEN:'Oak · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/kuna_stool_1.png']},
+  {id:'p_stool_lani',cat:'stools',name:'Stool Lani',nameEN:'Lani Stool',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/lani_stool_1.png']},
+  {id:'p_stool_mangle',cat:'stools',name:'Stool Mangle',nameEN:'Mangle Stool',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N7',acabadosEN:'Matte · Tone N7',badge:null,imgs:['fotos/mangle_stool_1.png']},
+  {id:'p_stool_maui',cat:'stools',name:'Stool Maui',nameEN:'Maui Stool',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/maui_stool_1.png']},
+  {id:'p_stool_olas',cat:'stools',name:'Stool Olas',nameEN:'Olas Stool',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N5',acabadosEN:'Matte · Tone N5',badge:null,imgs:['fotos/olas_stool_1.png']},
+  {id:'p_stool_oleo',cat:'stools',name:'Stool Oleo',nameEN:'Oleo Stool',material:'Cenízaro',materialEN:'Cenizaro',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N8',acabadosEN:'Satin · Tone N8',badge:null,imgs:['fotos/oleo_stool_1.png']},
+  {id:'p_stool_pavones',cat:'stools',name:'Stool Pavones',nameEN:'Pavones Stool',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/pavones_stool_1.png']},
+  {id:'p_stool_reef',cat:'stools',name:'Stool Reef',nameEN:'Reef Stool',material:'Cenízaro · sentadero textil',materialEN:'Cenizaro · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/reef_stool_1.png']},
+  {id:'p_stool_zulu',cat:'stools',name:'Stool Zulu',nameEN:'Zulu Stool',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/zulu_stool_1.png']},
+  {id:'p_stool_zuma',cat:'stools',name:'Stool Zuma',nameEN:'Zuma Stool',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/zuma_stool_1.png']},
   {id:'p_kira',cat:'consola',name:'Console Kira',nameEN:'Kira Console',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N5',acabadosEN:'Satin · Tone N5',badge:null,imgs:['fotos/kira_console_1.png']},
   {id:'p_luma',cat:'consola',name:'Console Luma',nameEN:'Luma Console',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N5',acabadosEN:'Satin · Tone N5',badge:null,imgs:['fotos/luma_console_1.png']},
   {id:'p_nara',cat:'consola',name:'Console Nara',nameEN:'Nara Console',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N5',acabadosEN:'Satin · Tone N5',badge:null,imgs:['fotos/nara_console_1.png']},
@@ -1196,7 +1197,7 @@ const CATALOG = [
   {id:'p_zolu',cat:'sala',name:'Sofá Zolu',nameEN:'Zolu Sofa',material:'Textil de alto tránsito',materialEN:'High-traffic textile',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/zolu_sofa_1.png']},
 ];
 
-function getCatLabels(){function strip(s){return s.replace(/^[^a-zA-ZÀ-ž]+/,'').trim();}return {cafe:strip(tr('cat.filter.cafe')),comedor:strip(tr('cat.filter.comedor')),consola:strip(tr('cat.filter.consola')),dormitorio:strip(tr('cat.filter.dormitorio')),noche:strip(tr('cat.filter.noche')),outdoor:strip(tr('cat.filter.outdoor')),sala:strip(tr('cat.filter.sala'))};}
+function getCatLabels(){function strip(s){return s.replace(/^[^a-zA-ZÀ-ž]+/,'').trim();}return {mesas_comedor:strip(tr('cat.filter.mesas_comedor')),sillas:strip(tr('cat.filter.sillas')),stools:strip(tr('cat.filter.stools')),cafe:strip(tr('cat.filter.cafe')),consola:strip(tr('cat.filter.consola')),dormitorio:strip(tr('cat.filter.dormitorio')),noche:strip(tr('cat.filter.noche')),outdoor:strip(tr('cat.filter.outdoor')),sala:strip(tr('cat.filter.sala'))};}
 const CAT_GRADIENTS = {
   sala:'linear-gradient(145deg,#f5f0e8,#ede5d5)',
   comedor:'linear-gradient(145deg,#f5f0e8,#ede5d5)',
@@ -2361,6 +2362,9 @@ const T = {
     "inspo.cat.sofa": "Sof\u00e1", "inspo.cat.exterior": "Exterior", "inspo.cat.dormitorio": "Dormitorio",
     "cat.filter.sala": "Sala", "cat.filter.comedor": "Comedor",
     "cat.filter.dormitorio": "Dormitorio", "cat.filter.terraza": "Terraza", "cat.filter.accesorios": "✦ Accesorios", "cat.filter.consola": "Consolas",
+    "cat.filter.mesas_comedor": "Mesas de comedor",
+    "cat.filter.sillas": "Sillas",
+    "cat.filter.stools": "Stools",
     "cat.filter.cafe": "Mesas de caf\u00e9",
     "cat.filter.outdoor": "Outdoor",
     "cat.filter.noche": "Mesas de noche",
@@ -2439,6 +2443,9 @@ const T = {
     "inspo.cat.sofa": "Sofa", "inspo.cat.exterior": "Outdoor", "inspo.cat.dormitorio": "Bedroom",
     "cat.filter.sala": "Living", "cat.filter.comedor": "Dining",
     "cat.filter.dormitorio": "Bedroom", "cat.filter.terraza": "Outdoor", "cat.filter.accesorios": "Accessories", "cat.filter.consola": "Consoles",
+    "cat.filter.mesas_comedor": "Dining Tables",
+    "cat.filter.sillas": "Chairs",
+    "cat.filter.stools": "Stools",
     "cat.filter.cafe": "Coffee Tables",
     "cat.filter.outdoor": "Outdoor",
     "cat.filter.noche": "Nightstands",
@@ -2852,7 +2859,7 @@ function initApp(){
   showMobileBarIfNeeded();
   window.addEventListener('scroll', showMobileBarIfNeeded, {passive:true});
   renderProjEditorial('all');
-  renderCatalog('all');
+  renderCatalog('mesas_comedor');
   updateSubtipo(state.tipo);
   updatePreview();
 }
