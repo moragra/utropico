@@ -1089,6 +1089,7 @@ function showTab(id){
   document.getElementById('tab-'+id)?.classList.add('active');
   document.getElementById('main')?.scrollIntoView({behavior:'smooth'});
   setTimeout(showMobileBarIfNeeded, 100);
+  if(typeof setURL==='function') setURL(id);
 }
 
 // ── CATALOG DATA ──
@@ -2845,6 +2846,46 @@ updatePreview();
 
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1});
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+// ── URL ROUTING ──
+function parseAndApplyURL(){
+  const hash = window.location.hash.replace('#','').toLowerCase();
+  if(!hash) return;
+  const parts = hash.split('/');
+  const section = parts[0];
+  const sub = parts[1] || null;
+  const tabMap = {proyectos:'proyectos',catalogo:'catalogo',configurador:'configurador',asesoria:'asesoria',catalog:'catalogo',advisory:'asesoria',disena:'configurador'};
+  if(section==='producto' && sub){
+    showTab('catalogo');
+    setTimeout(()=>openModal(sub), 300);
+  } else if(tabMap[section]){
+    showTab(tabMap[section]);
+    if(tabMap[section]==='catalogo' && sub){
+      setTimeout(()=>{
+        const btn = document.querySelector(`.cat-filter-btn[onclick*="'${sub}'"]`);
+        if(btn) filterCat(btn, sub);
+      }, 300);
+    }
+  }
+}
+let _settingURL = false;
+function setURL(hash){
+  _settingURL = true;
+  history.replaceState(null,'','#'+hash);
+  setTimeout(()=>_settingURL=false, 50);
+}
+// Hook tab changes to update URL
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=> setURL(btn.getAttribute('onclick')?.match(/'([^']+)'/)?.[1]||''));
+});
+// Hook catalog filters
+document.getElementById('catFilters')?.addEventListener('click', e=>{
+  const btn = e.target.closest('.cat-filter-btn');
+  if(btn){ const m = btn.getAttribute('onclick')?.match(/'([^']+)'/g); if(m&&m[1]) setURL('catalogo/'+m[1].replace(/'/g,'')); }
+});
+// Apply URL on initial load only if hash exists
+window.addEventListener('load', ()=>{ if(window.location.hash) setTimeout(parseAndApplyURL, 400); });
+window.addEventListener('hashchange', ()=>{ if(!_settingURL) parseAndApplyURL(); });
 </script>
 
 <!-- MOBILE PREVIEW BAR + DRAWER -->
