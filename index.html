@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>utropico — Muebles artesanales de Costa Rica</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
@@ -607,9 +608,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
   .proj-modal-name{font-size:1.5rem}
 }
 .modal-cat{font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rattan);font-family:'Outfit',sans-serif;font-weight:400}
+
+@media(max-width:768px){
+  #tab-nosotros [style*="grid-template-columns:1fr 1fr 1fr 1fr"]{grid-template-columns:1fr 1fr!important}
+  #tab-nosotros [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}
+  #tab-nosotros [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  #tab-nosotros .sec-label{font-size:.55rem}
+}
+
+@media(max-width:768px){
+  #temporada>div{grid-template-columns:1fr!important}
+  #temporada>div>div:last-child{min-height:260px!important}
+}
 </style>
 </head>
 <body>
+
+<!-- INTRO CURTAIN -->
+<div id="introCurtain" style="position:fixed;inset:0;z-index:9999;background:#1a1712;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;pointer-events:none;transition:transform .9s cubic-bezier(.76,0,.24,1)">
+  <span style="font-family:'Playfair Display',serif;font-size:6rem;font-style:italic;font-weight:400;color:#f0ebe0;line-height:1">u</span>
+  <p style="font-family:'Outfit',sans-serif;font-size:.65rem;letter-spacing:.35em;color:#8a7a60;text-transform:uppercase;font-weight:300">utropico studio</p>
+</div>
+<script>
+(function(){
+  var el = document.getElementById('introCurtain');
+  if(!el) return;
+  setTimeout(function(){
+    el.style.transform = 'translateY(-100%)';
+    setTimeout(function(){ el.style.display='none'; }, 950);
+  }, 1600);
+})();
+</script>
+
 
 <nav id="siteNav">
   <a href="#" class="logo-mark">
@@ -624,6 +654,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
     <a href="#" onclick="navGo('catalogo',event)" data-i18n="tab.1">Catálogo</a>
     <a href="#" onclick="navGo('configurador',event)" data-i18n="tab.2" style="display:none">Diseñá tu pieza</a>
     <a href="#" onclick="navGo('asesoria',event)" data-i18n="tab.3">Asesoría</a>
+    <a href="#" onclick="navGo('nosotros',event)" data-i18n="tab.4">Nosotros</a>
     <a href="#" onclick="navGo('catalogo',event)" class="nav-pill" data-i18n="nav.cta">Cotizar →</a>
     <button class="lang-btn" onclick="toggleLang()" id="langBtn">EN</button>
   </div>
@@ -640,6 +671,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
   <a href="#" onclick="navGo('catalogo',event)" data-i18n="tab.1">Catálogo</a>
   <a href="#" onclick="navGo('configurador',event)" data-i18n="tab.2" style="display:none">Diseñá tu pieza</a>
   <a href="#" onclick="navGo('asesoria',event)" data-i18n="tab.3">Asesoría</a>
+  <a href="#" onclick="navGo('nosotros',event)" data-i18n="tab.4">Nosotros</a>
   <a href="#" onclick="navGo('configurador',event)" class="mobile-cta" data-i18n="nav.cta">Cotizar →</a>
 </div>
 <div id="mobileOverlay" onclick="toggleNav()"></div>
@@ -664,13 +696,63 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 
 </div>
 
-<section id="main" style="padding:5rem 4rem">
+
+<!-- TEMPORADA SECTION -->
+<section id="temporada" style="padding:0">
+  <div style="display:grid;grid-template-columns:1fr 1.4fr;min-height:480px">
+    <!-- Left: text + product list -->
+    <div style="padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--border)">
+      <div>
+        <p style="font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rattan);margin:0 0 .85rem;font-family:'Outfit',sans-serif">✦ Temporada</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;font-style:italic;color:var(--dark);margin:0 0 1.25rem;line-height:1.2">Piezas de edición especial.</h2>
+        <p style="font-size:.88rem;color:var(--mid);line-height:1.75;margin:0;font-family:'Outfit',sans-serif">Una selección limitada de piezas con materiales únicos, producidas en nuestro taller en Costa Rica. Disponibles por tiempo limitado.</p>
+      </div>
+      <div style="margin-top:2.5rem">
+        <div style="display:flex;flex-direction:column;margin-bottom:1.75rem" id="temporadaList">
+          <div onclick="openModal('p_riva')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
+            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Mesa Riva</span>
+            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Cenízaro · Satinado N8</span>
+          </div>
+          <div onclick="openModal('p_sabi')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
+            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Console Sabi</span>
+            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Teca · Rattan</span>
+          </div>
+          <div onclick="openModal('p_amara')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
+            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Sofá Amara</span>
+            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Textil de alto tránsito</span>
+          </div>
+          <div onclick="openModal('p_bed_ellie')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
+            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Cama Ellie</span>
+            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Roble · Rattan</span>
+          </div>
+          <div onclick="openModal('p_noa')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
+            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Outdoor Noa</span>
+            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Teca · Rattan</span>
+          </div>
+        </div>
+        <button onclick="showTab('catalogo')" style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.6rem 1.4rem;background:transparent;border:1px solid var(--border);color:var(--mid);border-radius:20px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--moss)';this.style.color='var(--moss)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--mid)'">Ver catálogo completo →</button>
+      </div>
+    </div>
+    <!-- Right: main photo -->
+    <div style="position:relative;background:#e8e0d0;overflow:hidden;min-height:400px">
+      <img src="fotos/casa_dos_playas_butacas.jpg" alt="Colección temporada" style="width:100%;height:100%;object-fit:cover;object-position:center" onerror="this.style.display='none'">
+      <div style="position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(26,23,18,.6);backdrop-filter:blur(4px);padding:.6rem 1rem;border-radius:2px">
+        <p style="font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 .1rem;font-family:'Outfit',sans-serif">Disponible hasta agotar existencias</p>
+        <p style="font-size:.82rem;color:#f0ebe0;margin:0;font-family:'Playfair Display',serif;font-style:italic">Colección · Temporada 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="main" style="padding:5rem 4rem" data-section="main">
   <div class="fade">
     <div class="page-tabs">
       <button class="tab-btn active" onclick="showTab('proyectos')" data-i18n="tab.0">Proyectos</button>
       <button class="tab-btn" onclick="showTab('catalogo')" data-i18n="tab.1">Catálogo</button>
       <button class="tab-btn" onclick="showTab('configurador')" data-i18n="tab.2" style="display:none">Diseñá tu pieza</button>
       <button class="tab-btn" onclick="showTab('asesoria')" data-i18n="tab.3">Asesoría personalizada</button>
+          <button class="tab-btn" onclick="showTab('nosotros')" data-i18n="tab.4">Nosotros</button>
+          
     </div>
 
     <!-- PROYECTOS -->
@@ -899,15 +981,100 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
           </div>
         </div>
         <div class="ases-cta-box">
-          <h3 data-i18n="ases.quote">"Tengo una idea pero no sé exactamente qué quiero."</h3>
-          <p data-i18n="ases.body">No hay problema. Nuestro proceso de asesoría empieza con una conversación sin compromiso. Contanos qué espacio tenés, qué estilo te gusta, y nosotros te proponemos opciones.</p>
-          
+          <h3 data-i18n="ases.quote">"¿Tenés un proyecto en mente?"</h3>
+          <p data-i18n="ases.body" style="margin-bottom:1.5rem">Nuestro proceso de asesoría empieza con una conversación sin compromiso. Contanos qué espacio tenés, qué estilo te gusta, y nosotros te proponemos opciones.</p>
+
+          <!-- CONTACT FORM -->
+          <div id="contactForm" style="display:flex;flex-direction:column;gap:.85rem;margin-bottom:1.25rem">
+            <input id="cfName" type="text" placeholder="Tu nombre" data-i18n-ph="form.name"
+              style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:3px;font-family:'Outfit',sans-serif;font-size:.88rem;background:#faf7f1;color:var(--dark);outline:none">
+            <input id="cfEmail" type="email" placeholder="Tu correo" data-i18n-ph="form.email"
+              style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:3px;font-family:'Outfit',sans-serif;font-size:.88rem;background:#faf7f1;color:var(--dark);outline:none">
+            <textarea id="cfMsg" rows="4" placeholder="Contanos sobre tu espacio o el mueble que tenés en mente..." data-i18n-ph="form.msg"
+              style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:3px;font-family:'Outfit',sans-serif;font-size:.88rem;background:#faf7f1;color:var(--dark);outline:none;resize:vertical"></textarea>
+            <button onclick="submitContactForm()" style="width:100%;padding:.85rem;background:var(--moss);color:#fff;border:none;border-radius:3px;font-family:'Outfit',sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .2s" data-i18n="form.send">Enviar mensaje</button>
+            <p id="cfStatus" style="font-size:.78rem;color:var(--moss);text-align:center;display:none"></p>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem">
+            <hr style="flex:1;border:none;border-top:1px solid var(--border)">
+            <span style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)" data-i18n="form.or">o también por</span>
+            <hr style="flex:1;border:none;border-top:1px solid var(--border)">
+          </div>
           <button class="btn-rattan" onclick="startAsesoriaWA()" data-i18n="ases.cta">Iniciar asesoría por WhatsApp →</button>
         </div>
+
+
       </div>
     </div>
   </div>
+
+  <!-- TAB: NOSOTROS -->
+  <div class="tab-panel" id="tab-nosotros">
+    <div style="max-width:1200px;margin:0 auto;padding:4rem 2rem 6rem">
+
+      <div style="margin-bottom:6rem">
+        <p class="sec-label">Nosotros</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;color:var(--dark);margin-bottom:2rem;line-height:1.1">Quiénes somos.</h2>
+        <hr style="border:none;border-top:1px solid var(--border);margin-bottom:3rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+          <p style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:600;color:var(--dark);line-height:1.5;font-style:italic">"Creemos que los muebles que usás cada día merecen ser bellos, honestos y hechos para durar generaciones."</p>
+          <div style="color:var(--mid);line-height:1.8;font-size:.95rem">
+            <p style="margin-bottom:1.2rem">Utropico nació de esa convicción. Somos un estudio de diseño y producción de muebles artesanales con sede en Costa Rica. Cada pieza que hacemos empieza con una conversación y termina en tu espacio.</p>
+            <p style="margin-bottom:1.2rem">No trabajamos con líneas de producción masiva. Seleccionamos los materiales uno por uno, diseñamos a medida y producimos a mano en nuestro propio taller. El resultado son piezas con carácter propio, que envejecen con dignidad.</p>
+            <p>Trabajamos con arquitectos, diseñadores de interiores y clientes directos que entienden que un buen mueble es también una inversión en calidad de vida.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:6rem;background:var(--dark);border-radius:4px;padding:4rem 3rem">
+        <p style="font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.75rem">Filosofía</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:#fff;margin-bottom:3rem;line-height:1.1">Hecho a mano.</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid rgba(255,255,255,.15)">
+          <div style="padding:2rem 2rem 2rem 0;border-right:1px solid rgba(255,255,255,.1)">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.75rem">Materiales nobles</h3>
+            <p style="font-size:.87rem;color:rgba(255,255,255,.55);line-height:1.7">Solo usamos maderas y materiales naturales seleccionados por su calidad, durabilidad y carácter visual. Nada que no pueda envejecer con belleza.</p>
+          </div>
+          <div style="padding:2rem;border-right:1px solid rgba(255,255,255,.1)">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.75rem">Sin atajos</h3>
+            <p style="font-size:.87rem;color:rgba(255,255,255,.55);line-height:1.7">Cada unión, cada acabado y cada detalle se trabaja con el tiempo que merece. La velocidad nunca es el objetivo; la permanencia, sí.</p>
+          </div>
+          <div style="padding:2rem 0 2rem 2rem">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.75rem">Diseño con propósito</h3>
+            <p style="font-size:.87rem;color:rgba(255,255,255,.55);line-height:1.7">Cada línea en un diseño tiene una razón funcional o visual. No diseñamos decoración: diseñamos objetos que mejoran la experiencia de vivir.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:6rem">
+        <p class="sec-label">Proceso</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--dark);margin-bottom:3rem;line-height:1.1">Cómo trabajamos.</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-top:1px solid var(--border);border-left:1px solid var(--border)">
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><p style="font-size:.72rem;letter-spacing:.1em;color:var(--muted);margin-bottom:1rem">01</p><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.75rem">Escuchamos</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">Entendemos tu espacio, tu vida cotidiana y lo que buscás sentir en él. Sin plantillas ni soluciones genéricas.</p></div>
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><p style="font-size:.72rem;letter-spacing:.1em;color:var(--muted);margin-bottom:1rem">02</p><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.75rem">Diseñamos</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">Creamos la pieza desde cero, pensada exactamente para el lugar donde va a vivir. Cada ángulo tiene una razón.</p></div>
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><p style="font-size:.72rem;letter-spacing:.1em;color:var(--muted);margin-bottom:1rem">03</p><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.75rem">Producimos</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">Cada mueble se trabaja a mano en nuestro taller en Costa Rica, con materiales seleccionados uno por uno.</p></div>
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><p style="font-size:.72rem;letter-spacing:.1em;color:var(--muted);margin-bottom:1rem">04</p><h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:.75rem">Entregamos</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">Instalamos en tu espacio y ajustamos hasta que todo esté en su lugar. El proceso no termina hasta que estés conforme.</p></div>
+        </div>
+      </div>
+
+      <div>
+        <p class="sec-label">Materiales</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--dark);margin-bottom:3rem;line-height:1.1">Lo que elegimos.</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border);border-left:1px solid var(--border)">
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:.6rem">Teca</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">Alta durabilidad natural. Resistente a la humedad y al paso del tiempo. Ideal para exteriores e interiores tropicales.</p></div>
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:.6rem">Roble</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">Estructura y elegancia. Grano abierto que acepta cualquier acabado. Una madera que envejece con dignidad.</p></div>
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:.6rem">Cenízaro</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">Madera costarricense de carácter único. Vetas expresivas y tonos cálidos que definen cada pieza.</p></div>
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:.6rem">Rattan</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">Liviano, sostenible y trenzado a mano. Define la estética tropical premium y complementa cualquier madera.</p></div>
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:.6rem">Textiles</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">Seleccionamos textiles de alto tránsito y Sunbrella. Durabilidad sin sacrificar el confort ni la estética.</p></div>
+          <div style="padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:.6rem">Guanacaste</h3><p style="font-size:.85rem;color:var(--mid);line-height:1.7">El árbol nacional. Piezas de gran formato, alma costarricense. Cada tablón cuenta una historia diferente.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </section>
+</div>
 
 <footer>
   <span class="foot-logo">utropico</span>
@@ -1085,16 +1252,15 @@ function updateInspoUI(){
 function showTab(id){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  const tabs=['proyectos','catalogo','configurador','asesoria'];
+  const tabs=['proyectos','catalogo','configurador','asesoria','nosotros'];
   const idx=tabs.indexOf(id);
   document.querySelectorAll('.tab-btn')[idx]?.classList.add('active');
   document.getElementById('tab-'+id)?.classList.add('active');
+
   document.getElementById('main')?.scrollIntoView({behavior:'smooth'});
   setTimeout(showMobileBarIfNeeded, 100);
-  // Set URL after scroll to prevent #main from overwriting it
   setTimeout(()=>{ if(typeof setURL==='function') setURL(id); }, 10);
   if(id==='catalogo'){
-    // Force render with slight delay to ensure tab is visible
     setTimeout(()=>{
       const btn = document.querySelector('#catFilters .cat-filter-btn.active');
       renderCatalog(btn?.dataset?.cat || 'mesas_comedor');
@@ -2182,12 +2348,23 @@ function startAsesoriaWA(){
 // Layout: [big left spanning 2 rows] + [4 small cells]
 const PROJ_SETS = {
   all: [
-    {img:'fotos/casa_pinilla_sofaybutacas.png',      name:'Casa Pinilla',     loc:'Guanacaste',   badge:'Sofá y butacas',     badgeEN:'Sofa & armchairs',          pos:'center center', imgs:['fotos/casa_pinilla_sofaybutacas.png']},
-    {img:'fotos/casa_dos_playas_butacas.jpg',         name:'Casa Dos Playas',  loc:'Pacífico',     badge:'Butacas',            badgeEN:'Armchairs',                 pos:'center center', imgs:['fotos/casa_dos_playas_1.jpg','fotos/casa_dos_playas_2.jpg','fotos/casa_dos_playas_3.jpg','fotos/casa_dos_playas_4.jpg','fotos/casa_dos_playas_5.jpg','fotos/casa_dos_playas_6.jpg','fotos/casa_dos_playas_7.jpg']},
-    {img:'fotos/casa_la_bandida_sofa.jpg',            name:'Casa La Bandida',  loc:'Pacífico',     badge:'Sofá',               badgeEN:'Sofa',                    pos:'center center', imgs:['fotos/casa_la_bandida_sofa.jpg']},
-    {img:'fotos/casa_oasis_mesaysillas.jpg',          name:'Casa Oasis',       loc:'Pacífico',     badge:'Mesa y sillas',      badgeEN:'Table & chairs',           pos:'center center', imgs:['fotos/casa_oasis_mesaysillas.jpg']},
-    {img:'fotos/casa_dominick_sofasymesa.png',        name:'Casa Dominick',    loc:'Pacífico',     badge:'Sofás y mesa',       badgeEN:'Sofas & table',            pos:'center center', imgs:['fotos/casa_dominick_sofasymesa.png']},
-    {img:'fotos/casa_naia_bancabutacaystools.png',    name:'Casa Naia',        loc:'Pacífico',     badge:'Banca, butacas y stools', badgeEN:'Bench, armchairs & stools', pos:'center center', imgs:['fotos/casa_naia_bancabutacaystools.png']},
+    {img:'fotos/casa_dos_playas_butacas.jpg',name:'Casa Dos Playas',loc:'Pacífico',badge:'Butacas',badgeEN:'Armchairs',pos:'center center',imgs:['fotos/casa_dos_playas_butacas.jpg','fotos/casa_dos_playas_1.jpg','fotos/casa_dos_playas_2.jpg','fotos/casa_dos_playas_3.jpg','fotos/casa_dos_playas_4.jpg','fotos/casa_dos_playas_5.jpg','fotos/casa_dos_playas_6.jpg','fotos/casa_dos_playas_7.jpg']},
+    {img:'fotos/casa_dominik_1.jpg',name:'Casa Dominik',loc:'Pacífico',badge:'Proyecto completo',badgeEN:'Full project',pos:'center center',imgs:['fotos/casa_dominik_1.jpg','fotos/casa_dominik_2.jpg','fotos/casa_dominik_3.jpg','fotos/casa_dominik_4.jpg','fotos/casa_dominik_5.jpg','fotos/casa_dominik_6.jpg','fotos/casa_dominik_7.jpg','fotos/casa_dominik_8.jpg','fotos/casa_dominik_9.jpg','fotos/casa_dominik_10.jpg','fotos/casa_dominik_11.jpg','fotos/casa_dominik_12.jpg']},
+    {img:'fotos/casa_become_nosara_sofastoolsbutacas.jpg',name:'Casa Become Nosara',loc:'Nosara, Guanacaste',badge:'Sofá, stools y butacas',badgeEN:'Sofa, stools & armchairs',pos:'center center',imgs:['fotos/casa_become_nosara_sofastoolsbutacas.jpg','fotos/casa_become_nosara_1.jpg','fotos/casa_become_nosara_2.jpg']},
+    {img:'fotos/hotel_belmar_mesasysillas.jpg',name:'Hotel Belmar',loc:'Guanacaste',badge:'Mesas y sillas',badgeEN:'Tables & chairs',pos:'center center',imgs:['fotos/hotel_belmar_mesasysillas.jpg','fotos/hotel_belmar_1.jpg']},
+    {img:'fotos/casa_body_tree_sofamesabutacasbancos.jpg',name:'Casa Body Tree',loc:'Pacífico',badge:'Sofá, mesa, butacas y bancos',badgeEN:'Sofa, table, armchairs & benches',pos:'center center',imgs:['fotos/casa_body_tree_sofamesabutacasbancos.jpg','fotos/casa_body_tree_1.jpg','fotos/casa_body_tree_2.jpg','fotos/casa_body_tree_3.jpg','fotos/casa_body_tree_4.jpg','fotos/casa_body_tree_5.jpg','fotos/casa_body_tree_6.jpg','fotos/casa_body_tree_7.jpg']},
+    {img:'fotos/casa_4_monos_sofamesasillascamadesolconsola.jpg',name:'Casa 4 Monos',loc:'Pacífico',badge:'Sofá, mesa, sillas, cama de sol y consola',badgeEN:'Sofa, table, chairs, sunbed & console',pos:'center center',imgs:['fotos/casa_4_monos_sofamesasillascamadesolconsola.jpg','fotos/casa_4_monos_1.jpg','fotos/casa_4_monos_2.jpg','fotos/casa_4_monos_3.jpg','fotos/casa_4_monos_4.jpg','fotos/casa_4_monos_5.jpg','fotos/casa_4_monos_6.jpg','fotos/casa_4_monos_7.jpg','fotos/casa_4_monos_8.jpg','fotos/casa_4_monos_9.jpg','fotos/casa_4_monos_10.jpg','fotos/casa_4_monos_11.jpg']},
+    {img:'fotos/casa_mirame_mesasillasbutacasbancosconsola.jpg',name:'Casa Mírame',loc:'Pacífico',badge:'Mesa, sillas, butacas, bancos y consola',badgeEN:'Table, chairs, armchairs, benches & console',pos:'center center',imgs:['fotos/casa_mirame_mesasillasbutacasbancosconsola.jpg','fotos/casa_mirame_1.jpg','fotos/casa_mirame_2.jpg','fotos/casa_mirame_3.jpg','fotos/casa_mirame_4.jpg','fotos/casa_mirame_5.jpg','fotos/casa_mirame_6.jpg','fotos/casa_mirame_7.jpg']},
+    {img:'fotos/casa_naia_bancabutacaystools.png',name:'Casa Naia',loc:'Pacífico',badge:'Banca, butacas y stools',badgeEN:'Bench, armchairs & stools',pos:'center center',imgs:['fotos/casa_naia_bancabutacaystools.png','fotos/casa_naia_1.jpg','fotos/casa_naia_2.jpg','fotos/casa_naia_3.jpg','fotos/casa_naia_4.jpg','fotos/casa_naia_5.jpg']},
+    {img:'fotos/casa_pinilla_sofaybutacas.png',name:'Casa Pinilla',loc:'Guanacaste',badge:'Sofá y butacas',badgeEN:'Sofa & armchairs',pos:'center center',imgs:['fotos/casa_pinilla_sofaybutacas.png','fotos/casa_pinilla_1.jpg','fotos/casa_pinilla_2.jpg','fotos/casa_pinilla_3.jpg']},
+    {img:'fotos/house_of_somos_camasillasbutacas.jpg',name:'House of Somos',loc:'Costa Rica',badge:'Cama, sillas y butacas',badgeEN:'Bed, chairs & armchairs',pos:'center center',imgs:['fotos/house_of_somos_camasillasbutacas.jpg','fotos/house_of_somos_1.jpg','fotos/house_of_somos_2.jpg','fotos/house_of_somos_3.jpg']},
+    {img:'fotos/villa_kais_sofabancossillas.jpg',name:'Villa Kais',loc:'Costa Rica',badge:'Sofá, bancos y sillas',badgeEN:'Sofa, benches & chairs',pos:'center center',imgs:['fotos/villa_kais_sofabancossillas.jpg','fotos/villa_kais_1.jpg','fotos/villa_kais_2.jpg','fotos/villa_kais_3.jpg']},
+    {img:'fotos/casa_la_bandida_sofa.jpg',name:'Casa La Bandida',loc:'Pacífico',badge:'Sofá',badgeEN:'Sofa',pos:'center center',imgs:['fotos/casa_la_bandida_sofa.jpg','fotos/casa_la_bandida_1.jpg','fotos/casa_la_bandida_2.jpg','fotos/casa_la_bandida_3.jpg','fotos/casa_la_bandida_4.jpg','fotos/casa_la_bandida_5.jpg','fotos/casa_la_bandida_6.jpg']},
+    {img:'fotos/casa_rincon_escondido_mesasillassofastool.jpg',name:'Casa Rincón Escondido',loc:'Costa Rica',badge:'Mesa, sillas, sofá y stool',badgeEN:'Table, chairs, sofa & stool',pos:'center center',imgs:['fotos/casa_rincon_escondido_mesasillassofastool.jpg','fotos/casa_rincon_escondido_1.jpg','fotos/casa_rincon_escondido_2.jpg','fotos/casa_rincon_escondido_3.jpg','fotos/casa_rincon_escondido_4.jpg','fotos/casa_rincon_escondido_5.jpg','fotos/casa_rincon_escondido_6.jpg','fotos/casa_rincon_escondido_7.jpg']},
+    {img:'fotos/casa_salagna_mesasillassofabanca.jpg',name:'Casa Salagna',loc:'Costa Rica',badge:'Mesa, sillas, sofá y banca',badgeEN:'Table, chairs, sofa & bench',pos:'center center',imgs:['fotos/casa_salagna_mesasillassofabanca.jpg','fotos/casa_salagna_1.jpg','fotos/casa_salagna_2.jpg','fotos/casa_salagna_3.jpg']},
+    {img:'fotos/villa_the_l_mesasillassofabutacastool.jpg',name:'The L Villa',loc:'Costa Rica',badge:'Mesa, sillas, sofá, butacas y stool',badgeEN:'Table, chairs, sofa, armchairs & stool',pos:'center center',imgs:['fotos/villa_the_l_mesasillassofabutacastool.jpg','fotos/villa_the_l_1.jpg','fotos/villa_the_l_2.jpg']},
+    {img:'fotos/villa_koa_sofastoolssillamesacamadesol.jpg',name:'Villa Koa',loc:'Costa Rica',badge:'Sofá, stools, sillas, mesa y cama de sol',badgeEN:'Sofa, stools, chairs, table & sunbed',pos:'center center',imgs:['fotos/villa_koa_sofastoolssillamesacamadesol.jpg','fotos/villa_koa_1.jpg','fotos/villa_koa_2.jpg','fotos/villa_koa_3.jpg','fotos/villa_koa_4.jpg','fotos/villa_koa_5.jpg','fotos/villa_koa_6.jpg','fotos/villa_koa_7.jpg','fotos/villa_koa_8.jpg','fotos/villa_koa_9.jpg','fotos/villa_koa_10.jpg','fotos/villa_koa_11.jpg']},
+    {img:'fotos/villa_lasai_camadesolmesasillasbutacasstool.jpg',name:'Villa Lasai',loc:'Costa Rica',badge:'Cama de sol, mesa, sillas, butacas y stool',badgeEN:'Sunbed, table, chairs, armchairs & stool',pos:'center center',imgs:['fotos/villa_lasai_camadesolmesasillasbutacasstool.jpg','fotos/villa_lasai_1.jpg','fotos/villa_lasai_2.jpg','fotos/villa_lasai_3.jpg','fotos/villa_lasai_4.jpg','fotos/villa_lasai_5.jpg','fotos/villa_lasai_6.jpg','fotos/villa_lasai_7.jpg']},
   ],
 };
 
@@ -2296,7 +2473,7 @@ const T = {
     "hero.p": "Muebles artesanales en madera Guanacaste y rattan para villas en el Pac\u00edfico y residencias en la GAM. Cada pieza, \u00fanica.",
     "hero.cta1": "Cat\u00e1logo",
     "hero.cta2": "Ver proyectos",
-    "tab.0": "Proyectos", "tab.1": "Cat\u00e1logo", "tab.2": "Diseñá tu pieza", "tab.3": "Asesor\u00eda personalizada",
+    "tab.0": "Proyectos", "tab.1": "Cat\u00e1logo", "tab.2": "Diseñá tu pieza", "tab.3": "Asesor\u00eda personalizada", "tab.4": "Nosotros",
     "proj.label": "Portfolio", "proj.h2": "Proyectos <em>realizados</em>",
     "filter.all": "Todos", "filter.villa": "\uD83C\uDF0A Villas", "filter.gam": "\uD83C\uDFD9 GAM", "filter.airbnb": "\uD83C\uDFE1 Hotel / Airbnb",
     "config.label": "Diseñá", "config.h2": "Dise\u00f1\u00e1 tu <em>pieza ideal</em>",
@@ -2328,8 +2505,8 @@ const T = {
     "f3.text": "Si ten\u00e9s una idea espec\u00edfica o necesit\u00e1s adaptar una pieza a medidas exactas, nuestro equipo te ayuda a definir cada detalle.",
     "f4.title": "Entrega e instalaci\u00f3n",
     "f4.text": "Coordinamos log\u00edstica para todo Costa Rica \u2014 Pac\u00edfico Norte, Central, y GAM. Instalamos y dejamos todo en su lugar.",
-    "ases.quote": "\u201cTengo una idea pero no s\u00e9 exactamente qu\u00e9 quiero.\u201d",
-    "ases.body": "No hay problema. Nuestro proceso de asesor\u00eda empieza con una conversaci\u00f3n sin compromiso. Cont\u00e1nos qu\u00e9 espacio ten\u00e9s, qu\u00e9 estilo te gusta, y nosotros te proponemos opciones.",
+    "ases.quote": "\u00bfTen\u00e9s un proyecto en mente?",
+    "ases.body": "Nuestro proceso de asesor\u00eda empieza con una conversaci\u00f3n sin compromiso. Cont\u00e1nos qu\u00e9 espacio ten\u00e9s, qu\u00e9 estilo te gusta, y nosotros te proponemos opciones.",
     "ases.cta": "Iniciar asesor\u00eda por WhatsApp \u2192",
     "about.label": "Nuestra historia",
     "about.h2": "De los bosques de Costa Rica<br>a tu <em>espacio de vida.</em>",
@@ -2378,7 +2555,7 @@ const T = {
     "hero.p": "Artisan furniture in Guanacaste wood and rattan for Pacific villas and residences. Every piece, one of a kind.",
     "hero.cta1": "Catalog",
     "hero.cta2": "View projects",
-    "tab.0": "Projects", "tab.1": "Catalog", "tab.2": "Design yours", "tab.3": "Advisory",
+    "tab.0": "Projects", "tab.1": "Catalog", "tab.2": "Design yours", "tab.3": "Advisory", "tab.4": "About us",
     "proj.label": "Portfolio", "proj.h2": "Completed <em>projects</em>",
     "filter.all": "All", "filter.villa": "\uD83C\uDF0A Villas", "filter.gam": "\uD83C\uDFD9 GAM", "filter.airbnb": "\uD83C\uDFE1 Hotel / Airbnb",
     "config.label": "Custom", "config.h2": "Design your <em>perfect piece</em>",
@@ -2412,7 +2589,7 @@ const T = {
     "f4.title": "Delivery and installation",
     "f4.text": "We coordinate logistics across all of Costa Rica \u2014 North Pacific, Central Pacific, and GAM. We install everything and leave it perfect.",
     "ases.quote": "\u201cI have an idea but I am not exactly sure what I want.\u201d",
-    "ases.body": "No problem. Our advisory process starts with a no-commitment conversation. Tell us about your space and style, and we will propose options.",
+    "ases.body": "Our advisory process starts with a no-commitment conversation. Tell us about your space and style, and we will propose options.",
     "ases.cta": "Start advisory on WhatsApp \u2192",
     "about.label": "Our story",
     "about.h2": "From the forests of Costa Rica<br>to your <em>living space.</em>",
@@ -2718,6 +2895,41 @@ function projModalWA(){
   const p = projModalData;
   const msg = `Hola utropico! Vi el proyecto *${p.name}* en su portafolio y me gustaría consultar sobre algo similar. ¿Podemos hablar?`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+
+async function submitContactForm(){
+  const name = document.getElementById('cfName')?.value.trim();
+  const email = document.getElementById('cfEmail')?.value.trim();
+  const msg = document.getElementById('cfMsg')?.value.trim();
+  const status = document.getElementById('cfStatus');
+  const btn = document.querySelector('[onclick="submitContactForm()"]');
+  if(!name || !email || !msg){
+    if(status){ status.style.display='block'; status.style.color='#c0392b'; status.textContent = LANG==='en' ? 'Please fill all fields.' : 'Por favor completá todos los campos.'; }
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = LANG==='en' ? 'Sending...' : 'Enviando...';
+  try {
+    const res = await fetch('https://formspree.io/f/mpqnpnpk', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({name, email, message: msg})
+    });
+    if(res.ok){
+      if(status){ status.style.display='block'; status.style.color='var(--moss)'; status.textContent = LANG==='en' ? '✓ Message sent! We\'ll get back to you soon.' : '✓ Mensaje enviado. Te contactamos pronto.'; }
+      document.getElementById('cfName').value='';
+      document.getElementById('cfEmail').value='';
+      document.getElementById('cfMsg').value='';
+      btn.textContent = LANG==='en' ? 'Send message' : 'Enviar mensaje';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch(e){
+    if(status){ status.style.display='block'; status.style.color='#c0392b'; status.textContent = LANG==='en' ? 'Error sending. Try WhatsApp instead.' : 'Error al enviar. Intentá por WhatsApp.'; }
+    btn.textContent = LANG==='en' ? 'Send message' : 'Enviar mensaje';
+  }
+  btn.disabled = false;
 }
 
 function navGo(tab,e){
