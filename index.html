@@ -879,6 +879,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         <button class="cat-filter-btn active" onclick="filterCat(this,'mesas_comedor')" data-cat="mesas_comedor" data-i18n="cat.filter.mesas_comedor">Mesas de comedor</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'sillas')" data-cat="sillas" data-i18n="cat.filter.sillas">Sillas</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'stools')" data-cat="stools" data-i18n="cat.filter.stools">Stools</button>
+        <button class="cat-filter-btn" onclick="filterCat(this,'butacas')" data-cat="butacas" data-i18n="cat.filter.butacas">Butacas</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'cafe')" data-cat="cafe" data-i18n="cat.filter.cafe">Mesas de café</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'consola')" data-cat="consola" data-i18n="cat.filter.consola">Consolas</button>
         <button class="cat-filter-btn" onclick="filterCat(this,'dormitorio')" data-cat="dormitorio" data-i18n="cat.filter.dormitorio">Dormitorio</button>
@@ -1111,12 +1112,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;color:var(--dark);margin-bottom:2rem;line-height:1.1">Quiénes somos.</h2>
         <hr style="border:none;border-top:1px solid var(--border);margin-bottom:3rem">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
-          <p style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:600;color:var(--dark);line-height:1.5;font-style:italic">"Creemos que el buen diseño y el confort deben coexistir en cada pieza, transformando los espacios en experiencias que se viven."</p>
+          <p style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:600;color:var(--dark);line-height:1.5;font-style:italic">"Creemos que los muebles que usás cada día merecen ser bellos, honestos y hechos para durar generaciones."</p>
           <div style="color:var(--mid);line-height:1.8;font-size:.95rem">
-            <p style="margin-bottom:1.2rem">Somos un estudio costarricense de diseño y producción de mobiliario personalizado.</p>
-            <p style="margin-bottom:1.2rem">Cada pieza comienza con una conversación y termina materializada en las necesidades de cada  espacio.</p>
-            <p style="margin-bottom:1.2rem">Seleccionamos cada material con criterio, diseñamos a medida y producimos a mano en nuestro propio taller.</p>
-            <p >Colaboramos con arquitectos, diseñadores de interiores y clientes que valoran el diseño como parte esencial de cómo viven.</p>
+            <p style="margin-bottom:1.2rem">Utropico nació de esa convicción. Somos un estudio de diseño y producción de muebles artesanales con sede en Costa Rica. Cada pieza que hacemos empieza con una conversación y termina en tu espacio.</p>
+            <p style="margin-bottom:1.2rem">No trabajamos con líneas de producción masiva. Seleccionamos los materiales uno por uno, diseñamos a medida y producimos a mano en nuestro propio taller. El resultado son piezas con carácter propio, que envejecen con dignidad.</p>
+            <p>Trabajamos con arquitectos, diseñadores de interiores y clientes directos que entienden que un buen mueble es también una inversión en calidad de vida.</p>
           </div>
         </div>
       </div>
@@ -1411,7 +1411,16 @@ const CATALOG = [
   {id:'p_stool_pavones',cat:'stools',name:'Stool Pavones',nameEN:'Pavones Stool',material:'Teca',materialEN:'Teak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/pavones_stool_1.png']},
   {id:'p_stool_reef',cat:'stools',name:'Stool Reef',nameEN:'Reef Stool',material:'Cenízaro · sentadero textil',materialEN:'Cenizaro · textile seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N6',acabadosEN:'Satin · Tone N6',badge:null,imgs:['fotos/reef_stool_1.png']},
   {id:'p_stool_zulu',cat:'stools',name:'Stool Zulu',nameEN:'Zulu Stool',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/zulu_stool_1.png']},
-  {id:'p_lasai',cat:'sala',name:'Armchair Lasai',nameEN:'Lasai Armchair',material:'Teca · sentadero tejido fibra natural y textil',materialEN:'Teak · natural fiber woven seat & high-traffic textile',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/lasai_armchair_1.png']},
+  {id:'p_lasai',cat:'butacas',name:'Armchair Lasai',nameEN:'Lasai Armchair',material:'Teca · sentadero tejido fibra natural y textil',materialEN:'Teak · natural fiber woven seat & high-traffic textile',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N2',acabadosEN:'Satin · Tone N2',badge:null,imgs:['fotos/lasai_armchair_1.png']},
+  {id:'p_ar_ceiba',cat:'butacas',name:'Armchair Ceiba',nameEN:'Ceiba Armchair',material:'Tapicería de alto tránsito',materialEN:'High-traffic upholstery',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/ceiba_armchair_1.png']},
+  {id:'p_ar_dive',cat:'butacas',name:'Armchair Dive',nameEN:'Dive Armchair',material:'Tapicería de alto tránsito',materialEN:'High-traffic upholstery',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/dive_armchair_1.png']},
+  {id:'p_ar_kai',cat:'butacas',name:'Armchair Kai',nameEN:'Kai Armchair',material:'Teca · tapicería de alto tránsito',materialEN:'Teak · high-traffic upholstery',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/kai_armchair_1.png']},
+  {id:'p_ar_kai2',cat:'butacas',name:'Armchair Kai II',nameEN:'Kai II Armchair',material:'Teca · tapicería de alto tránsito',materialEN:'Teak · high-traffic upholstery',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N2',acabadosEN:'Matte · Tone N2',badge:null,imgs:['fotos/kai_armchair_1.png']},
+  {id:'p_ar_kais',cat:'butacas',name:'Armchair Kais',nameEN:'Kais Armchair',material:'Tapicería de alto tránsito',materialEN:'High-traffic upholstery',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/kais_armchair_1.png']},
+  {id:'p_ar_paris',cat:'butacas',name:'Armchair Paris',nameEN:'Paris Armchair',material:'Teca · tapicería de alto tránsito',materialEN:'Teak · high-traffic upholstery',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N7',acabadosEN:'Matte · Tone N7',badge:null,imgs:['fotos/paris_armchair_1.png']},
+  {id:'p_ar_polca',cat:'butacas',name:'Armchair Polca',nameEN:'Polca Armchair',material:'Tapicería de alto tránsito',materialEN:'High-traffic upholstery',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/polca_armchair_1.png']},
+  {id:'p_ar_zenda',cat:'butacas',name:'Armchair Zenda',nameEN:'Zenda Armchair',material:'Cenízaro · tapicería de alto tránsito',materialEN:'Cenizaro · high-traffic upholstery',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N8',acabadosEN:'Matte · Tone N8',badge:null,imgs:['fotos/zenda_armchair_1.png']},
+  {id:'p_ar_zuma',cat:'butacas',name:'Armchair Zuma',nameEN:'Zuma Armchair',material:'Tapicería de alto tránsito',materialEN:'High-traffic upholstery',dims:'H: 0 × W: 0 × D: 0 cm',badge:null,imgs:['fotos/zuma_armchair_1.png']},
   {id:'p_mahui',cat:'stools',name:'Stool Mahui',nameEN:'Mahui Stool',material:'Roble · sentadero tejido fibra natural',materialEN:'Oak · natural fiber woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N1',acabadosEN:'Satin · Tone N1',badge:null,imgs:['fotos/mahui_stool_1.png']},
   {id:'p_stool_zuma',cat:'stools',name:'Stool Zuma',nameEN:'Zuma Stool',material:'Roble · sentadero tejido',materialEN:'Oak · woven seat',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Mate · Tono N1',acabadosEN:'Matte · Tone N1',badge:null,imgs:['fotos/zuma_stool_1.png']},
   {id:'p_kira',cat:'consola',name:'Console Kira',nameEN:'Kira Console',material:'Roble',materialEN:'Oak',dims:'H: 0 × W: 0 × D: 0 cm',acabados:'Satinado · Tono N5',acabadosEN:'Satin · Tone N5',badge:null,imgs:['fotos/kira_console_1.png']},
@@ -2719,6 +2728,7 @@ const T = {
     "cat.filter.mesas_comedor": "Dining Tables",
     "cat.filter.sillas": "Chairs",
     "cat.filter.stools": "Stools",
+    "cat.filter.butacas": "Armchairs",
     "cat.filter.cafe": "Coffee Tables",
     "cat.filter.outdoor": "Outdoor",
     "cat.filter.noche": "Nightstands",
