@@ -761,7 +761,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
       <!-- Carousel -->
       <div id="tempCarousel" style="width:100%;height:100%;position:relative;overflow:hidden">
         <div id="tempSlides" style="display:flex;width:300%;height:100%;transition:transform .6s cubic-bezier(.76,0,.24,1)">
-          <img src="fotos/butaca_temporada_1.jpg" alt="Temporada" style="width:33.333%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/butaca_temporada_1.jpg" alt="Temporada" style="width:33.333%;height:100%;object-fit:cover;flex-shrink:0;object-position:center top">
           <img src="fotos/outdoor_temporada_1.jpg" alt="Temporada outdoor" style="width:33.333%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
           <img src="fotos/casa_salagna_3.jpg" alt="Temporada" style="width:33.333%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
         </div>
@@ -1103,7 +1103,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
               style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:3px;font-family:'Outfit',sans-serif;font-size:.88rem;background:#faf7f1;color:var(--dark);outline:none">
             <textarea id="cfMsg" rows="4" placeholder="Contanos sobre tu espacio o el mueble que tenés en mente..." data-i18n-ph="form.msg"
               style="width:100%;padding:.75rem 1rem;border:1px solid var(--border);border-radius:3px;font-family:'Outfit',sans-serif;font-size:.88rem;background:#faf7f1;color:var(--dark);outline:none;resize:vertical"></textarea>
-            <button onclick="submitContactForm()" style="width:100%;padding:.85rem;background:var(--moss);color:#fff;border:none;border-radius:3px;font-family:'Outfit',sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .2s" data-i18n="form.send">Enviar mensaje</button>
+            <button onclick="submitContactForm()" style="width:100%;padding:1rem 2rem;background:var(--rattan);color:#fff;border:none;border-radius:3px;font-family:'Outfit',sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .2s;font-weight:500" onmouseover="this.style.background='var(--rattan2)'" onmouseout="this.style.background='var(--rattan)'" data-i18n="form.send">Enviar mensaje →</button>
             <p id="cfStatus" style="font-size:.78rem;color:var(--moss);text-align:center;display:none"></p>
           </div>
 
