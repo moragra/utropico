@@ -188,7 +188,7 @@ footer p{font-size:.72rem;color:rgba(255,255,255,.3);letter-spacing:.06em}
 /* PROJECT EDITORIAL GRID */
 
 .proj-editorial{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2rem;transition:opacity .3s}
-.proj-editorial.fading{opacity:0;transform:translateY(4px);transition:opacity .3s ease,transform .3s ease}
+.proj-editorial.fading{opacity:0;transform:translateY(6px)}
 .proj-cell{cursor:pointer}
 .proj-cell-img{overflow:hidden;aspect-ratio:4/3;background:var(--moss3)}
 .proj-cell-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
@@ -474,8 +474,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 
 /* PORTFOLIO CAROUSEL */
 .proj-carousel-wrap{position:relative}
-.proj-editorial{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2rem;transition:opacity .6s ease}
-.proj-editorial.fading{opacity:0;transform:translateY(4px);transition:opacity .3s ease,transform .3s ease}
+.proj-editorial{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2rem;transition:opacity .5s ease,transform .5s ease}
+.proj-editorial.fading{opacity:0;transform:translateY(6px)}
 .proj-carousel-nav{display:flex;align-items:center;justify-content:space-between;margin-top:2rem}
 .proj-carousel-dots{display:flex;gap:.5rem}
 .proj-carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(68,60,30,.2);cursor:pointer;transition:all .25s;border:none;padding:0}
@@ -874,7 +874,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         </div>
       </div>
       <div class="proj-carousel-wrap">
-        <div id="projEditorialGrid"></div>
+        <div id="projEditorialGrid" style="background:var(--cream);min-height:500px"></div>
         <div class="proj-carousel-nav">
           <div class="proj-carousel-dots" id="projDots"></div>
           <div class="proj-carousel-arrows">
@@ -2470,6 +2470,7 @@ function startAsesoriaWA(){
 // Layout: [big left spanning 2 rows] + [4 small cells]
 const PROJ_SETS = {
   all: [
+    {img:'fotos/casa_la_kabash_stoolmesassillassetoutdoor.jpg',name:'Casa La Kabash',loc:'Costa Rica',badge:'Stools, mesas, sillas y set outdoor',badgeEN:'Stools, tables, chairs & outdoor set',pos:'center center',imgs:['fotos/casa_la_kabash_stoolmesassillassetoutdoor.jpg','fotos/casa_la_kabash_1.jpg','fotos/casa_la_kabash_2.jpg']},
     {img:'fotos/casa_dos_playas_butacas.jpg',name:'Casa Dos Playas',loc:'Pacífico',badge:'Butacas',badgeEN:'Armchairs',pos:'center center',imgs:['fotos/casa_dos_playas_butacas.jpg','fotos/casa_dos_playas_1.jpg','fotos/casa_dos_playas_2.jpg','fotos/casa_dos_playas_3.jpg','fotos/casa_dos_playas_4.jpg','fotos/casa_dos_playas_5.jpg','fotos/casa_dos_playas_6.jpg','fotos/casa_dos_playas_7.jpg']},
     {img:'fotos/casa_dominick_sofasymesa.png',name:'Casa Dominick',loc:'Pacífico',badge:'Proyecto completo',badgeEN:'Full project',pos:'center center',imgs:['fotos/casa_dominick_1.jpg','fotos/casa_dominick_2.jpg','fotos/casa_dominick_3.jpg','fotos/casa_dominick_4.jpg','fotos/casa_dominick_5.jpg','fotos/casa_dominick_6.jpg','fotos/casa_dominick_7.jpg','fotos/casa_dominick_9.jpg','fotos/casa_dominick_10.jpg','fotos/casa_dominick_11.jpg','fotos/casa_dominick_12.jpg']},
     {img:'fotos/casa_become_nosara_sofastoolsbutacas.jpg',name:'Casa Become Nosara',loc:'Nosara, Guanacaste',badge:'Sofá, stools y butacas',badgeEN:'Sofa, stools & armchairs',pos:'center center',imgs:['fotos/casa_become_nosara_sofastoolsbutacas.jpg','fotos/casa_become_nosara_1.jpg','fotos/casa_become_nosara_2.jpg']},
