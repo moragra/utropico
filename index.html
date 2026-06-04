@@ -728,29 +728,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
       </div>
       <div style="margin-top:2.5rem">
         <div style="display:flex;flex-direction:column;margin-bottom:1.75rem" id="temporadaList">
-          <div onclick="openModal('p_oaxaca')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
-            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Mesa Oaxaca</span>
-            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Cenízaro · Satinado N6</span>
+          <div onclick="openModal('p_bistro')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
+            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Silla Bistro</span>
+            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Teca · sentadero textil</span>
           </div>
-          <div onclick="openModal('p_bed_kaia')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
-            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Cama Kaia</span>
-            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Teca · headboard textil</span>
+          <div onclick="openModal('p_mara')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
+            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Mesa Mara</span>
+            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Teca · Mate N1</span>
           </div>
-          <div onclick="openModal('p_ar_zenda')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
-            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Butaca Zenda</span>
-            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Cenízaro · tapicería</span>
-          </div>
-          <div onclick="openModal('p_cleo')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
-            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Sofá Cleo</span>
+          <div onclick="openModal('p_zolu')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
+            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Sofá Zolu</span>
             <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Textil de alto tránsito</span>
-          </div>
-          <div onclick="openModal('p_dali')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
-            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Outdoor Dali</span>
-            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Rattan</span>
-          </div>
-          <div onclick="openModal('p_artesana')" style="display:flex;justify-content:space-between;align-items:baseline;padding:.75rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .15s" onmouseover="this.style.color='var(--rattan)'" onmouseout="this.style.color=''">
-            <span style="font-size:.95rem;font-family:'Playfair Display',serif;font-style:italic">Silla Artesana</span>
-            <span style="font-size:.72rem;color:var(--muted);font-family:'Outfit',sans-serif;letter-spacing:.08em">Teca · Satinado N2</span>
           </div>
         </div>
         <button onclick="showTab('catalogo')" style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.6rem 1.4rem;background:transparent;border:1px solid var(--border);color:var(--mid);border-radius:20px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--moss)';this.style.color='var(--moss)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--mid)'">Ver catálogo completo →</button>
@@ -760,10 +748,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
     <div style="position:relative;background:#e8e0d0;overflow:hidden;min-height:400px">
       <!-- Carousel -->
       <div id="tempCarousel" style="width:100%;height:100%;position:relative;overflow:hidden">
-        <div id="tempSlides" style="display:flex;width:300%;height:100%;transition:transform .6s cubic-bezier(.76,0,.24,1)">
-          <img src="fotos/butaca_temporada_1.jpg" alt="Temporada" style="width:33.333%;height:100%;object-fit:cover;flex-shrink:0;object-position:center 70%">
-          <img src="fotos/outdoor_temporada_1.jpg" alt="Temporada outdoor" style="width:33.333%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
-          <img src="fotos/casa_salagna_3.jpg" alt="Temporada" style="width:33.333%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+        <div id="tempSlides" style="display:flex;width:500%;height:100%;transition:transform .6s cubic-bezier(.76,0,.24,1)">
+          <img src="fotos/main_temporada_1.png" alt="Temporada" style="width:20%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/chair_bistro_temporada_1.png" alt="Silla Bistro" style="width:20%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/chair_bistro_temporada_2.png" alt="Silla Bistro" style="width:20%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/table_mara_temporada_1.png" alt="Mesa Mara" style="width:20%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/sofa_zolu_temporada_1.png" alt="Sofá Zolu" style="width:20%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
         </div>
         <button onclick="tempSlide(-1)" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)">&#8592;</button>
         <button onclick="tempSlide(1)" style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)">&#8594;</button>
@@ -772,6 +762,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         </div>
         <div style="position:absolute;bottom:1.5rem;right:1rem;display:flex;gap:.4rem" id="tempDots">
           <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.9)"></div>
+          <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)"></div>
+          <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)"></div>
           <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)"></div>
           <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)"></div>
         </div>
@@ -3075,7 +3067,7 @@ function tempSlide(dir){
   if(!slides) return;
   const total = slides.children.length;
   tempIdx = (tempIdx + dir + total) % total;
-  slides.style.transform = 'translateX(-' + (tempIdx * 33.333) + '%)';
+  slides.style.transform = `translateX(-${tempIdx * (100 / total)}%)`;
   document.querySelectorAll('#tempDots div').forEach((d,i)=>{
     d.style.background = i===tempIdx ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.35)';
   });
