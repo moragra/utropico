@@ -617,9 +617,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 }
 
 /* TEMPORADA responsive */
-#tempCarousel{position:relative!important;inset:unset!important}
-#tempSlides{display:flex!important;width:400%!important;height:auto!important}
-#tempSlides img{width:25%!important;height:auto!important;aspect-ratio:16/9;object-fit:cover!important;flex-shrink:0!important}
+#tempCarousel{position:absolute!important;inset:0!important}
+#tempSlides{display:flex!important;width:400%!important;height:100%!important}
+#tempSlides img{width:25%!important;height:100%!important;object-fit:cover!important;flex-shrink:0!important}
 @media(max-width:1024px){
   #temporada>div{grid-template-columns:1fr!important;height:auto!important}
   #temporada>div>div:first-child{padding:2.5rem 2rem!important;overflow-y:visible!important;border-right:none!important;border-bottom:1px solid var(--border)!important}
@@ -723,7 +723,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 
 <!-- TEMPORADA SECTION -->
 <section id="temporada" style="padding:0">
-  <div style="display:grid;grid-template-columns:1fr 1.4fr;align-items:stretch">
+  <div style="display:grid;grid-template-columns:1fr 2fr;align-items:stretch">
     <!-- Left: text + product list -->
     <div style="padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:flex-start;gap:2rem;border-right:1px solid var(--border)">
       <div>
@@ -750,13 +750,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
       </div>
     </div>
     <!-- Right: carousel -->
-    <div style="position:relative;overflow:hidden">
-      <div id="tempCarousel" style="position:relative;overflow:hidden;width:100%">
-        <div id="tempSlides" style="display:flex;width:400%;transition:transform .6s cubic-bezier(.76,0,.24,1)">
-          <img src="fotos/main_temporada_1.png" alt="Temporada" style="width:25%;aspect-ratio:16/9;object-fit:cover;flex-shrink:0;object-position:center">
-          <img src="fotos/chair_bistro_temporada_1.png" alt="Silla Bistro" style="width:25%;aspect-ratio:16/9;object-fit:cover;flex-shrink:0;object-position:center">
-          <img src="fotos/table_mara_temporada_1.png" alt="Mesa Mara" style="width:25%;aspect-ratio:16/9;object-fit:cover;flex-shrink:0;object-position:center">
-          <img src="fotos/sofa_zolu_temporada_1.png" alt="Sofá Zolu" style="width:25%;aspect-ratio:16/9;object-fit:cover;flex-shrink:0;object-position:center">
+    <div style="position:relative;overflow:hidden;min-height:500px">
+      <div id="tempCarousel" style="position:absolute;inset:0;overflow:hidden;width:100%">
+        <div id="tempSlides" style="display:flex;width:400%;height:100%;transition:transform .6s cubic-bezier(.76,0,.24,1)">
+          <img src="fotos/main_temporada_1.png" alt="Temporada" style="width:25%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/chair_bistro_temporada_1.png" alt="Silla Bistro" style="width:25%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/table_mara_temporada_1.png" alt="Mesa Mara" style="width:25%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/sofa_zolu_temporada_1.png" alt="Sofá Zolu" style="width:25%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
         </div>
         <button onclick="tempSlide(-1)" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)">&#8592;</button>
         <button onclick="tempSlide(1)" style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)">&#8594;</button>
