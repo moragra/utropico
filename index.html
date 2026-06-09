@@ -616,11 +616,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
   #tab-nosotros .sec-label{font-size:.55rem}
 }
 
-@media(max-width:768px){
+/* TEMPORADA responsive */
+#tempCarousel{position:relative!important;inset:unset!important}
+#tempSlides{display:flex!important;width:500%!important;height:auto!important}
+#tempSlides img{width:20%!important;height:auto!important;aspect-ratio:16/9;object-fit:cover!important;flex-shrink:0!important}
+@media(max-width:1024px){
   #temporada>div{grid-template-columns:1fr!important;height:auto!important}
-  #temporada>div>div:first-child{padding:2rem 1.5rem!important;overflow-y:visible!important}
-  #temporada>div>div:last-child{height:360px!important;min-height:unset!important}
-  #temporada #tempCarousel,#temporada #tempSlides,#temporada #tempSlides img{height:360px!important}
+  #temporada>div>div:first-child{padding:2.5rem 2rem!important;overflow-y:visible!important;border-right:none!important;border-bottom:1px solid var(--border)!important}
+  #temporada>div>div:last-child{min-height:unset!important;background:transparent!important}
 }
 
 /* LOOKBOOK PINPOINTS */
@@ -720,7 +723,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 
 <!-- TEMPORADA SECTION -->
 <section id="temporada" style="padding:0">
-  <div style="display:grid;grid-template-columns:1fr 1.4fr;grid-template-rows:1fr;min-height:580px">
+  <div style="display:grid;grid-template-columns:1fr 1.4fr;align-items:stretch">
     <!-- Left: text + product list -->
     <div style="padding:3.5rem 3rem;display:flex;flex-direction:column;justify-content:flex-start;gap:2rem;border-right:1px solid var(--border)">
       <div>
@@ -746,15 +749,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         <button onclick="showTab('catalogo')" style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.6rem 1.4rem;background:transparent;border:1px solid var(--border);color:var(--mid);border-radius:20px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--moss)';this.style.color='var(--moss)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--mid)'">Ver catálogo completo →</button>
       </div>
     </div>
-    <!-- Right: main photo -->
-    <div style="position:relative;background:#e8e0d0;overflow:hidden;min-height:580px">
-      <!-- Carousel -->
-      <div id="tempCarousel" style="position:absolute;inset:0;overflow:hidden">
-        <div id="tempSlides" style="display:flex;align-items:stretch;width:500%;height:100%;transition:transform .6s cubic-bezier(.76,0,.24,1)">
-          <img src="fotos/main_temporada_1.png" alt="Temporada" style="width:20%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
-          <img src="fotos/chair_bistro_temporada_1.png" alt="Silla Bistro" style="width:20%;height:100%;object-fit:cover;flex-shrink:0;object-position:center;">
-          <img src="fotos/table_mara_temporada_1.png" alt="Mesa Mara" style="width:20%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
-          <img src="fotos/sofa_zolu_temporada_1.png" alt="Sofá Zolu" style="width:20%;height:100%;object-fit:cover;flex-shrink:0;object-position:center">
+    <!-- Right: carousel -->
+    <div style="position:relative;background:#e8e0d0;overflow:hidden">
+      <div id="tempCarousel" style="position:relative;overflow:hidden;width:100%">
+        <div id="tempSlides" style="display:flex;width:500%;transition:transform .6s cubic-bezier(.76,0,.24,1)">
+          <img src="fotos/main_temporada_1.png" alt="Temporada" style="width:20%;aspect-ratio:16/9;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/chair_bistro_temporada_1.png" alt="Silla Bistro" style="width:20%;aspect-ratio:16/9;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/table_mara_temporada_1.png" alt="Mesa Mara" style="width:20%;aspect-ratio:16/9;object-fit:cover;flex-shrink:0;object-position:center">
+          <img src="fotos/sofa_zolu_temporada_1.png" alt="Sofá Zolu" style="width:20%;aspect-ratio:16/9;object-fit:cover;flex-shrink:0;object-position:center">
         </div>
         <button onclick="tempSlide(-1)" style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)">&#8592;</button>
         <button onclick="tempSlide(1)" style="position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)">&#8594;</button>
@@ -763,7 +765,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         </div>
         <div style="position:absolute;bottom:1.5rem;right:1rem;display:flex;gap:.4rem" id="tempDots">
           <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.9)"></div>
-          <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)"></div>
           <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)"></div>
           <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)"></div>
           <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)"></div>
